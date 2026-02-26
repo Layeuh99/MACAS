@@ -1,27 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Health On Wheels - Clinique médicale mobile pour les communautés rurales du Sénégal">
-    <meta name="keywords" content="santé, médecine mobile, Sénégal, communautés rurales, ONG">
-    <meta name="author" content="MACAS - Health On Wheels">
-    <title>Health On Wheels - Apporter la santé aux populations</title>
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Health On Wheels">
-    <meta property="og:description" content="Apporter la santé aux populations, pas les populations aux hôpitaux">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
-    
-    <!-- CSS -->
+    <title>Health On Wheels - MACAS</title>
+    <meta name="description" content="Clinique médicale mobile qui dessert les communautés rurales à travers le monde">
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -48,16 +32,22 @@
                 </button>
                 
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link">Accueil</a></li>
-                    <li><a href="#project" class="nav-link">Le Projet</a></li>
-                    <li><a href="#stakeholders" class="nav-link">Partenaires</a></li>
-                    <li><a href="#team" class="nav-link">Équipe</a></li>
-                    <li><a href="#action" class="nav-link">Action</a></li>
+                    <li><a href="#home" class="nav-link" data-translate="nav-home">Accueil</a></li>
+                    <li><a href="#project" class="nav-link" data-translate="nav-project">Le Projet</a></li>
+                    <li><a href="#stakeholders" class="nav-link" data-translate="nav-stakeholders">Partenaires</a></li>
+                    <li><a href="#team" class="nav-link" data-translate="nav-team">Équipe</a></li>
+                    <li><a href="#action" class="nav-link" data-translate="nav-action">Action</a></li>
                 </ul>
                 
-                <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
-                    <span class="theme-icon">🌙</span>
-                </button>
+                <div class="nav-controls">
+                    <div class="language-switcher" id="languageSwitcher">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
@@ -68,34 +58,33 @@
             <div class="container">
                 <div class="hero-content">
                     <h1 class="hero-title">
-                        <span class="title-main">Health On Wheels</span>
-                        <span class="title-sub">Apporter la santé aux populations, pas les populations aux hôpitaux</span>
+                        <span class="title-main" data-translate="hero-title-main">Health On Wheels</span>
+                        <span class="title-sub" data-translate="hero-title-sub">Apporter la santé aux populations, pas les populations aux hôpitaux</span>
                     </h1>
                     
                     <p class="hero-description">
-                        Une clinique médicale mobile qui dessert les communautés rurales à travers le monde, 
-                        offrant des soins essentiels à ceux qui en ont le plus besoin.
-                        <br><span class="team-credit">Un projet piloté par l'équipe MACAS</span>
+                        <span data-translate="hero-description">Une clinique médicale mobile qui dessert les communautés rurales à travers le monde, offrant des soins essentiels à ceux qui en ont le plus besoin.</span>
+                        <br><span class="team-credit" data-translate="hero-team-credit">Un projet piloté par l'équipe MACAS</span>
                     </p>
                     
                     <div class="hero-actions">
-                        <a href="#project" class="btn btn-primary">Découvrir le projet</a>
-                        <a href="#action" class="btn btn-secondary">Soutenir l'initiative</a>
+                        <a href="#project" class="btn btn-primary" data-translate="hero-btn-primary">Découvrir le projet</a>
+                        <a href="#action" class="btn btn-secondary" data-translate="hero-btn-secondary">Soutenir l'initiative</a>
                     </div>
                 </div>
                 
                 <div class="hero-stats">
                     <div class="stat-card">
                         <div class="stat-number" data-target="2000">0</div>
-                        <div class="stat-label">Personnes soignées par mois</div>
+                        <div class="stat-label" data-translate="stat-1-label">Personnes soignées par mois</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Pays ciblés</div>
+                        <div class="stat-label" data-translate="stat-2-label">Pays ciblés</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">5M</div>
-                        <div class="stat-label">Milliards FCFA - Coût projet pilote</div>
+                        <div class="stat-label" data-translate="stat-3-label">Milliards FCFA - Coût projet pilote</div>
                     </div>
                 </div>
             </div>
@@ -105,14 +94,14 @@
         <section id="project" class="project" role="region" aria-labelledby="project-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="project-title" class="section-title">Le Projet – Health On Wheels</h2>
-                    <p class="section-subtitle">Une solution innovante pour l'accès aux soins en milieu rural</p>
+                    <h2 id="project-title" class="section-title" data-translate="project-title">Le Projet – Health On Wheels</h2>
+                    <p class="section-subtitle" data-translate="project-subtitle">Une solution innovante pour l'accès aux soins en milieu rural</p>
                 </header>
 
                 <div class="project-content">
                     <div class="project-intro">
-                        <h3>Introduction & Contexte</h3>
-                        <p>
+                        <h3 data-translate="project-intro-title">Introduction & Contexte</h3>
+                        <p data-translate="project-description">
                             Health On Wheels est une initiative à impact social portée par l'équipe MACAS, 
                             qui vise à résoudre le problème critique de l'accès aux soins de santé dans les 
                             communautés rurales à travers le monde. Notre approche mobile nous permet de 
@@ -122,63 +111,63 @@
 
                     <div class="problem-solution">
                         <div class="problem-section">
-                            <h3>Problématique</h3>
+                            <h3 data-translate="problem-title">Problématique</h3>
                             <div class="problems-grid">
                                 <div class="problem-card">
                                     <div class="problem-icon">🏥</div>
-                                    <h4>Manque d'hôpitaux</h4>
-                                    <p>Les zones rurales manquent d'infrastructures médicales adéquates</p>
+                                    <h4 data-translate="problem-1-title">Manque d'hôpitaux</h4>
+                                    <p data-translate="problem-1-text">Les zones rurales manquent d'infrastructures médicales adéquates</p>
                                 </div>
                                 <div class="problem-card">
                                     <div class="problem-icon">👨‍⚕️</div>
-                                    <h4>Manque de médecins</h4>
-                                    <p>Pénurie de personnel médical qualifié dans les régions éloignées</p>
+                                    <h4 data-translate="problem-2-title">Manque de médecins</h4>
+                                    <p data-translate="problem-2-text">Pénurie de personnel médical qualifié dans les régions éloignées</p>
                                 </div>
                                 <div class="problem-card">
                                     <div class="problem-icon">🚗</div>
-                                    <h4>Absence de moyens de transport</h4>
-                                    <p>Difficulté d'accès aux centres de santé existants</p>
+                                    <h4 data-translate="problem-3-title">Absence de moyens de transport</h4>
+                                    <p data-translate="problem-3-text">Difficulté d'accès aux centres de santé existants</p>
                                 </div>
                                 <div class="problem-card">
                                     <div class="problem-icon">😷</div>
-                                    <h4>Maladies non traitées</h4>
-                                    <p>Pathologies qui s'aggravent par manque de suivi médical</p>
+                                    <h4 data-translate="problem-4-title">Maladies non traitées</h4>
+                                    <p data-translate="problem-4-text">Pathologies qui s'aggravent par manque de suivi médical</p>
                                 </div>
                                 <div class="problem-card">
                                     <div class="problem-icon">💉</div>
-                                    <h4>Vaccinations manquées</h4>
-                                    <p>Enfants et adultes non protégés contre les maladies évitables</p>
+                                    <h4 data-translate="problem-5-title">Vaccinations manquées</h4>
+                                    <p data-translate="problem-5-text">Enfants et adultes non protégés contre les maladies évitables</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="solution-section">
-                            <h3>Notre Solution</h3>
+                            <h3 data-translate="solution-title">Notre Solution</h3>
                             <div class="solution-card">
                                 <div class="solution-header">
                                     <div class="solution-icon">🚑</div>
-                                    <h4>Clinique Médicale Mobile</h4>
+                                    <h4 data-translate="solution-main-title">Clinique Médicale Mobile</h4>
                                 </div>
                                 <div class="solution-services">
                                     <div class="service-item">
                                         <span class="service-icon">🩺</span>
                                         <div>
-                                            <h5>Premiers soins et traitements de base</h5>
-                                            <p>Consultations, diagnostics et médicaments essentiels</p>
+                                            <h5 data-translate="service-1-title">Premiers soins et traitements de base</h5>
+                                            <p data-translate="service-1-desc">Consultations, diagnostics et médicaments essentiels</p>
                                         </div>
                                     </div>
                                     <div class="service-item">
                                         <span class="service-icon">💉</span>
                                         <div>
-                                            <h5>Campagnes de vaccination</h5>
-                                            <p>Immunisation contre les maladies courantes et épidémies</p>
+                                            <h5 data-translate="service-2-title">Campagnes de vaccination</h5>
+                                            <p data-translate="service-2-desc">Immunisation contre les maladies courantes et épidémies</p>
                                         </div>
                                     </div>
                                     <div class="service-item">
                                         <span class="service-icon">📚</span>
                                         <div>
-                                            <h5>Éducation sanitaire et prévention</h5>
-                                            <p>Sensibilisation aux bonnes pratiques d'hygiène et de santé</p>
+                                            <h5 data-translate="service-3-title">Éducation sanitaire et prévention</h5>
+                                            <p data-translate="service-3-desc">Sensibilisation aux bonnes pratiques d'hygiène et de santé</p>
                                         </div>
                                     </div>
                                 </div>
@@ -187,50 +176,50 @@
                     </div>
 
                     <div class="impact-section">
-                        <h3>Bénéfices & Impact</h3>
+                        <h3 data-translate="impact-title">Bénéfices & Impact</h3>
                         <div class="impact-grid">
                             <div class="impact-card">
                                 <div class="impact-number">2000+</div>
-                                <div class="impact-label">Personnes soignées par mois</div>
+                                <div class="impact-label" data-translate="impact-1-label">Personnes soignées par mois</div>
                             </div>
                             <div class="impact-card">
                                 <div class="impact-number">↓</div>
-                                <div class="impact-label">Réduction des décès évitables</div>
+                                <div class="impact-label" data-translate="impact-2-label">Réduction des décès évitables</div>
                             </div>
                             <div class="impact-card">
                                 <div class="impact-number">↑</div>
-                                <div class="impact-label">Amélioration de la sensibilisation sanitaire</div>
+                                <div class="impact-label" data-translate="impact-3-label">Amélioration de la sensibilisation sanitaire</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="costs-section">
-                        <h3>Coûts Estimatifs</h3>
+                        <h3 data-translate="costs-title">Coûts Estimatifs</h3>
                         <div class="costs-grid">
                             <div class="cost-card">
                                 <div class="cost-header">
-                                    <h4>Phase Pilote</h4>
-                                    <div class="cost-amount">5 milliards FCFA</div>
+                                    <h4 data-translate="costs-pilot-title">Phase Pilote</h4>
+                                    <div class="cost-amount" data-translate="costs-pilot-amount">5 milliards FCFA</div>
                                 </div>
                                 <ul class="cost-details">
-                                    <li>Flotte de véhicules médicaux équipés</li>
-                                    <li>Médicaments et matériel médical</li>
-                                    <li>Personnel international et formation</li>
-                                    <li>Infrastructure logistique mondiale</li>
-                                    <li>Systèmes de gestion et coordination</li>
+                                    <li data-translate="costs-pilot-item-1">Flotte de véhicules médicaux équipés</li>
+                                    <li data-translate="costs-pilot-item-2">Médicaments et matériel médical</li>
+                                    <li data-translate="costs-pilot-item-3">Personnel international et formation</li>
+                                    <li data-translate="costs-pilot-item-4">Infrastructure logistique mondiale</li>
+                                    <li data-translate="costs-pilot-item-5">Systèmes de gestion et coordination</li>
                                 </ul>
                             </div>
                             <div class="cost-card">
                                 <div class="cost-header">
-                                    <h4>Fonctionnement Annuel</h4>
-                                    <div class="cost-amount">500 millions FCFA</div>
+                                    <h4 data-translate="costs-annual-title">Fonctionnement Annuel</h4>
+                                    <div class="cost-amount" data-translate="costs-annual-amount">500 millions FCFA</div>
                                 </div>
                                 <ul class="cost-details">
-                                    <li>Carburant et maintenance flotte</li>
-                                    <li>Consommables médicaux</li>
-                                    <li>Rémunération personnel international</li>
-                                    <li>Logistique et coordination mondiale</li>
-                                    <li>Formation et programmes locaux</li>
+                                    <li data-translate="costs-annual-item-1">Carburant et maintenance flotte</li>
+                                    <li data-translate="costs-annual-item-2">Consommables médicaux</li>
+                                    <li data-translate="costs-annual-item-3">Rémunération personnel international</li>
+                                    <li data-translate="costs-annual-item-4">Logistique et coordination mondiale</li>
+                                    <li data-translate="costs-annual-item-5">Formation et programmes locaux</li>
                                 </ul>
                             </div>
                         </div>
@@ -243,31 +232,31 @@
         <section id="stakeholders" class="stakeholders" role="region" aria-labelledby="stakeholders-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="stakeholders-title" class="section-title">Parties Prenantes & Gestion des Conflits</h2>
-                    <p class="section-subtitle">Notre écosystème de partenaires et notre stratégie de collaboration</p>
+                    <h2 id="stakeholders-title" class="section-title" data-translate="stakeholders-title">Parties Prenantes & Gestion des Conflits</h2>
+                    <p class="section-subtitle" data-translate="stakeholders-subtitle">Notre écosystème de partenaires et notre stratégie de collaboration</p>
                 </header>
 
                 <div class="stakeholders-content">
                     <div class="stakeholders-grid">
                         <div class="stakeholder-card">
                             <div class="stakeholder-icon">👨‍⚕️</div>
-                            <h3>Médecins et Infirmiers</h3>
-                            <p>Engagement temps partiel pour les consultations mobiles</p>
-                            <div class="stakeholder-role">Personnel médical</div>
+                            <h3 data-translate="stakeholder-1-title">Médecins et Infirmiers</h3>
+                            <p data-translate="stakeholder-1-text">Engagement temps partiel pour les consultations mobiles</p>
+                            <div class="stakeholder-role" data-translate="stakeholder-1-role">Personnel médical</div>
                         </div>
                         
                         <div class="stakeholder-card">
                             <div class="stakeholder-icon">🎓</div>
-                            <h3>Étudiants en Médecine</h3>
-                            <p>Stages pratiques et expérience terrain valorisante</p>
-                            <div class="stakeholder-role">Formation et soutien</div>
+                            <h3 data-translate="stakeholder-2-title">Étudiants en Médecine</h3>
+                            <p data-translate="stakeholder-2-text">Stages pratiques et expérience terrain valorisante</p>
+                            <div class="stakeholder-role" data-translate="stakeholder-2-role">Formation et soutien</div>
                         </div>
                         
                         <div class="stakeholder-card">
                             <div class="stakeholder-icon">🤝</div>
-                            <h3>ONG</h3>
-                            <p>Financement, équipements médicaux et expertise technique</p>
-                            <div class="stakeholder-role">Partenaires financiers</div>
+                            <h3 data-translate="stakeholder-3-title">ONG</h3>
+                            <p data-translate="stakeholder-3-text">Financement, équipements médicaux et expertise technique</p>
+                            <div class="stakeholder-role" data-translate="stakeholder-3-role">Partenaires financiers</div>
                         </div>
                         
                         <div class="stakeholder-card">
@@ -279,15 +268,15 @@
                     </div>
 
                     <div class="conflict-section">
-                        <h3>Gestion des Conflits Potentiels</h3>
+                        <h3 data-translate="conflict-title">Gestion des Conflits Potentiels</h3>
                         <div class="conflict-card">
                             <div class="conflict-problem">
-                                <h4>🚨 Conflit Potentiel</h4>
-                                <p>Manque de personnel permanent et de financement durable</p>
+                                <h4 data-translate="conflict-problem-title">🚨 Conflit Potentiel</h4>
+                                <p data-translate="conflict-problem-text">Manque de personnel permanent et de financement durable</p>
                             </div>
                             <div class="conflict-solution">
-                                <h4>✅ Solution Proposée</h4>
-                                <p>Partenariats stratégiques avec les écoles de médecine pour le personnel 
+                                <h4 data-translate="conflict-solution-title">✅ Solution Proposée</h4>
+                                <p data-translate="conflict-solution-text">Partenariats stratégiques avec les écoles de médecine pour le personnel 
                                 et les ONG internationales pour le financement continu</p>
                             </div>
                         </div>
@@ -300,13 +289,13 @@
         <section id="team" class="team" role="region" aria-labelledby="team-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="team-title" class="section-title">L'Équipe MACAS</h2>
-                    <p class="section-subtitle">4 talents passionnés derrière Health On Wheels</p>
+                    <h2 id="team-title" class="section-title" data-translate="team-title">L'Équipe MACAS</h2>
+                    <p class="section-subtitle" data-translate="team-subtitle">4 talents passionnés derrière Health On Wheels</p>
                 </header>
 
                 <div class="team-content">
                     <div class="team-intro">
-                        <p>
+                        <p data-translate="team-intro">
                             Une équipe complémentaire réunie par une mission commune : 
                             rendre la santé accessible à tous.
                         </p>
@@ -319,9 +308,9 @@
                                     <div class="avatar-placeholder">👨‍💼</div>
                                 </div>
                                 <div class="member-info">
-                                    <h3>Directeur Général</h3>
-                                    <p class="member-role">Vision & Stratégie</p>
-                                    <button class="member-btn" onclick="openMemberModal('director')">
+                                    <h3 data-translate="member-director-name">Directeur Général</h3>
+                                    <p class="member-role" data-translate="team-member-1-role">Vision & Stratégie</p>
+                                    <button class="member-btn" onclick="openMemberModal('director')" data-translate="team-btn">
                                         <span>+</span>
                                     </button>
                                 </div>
@@ -334,9 +323,9 @@
                                     <div class="avatar-placeholder">👩‍⚕️</div>
                                 </div>
                                 <div class="member-info">
-                                    <h3>Directrice Médicale</h3>
-                                    <p class="member-role">Opérations & Soins</p>
-                                    <button class="member-btn" onclick="openMemberModal('medical')">
+                                    <h3 data-translate="member-medical-name">Directrice Médicale</h3>
+                                    <p class="member-role" data-translate="team-member-2-role">Opérations & Soins</p>
+                                    <button class="member-btn" onclick="openMemberModal('medical')" data-translate="team-btn">
                                         <span>+</span>
                                     </button>
                                 </div>
@@ -349,9 +338,9 @@
                                     <div class="avatar-placeholder">👨‍💻</div>
                                 </div>
                                 <div class="member-info">
-                                    <h3>CTO</h3>
-                                    <p class="member-role">Innovation & Tech</p>
-                                    <button class="member-btn" onclick="openMemberModal('tech')">
+                                    <h3 data-translate="member-cto-name">CTO</h3>
+                                    <p class="member-role" data-translate="team-member-3-role">Innovation & Tech</p>
+                                    <button class="member-btn" onclick="openMemberModal('tech')" data-translate="team-btn">
                                         <span>+</span>
                                     </button>
                                 </div>
@@ -364,9 +353,9 @@
                                     <div class="avatar-placeholder">👩‍🔧</div>
                                 </div>
                                 <div class="member-info">
-                                    <h3>Directrice des Opérations</h3>
-                                    <p class="member-role">Logistique & Terrain</p>
-                                    <button class="member-btn" onclick="openMemberModal('operations')">
+                                    <h3 data-translate="member-operations-name">Directrice des Opérations</h3>
+                                    <p class="member-role" data-translate="team-member-4-role">Logistique & Terrain</p>
+                                    <button class="member-btn" onclick="openMemberModal('operations')" data-translate="team-btn">
                                         <span>+</span>
                                     </button>
                                 </div>
@@ -381,32 +370,32 @@
         <section id="action" class="action" role="region" aria-labelledby="action-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="action-title" class="section-title">Appel à l'Action</h2>
+                    <h2 id="action-title" class="section-title" data-translate="action-title">Appel à l'Action</h2>
                 </header>
 
                 <div class="action-content">
                     <div class="action-message">
                         <blockquote class="action-quote">
-                        « Health On Wheels n'est pas seulement une clinique — c'est un espoir en mouvement. »
-                        <span class="quote-author">- Équipe MACAS</span>
+                        <span data-translate="action-quote">« Health On Wheels n'est pas seulement une clinique — c'est un espoir en mouvement. »</span>
+                        <span class="quote-author" data-translate="action-quote-author">- Équipe MACAS</span>
                     </blockquote>
-                        <p class="action-description">
+                        <p class="action-description" data-translate="action-description">
                             Rejoignez-nous dans cette mission vitale pour transformer l'accès aux soins de santé 
-                            au Sénégal rural. Chaque contribution, chaque partenariat, chaque geste de soutien 
+                            dans les zones rurales du monde entier. Chaque contribution, chaque partenariat, chaque geste de soutien 
                             compte pour sauver des vies et construire un avenir plus sain.
                         </p>
                     </div>
 
                     <div class="action-buttons">
-                        <a href="#partner" class="btn btn-primary btn-large">Devenir partenaire</a>
-                        <a href="#support" class="btn btn-secondary btn-large">Soutenir le projet</a>
-                        <a href="#join" class="btn btn-outline btn-large">Rejoindre l'initiative</a>
+                        <a href="#partner" class="btn btn-primary btn-large" data-translate="action-partner-btn">Devenir partenaire</a>
+                        <a href="#support" class="btn btn-secondary btn-large" data-translate="action-support-btn">Soutenir le projet</a>
+                        <a href="#join" class="btn btn-outline btn-large" data-translate="action-join-btn">Rejoindre l'initiative</a>
                     </div>
 
                     <div class="action-impact">
                         <div class="impact-highlight">
                             <div class="impact-number-large">2000</div>
-                            <div class="impact-text">vies changées chaque mois</div>
+                            <div class="impact-text" data-translate="action-impact-text">vies changées chaque mois</div>
                         </div>
                     </div>
                 </div>
@@ -436,7 +425,7 @@
                     <h4>Contact</h4>
                     <p>Email: contact@healthonwheels.org</p>
                     <p>Téléphone: +237 123 456 789</p>
-                    <p>Yaoundé, Cameroun</p>
+                    <p>Siège mondial (Opérations Cameroun)</p>
                 </div>
                 
                 <div class="footer-legal">
@@ -455,7 +444,7 @@
                             </svg>
                             <span class="social-text">Instagram</span>
                         </a>
-                        <a href="https://linkedin.com/company/macas" target="_blank" rel="noopener" aria-label="MACAS sur LinkedIn" class="social-link">
+                        <a href="https://www.linkedin.com/company/healthonwheelsafrica/about/?viewAsMember=true" target="_blank" rel="noopener" aria-label="MACAS sur LinkedIn" class="social-link">
                             <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
@@ -484,19 +473,19 @@
                 </button>
                 <div class="modal-header">
                     <div class="modal-avatar">👨‍💼</div>
-                    <h3>Directeur Général</h3>
-                    <p class="modal-role">Vision & Stratégie</p>
+                    <h3 data-translate="member-director-name">Directeur Général</h3>
+                    <p class="modal-role" data-translate="team-member-1-role">Vision & Stratégie</p>
                 </div>
                 <div class="modal-body">
                     <div class="modal-description">
-                        <p>
+                        <p data-translate="member-director-desc">
                             Leader visionnaire avec 15+ ans d'expérience en santé mondiale. 
                             Expert en projets à impact social et gestion d'équipes multiculturelles.
                         </p>
                     </div>
                     <div class="modal-skills">
-                        <h4>Compétences Clés</h4>
-                        <ul>
+                        <h4 data-translate="modal-skills-title">Compétences Clés</h4>
+                        <ul data-translate="member-director-skills">
                             <li>Stratégie</li>
                             <li>Gestion Internationale</li>
                             <li>Développement Durable</li>
@@ -504,8 +493,8 @@
                         </ul>
                     </div>
                     <div class="modal-impact">
-                        <h4>Impact</h4>
-                        <p>
+                        <h4 data-translate="modal-impact-title">Impact</h4>
+                        <p data-translate="member-director-impact">
                             Architecte de la vision mondiale, coordonne les partenariats 
                             et assure l'alignement stratégique.
                         </p>
@@ -523,19 +512,19 @@
                 </button>
                 <div class="modal-header">
                     <div class="modal-avatar">👩‍⚕️</div>
-                    <h3>Directrice Médicale</h3>
-                    <p class="modal-role">Opérations & Soins</p>
+                    <h3 data-translate="member-medical-name">Directrice Médicale</h3>
+                    <p class="modal-role" data-translate="team-member-2-role">Opérations & Soins</p>
                 </div>
                 <div class="modal-body">
                     <div class="modal-description">
-                        <p>
+                        <p data-translate="member-medical-desc">
                             Médecin humanitaire expert en santé publique et médecine d'urgence. 
                             Spécialisée en interventions zones rurales et systèmes mobiles.
                         </p>
                     </div>
                     <div class="modal-skills">
-                        <h4>Compétences Clés</h4>
-                        <ul>
+                        <h4 data-translate="modal-skills-title">Compétences Clés</h4>
+                        <ul data-translate="member-medical-skills">
                             <li>Médecine d'Urgence</li>
                             <li>Santé Publique</li>
                             <li>Logistique Médicale</li>
@@ -543,10 +532,10 @@
                         </ul>
                     </div>
                     <div class="modal-impact">
-                        <h4>Impact</h4>
-                        <p>
-                            Garante de la qualité des soins, supervise les opérations 
-                            et assure l'excellence des services mobiles.
+                        <h4 data-translate="modal-impact-title">Impact</h4>
+                        <p data-translate="member-medical-impact">
+                            Garante de la qualité des soins, supervise les protocoles médicaux 
+                            et forme le personnel sur le terrain.
                         </p>
                     </div>
                 </div>
@@ -562,19 +551,19 @@
                 </button>
                 <div class="modal-header">
                     <div class="modal-avatar">👨‍💻</div>
-                    <h3>CTO</h3>
-                    <p class="modal-role">Innovation & Tech</p>
+                    <h3 data-translate="member-cto-name">CTO</h3>
+                    <p class="modal-role" data-translate="team-member-3-role">Innovation & Tech</p>
                 </div>
                 <div class="modal-body">
                     <div class="modal-description">
-                        <p>
+                        <p data-translate="member-cto-desc">
                             Ingénieur logiciel spécialisé HealthTech. 
                             Expert en télémédecine, IA médicale et solutions mobiles.
                         </p>
                     </div>
                     <div class="modal-skills">
-                        <h4>Compétences Clés</h4>
-                        <ul>
+                        <h4 data-translate="modal-skills-title">Compétences Clés</h4>
+                        <ul data-translate="member-cto-skills">
                             <li>Télémédecine</li>
                             <li>IA et ML</li>
                             <li>Développement Mobile</li>
@@ -582,10 +571,10 @@
                         </ul>
                     </div>
                     <div class="modal-impact">
-                        <h4>Impact</h4>
-                        <p>
-                            Innovateur technologique, développe les solutions digitales 
-                            pour des soins de pointe en zones isolées.
+                        <h4 data-translate="modal-impact-title">Impact</h4>
+                        <p data-translate="member-cto-impact">
+                            Innovateur technologique, développe les solutions numériques 
+                            et optimise les opérations via la tech.
                         </p>
                     </div>
                 </div>
@@ -601,19 +590,19 @@
                 </button>
                 <div class="modal-header">
                     <div class="modal-avatar">👩‍🔧</div>
-                    <h3>Directrice des Opérations</h3>
-                    <p class="modal-role">Logistique & Terrain</p>
+                    <h3 data-translate="member-operations-name">Directrice des Opérations</h3>
+                    <p class="modal-role" data-translate="team-member-4-role">Logistique & Terrain</p>
                 </div>
                 <div class="modal-body">
                     <div class="modal-description">
-                        <p>
+                        <p data-translate="member-operations-desc">
                             Experte en logistique humanitaire avec 10 ans d'expérience. 
                             Spécialiste en chaîne d'approvisionnement médicale.
                         </p>
                     </div>
                     <div class="modal-skills">
-                        <h4>Compétences Clés</h4>
-                        <ul>
+                        <h4 data-translate="modal-skills-title">Compétences Clés</h4>
+                        <ul data-translate="member-operations-skills">
                             <li>Logistique Humanitaire</li>
                             <li>Gestion de Flotte</li>
                             <li>Coordination Terrain</li>
@@ -621,8 +610,8 @@
                         </ul>
                     </div>
                     <div class="modal-impact">
-                        <h4>Impact</h4>
-                        <p>
+                        <h4 data-translate="modal-impact-title">Impact</h4>
+                        <p data-translate="member-operations-impact">
                             Cerveau opérationnel, assure le fonctionnement parfait 
                             des cliniques mobiles.
                         </p>
@@ -633,6 +622,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
