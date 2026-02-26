@@ -241,57 +241,20 @@
             </div>
         </section>
 
-        <!-- World Map Section -->
-        <section id="world-map-section" class="world-map-section" role="region" aria-labelledby="world-map-title">
-            <div class="container">
-                <header class="section-header">
-                    <h2 id="world-map-title" class="section-title" data-translate="world-map-title">Carte Interactive des 50 Pays Ciblés</h2>
-                    <p class="section-subtitle" data-translate="world-map-subtitle">Explorez notre carte interactive pour découvrir les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.</p>
-                    <div class="section-actions">
-                        <button id="open-map-btn" class="btn btn-primary" data-translate="open-map-btn">
-                            🌍 Découvrir les 50 Pays Ciblés
-                        </button>
-                    </div>
-                </header>
-
-                <!-- World Map Container -->
-                <div class="map-container">
-                    <svg id="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Simplified world map paths will be added here -->
-                    </svg>
-                    
-                    <!-- Country Tooltip -->
-                    <div id="country-tooltip" class="country-tooltip"></div>
-                </div>
-            </div>
-        </section>
-
         <!-- Map Modal with Dashboard -->
-        <div id="map-modal" class="map-modal" role="dialog" aria-labelledby="map-modal-title" aria-hidden="true">
-            <div class="map-modal-overlay" id="map-modal-overlay"></div>
+        <div id="map-modal" class="map-modal">
+            <div class="map-modal-overlay"></div>
             <div class="map-modal-content">
-                <button class="modal-close" id="close-map-modal" aria-label="Fermer">
+                <button class="modal-close">
                     <span>×</span>
                 </button>
                 
-                <div class="map-modal-header">
-                    <h2 id="map-modal-title" data-translate="map-modal-title">Carte Interactive des 50 Pays Ciblés</h2>
-                    <p data-translate="map-modal-subtitle">Découvrez notre portée mondiale et les défis spécifiques à chaque région</p>
-                </div>
-
-                <!-- Content Container with Map and Dashboard -->
                 <div class="map-dashboard-container">
-                    <!-- Leaflet Map Container -->
                     <div class="map-section">
-                        <div id="leaflet-map" class="leaflet-map-container"></div>
+                        <div id="leaflet-map"></div>
                     </div>
-                    
-                    <!-- Dashboard Section -->
                     <div class="dashboard-section">
-                        <h3 class="dashboard-title">Dashboard</h3>
-                        <div id="dashboard-content" class="dashboard-content">
-                            <!-- Dashboard will be inserted here by JavaScript -->
-                        </div>
+                        <div id="dashboard-content"></div>
                     </div>
                 </div>
             </div>
@@ -714,12 +677,12 @@
             }
             
             // Vérifier que le bouton existe
-            const openBtn = document.getElementById('open-map-btn');
+            const openBtn = document.querySelector('.hero-cta .btn-primary');
             if (openBtn) {
                 console.log('✅ Open button found:', openBtn);
                 // Supprimer tous les écouteurs existants
                 openBtn.replaceWith(openBtn.cloneNode(true));
-                const newBtn = document.getElementById('open-map-btn');
+                const newBtn = document.querySelector('.hero-cta .btn-primary');
                 
                 // Ajouter un seul écouteur - PRIORITÉ À LEAFLET (vraie carte)
                 newBtn.addEventListener('click', function(e) {

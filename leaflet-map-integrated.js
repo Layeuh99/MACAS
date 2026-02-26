@@ -22,9 +22,9 @@ class LeafletMap {
     }
 
     setupModalListeners() {
-        const openMapBtn = document.getElementById('open-map-btn');
-        const closeMapBtn = document.getElementById('close-map-modal');
-        const modalOverlay = document.getElementById('map-modal-overlay');
+        const openMapBtn = document.querySelector('.hero-cta .btn-primary');
+        const closeMapBtn = document.querySelector('.modal-close');
+        const modalOverlay = document.querySelector('.map-modal-overlay');
         const modal = document.getElementById('map-modal');
 
         console.log('LeafletMap: Setting up event listeners...');
@@ -149,6 +149,9 @@ class LeafletMap {
 
             // Charger le GeoJSON et créer les labels
             this.loadGeoJSONWithLabels();
+            
+            // Créer le dashboard avec les données
+            this.createDashboard();
 
             console.log('LeafletMap: Map initialized successfully');
             
@@ -267,35 +270,50 @@ class LeafletMap {
         
         legend.onAdd = () => {
             const div = L.DomUtil.create('div', 'map-legend');
-            div.style.background = 'rgba(255, 255, 255, 0.95)';
-            div.style.padding = '15px';
-            div.style.borderRadius = '8px';
-            div.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
-            div.style.maxWidth = '200px';
+            div.style.cssText = `
+                background: white;
+                padding: 12px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 13px;
+                min-width: 180px;
+            `;
             
             div.innerHTML = `
-                <h4 style="margin: 0 0 10px 0; color: #1e293b; font-size: 16px; font-weight: 700;">50 Pays Ciblés</h4>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="width: 16px; height: 16px; background: #ff6b35; border-radius: 3px; border: 1px solid white;"></div>
-                        <span style="color: #1e293b; font-size: 13px;">Afrique (22 pays)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="width: 16px; height: 16px; background: #ffd93d; border-radius: 3px; border: 1px solid white;"></div>
-                        <span style="color: #1e293b; font-size: 13px;">Asie & Pacifique (14 pays)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="width: 16px; height: 16px; background: #6bcf7f; border-radius: 3px; border: 1px solid white;"></div>
-                        <span style="color: #1e293b; font-size: 13px;">Amérique Latine (10 pays)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="width: 16px; height: 16px; background: #4a90e2; border-radius: 3px; border: 1px solid white;"></div>
-                        <span style="color: #1e293b; font-size: 13px;">Moyen-Orient (4 pays)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
-                        <div style="width: 16px; height: 16px; background: #e0e0e0; border-radius: 3px; border: 1px solid white;"></div>
-                        <span style="color: #64748b; font-size: 13px;">Autres pays</span>
-                    </div>
+                <h4 style="margin: 0 0 10px 0; color: #1e293b; font-size: 14px; font-weight: 600;">50 Pays Ciblés</h4>
+                
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <div style="width: 14px; height: 14px; background: #ff6b35; border-radius: 3px;"></div>
+                    <span>Afrique (22 pays)</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <div style="width: 14px; height: 14px; background: #ffd93d; border-radius: 3px;"></div>
+                    <span>Asie & Pacifique (14 pays)</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <div style="width: 14px; height: 14px; background: #6bcf7f; border-radius: 3px;"></div>
+                    <span>Amérique Latine (10 pays)</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <div style="width: 14px; height: 14px; background: #4a90e2; border-radius: 3px;"></div>
+                    <span>Moyen-Orient (4 pays)</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <div style="width: 14px; height: 14px; background: #e0e0e0; border-radius: 3px;"></div>
+                    <span>Autres pays</span>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 8px 0;">
+                
+                <div style="font-size: 11px; color: #64748b; line-height: 1.4;">
+                    <div style="margin-bottom: 4px;"> Total: <strong>50 pays</strong></div>
+                    <div style="margin-bottom: 4px;"> Population: <strong>5.2M</strong></div>
+                    <div> Cliniques: <strong>55</strong></div>
                 </div>
             `;
             
@@ -341,6 +359,91 @@ class LeafletMap {
             other: 'Autre'
         };
         return regionNames[region] || 'Autre';
+    }
+
+    createDashboard() {
+        const dashboardContainer = document.getElementById('dashboard-content');
+        console.log('Dashboard container found:', dashboardContainer);
+        
+        if (!dashboardContainer) {
+            console.error('Dashboard container not found!');
+            return;
+        }
+
+        const regionStats = {
+            africa: { countries: 22, population: '1.2M', clinics: 15 },
+            asia: { countries: 14, population: '2.8M', clinics: 20 },
+            latin: { countries: 10, population: '800K', clinics: 12 },
+            middleEast: { countries: 4, population: '400K', clinics: 8 }
+        };
+
+        console.log('Creating dashboard with stats:', regionStats);
+
+        dashboardContainer.innerHTML = `
+            <div style="padding: 20px; height: 100%; overflow-y: auto;">
+                <h3 style="margin-bottom: 20px; color: #1e293b; font-size: 18px;">Statistiques par Région</h3>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <div style="width: 16px; height: 16px; background: #ff6b35; border-radius: 4px;"></div>
+                        <span style="font-weight: 600;">Afrique</span>
+                    </div>
+                    <div style="margin-left: 24px; font-size: 14px; color: #64748b;">
+                        <div>📍 ${regionStats.africa.countries} pays ciblés</div>
+                        <div>👥 ${regionStats.africa.population} personnes desservies</div>
+                        <div>🏥 ${regionStats.africa.clinics} cliniques mobiles</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <div style="width: 16px; height: 16px; background: #ffd93d; border-radius: 4px;"></div>
+                        <span style="font-weight: 600;">Asie & Pacifique</span>
+                    </div>
+                    <div style="margin-left: 24px; font-size: 14px; color: #64748b;">
+                        <div>📍 ${regionStats.asia.countries} pays ciblés</div>
+                        <div>👥 ${regionStats.asia.population} personnes desservies</div>
+                        <div>🏥 ${regionStats.asia.clinics} cliniques mobiles</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <div style="width: 16px; height: 16px; background: #6bcf7f; border-radius: 4px;"></div>
+                        <span style="font-weight: 600;">Amérique Latine</span>
+                    </div>
+                    <div style="margin-left: 24px; font-size: 14px; color: #64748b;">
+                        <div>📍 ${regionStats.latin.countries} pays ciblés</div>
+                        <div>👥 ${regionStats.latin.population} personnes desservies</div>
+                        <div>🏥 ${regionStats.latin.clinics} cliniques mobiles</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <div style="width: 16px; height: 16px; background: #4a90e2; border-radius: 4px;"></div>
+                        <span style="font-weight: 600;">Moyen-Orient & Afrique du Nord</span>
+                    </div>
+                    <div style="margin-left: 24px; font-size: 14px; color: #64748b;">
+                        <div>📍 ${regionStats.middleEast.countries} pays ciblés</div>
+                        <div>👥 ${regionStats.middleEast.population} personnes desservies</div>
+                        <div>🏥 ${regionStats.middleEast.clinics} cliniques mobiles</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 16px; background: #f8fafc; border-radius: 8px;">
+                    <h4 style="margin-bottom: 12px; color: #1e293b; font-size: 16px;">Impact Global</h4>
+                    <div style="font-size: 14px; color: #64748b;">
+                        <div>🌍 <strong>50 pays</strong> au total</div>
+                        <div>👥 <strong>5.2M</strong> personnes desservies</div>
+                        <div>🏥 <strong>55</strong> cliniques mobiles déployées</div>
+                        <div>💊 <strong>2000+</strong> consultations par mois</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        console.log('Dashboard HTML set successfully');
     }
 
     showMapError() {
