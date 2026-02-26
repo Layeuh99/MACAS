@@ -92,12 +92,12 @@ class SimpleMap {
             return;
         }
 
-        // Créer une carte SVG simple qui fonctionne TOUJOURS
+        // Créer une carte SVG plus réaliste et bien positionnée
         mapContainer.innerHTML = `
             <div style="
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(135deg, #e3f2fd 0%, #bb6bd9 100%);
+                background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
                 border-radius: 16px;
                 position: relative;
                 overflow: hidden;
@@ -105,75 +105,120 @@ class SimpleMap {
                 align-items: center;
                 justify-content: center;
             ">
-                <svg viewBox="0 0 1000 500" style="width: 100%; height: 100%; max-width: 800px;">
-                    <!-- Fond -->
-                    <rect width="1000" height="500" fill="#4a90e2"/>
+                <svg viewBox="0 0 1200 600" style="width: 100%; height: 100%; max-width: 900px;">
+                    <!-- Océan -->
+                    <rect width="1200" height="600" fill="#4682B4"/>
                     
-                    <!-- Grille -->
-                    <g stroke="#ffffff" stroke-width="0.5" opacity="0.3">
-                        <line x1="0" y1="250" x2="1000" y2="250"/>
-                        <line x1="500" y1="0" x2="500" y2="500"/>
+                    <!-- Grille de latitude/longitude -->
+                    <g stroke="#ffffff" stroke-width="0.5" opacity="0.2">
+                        <line x1="0" y1="300" x2="1200" y2="300"/>
+                        <line x1="600" y1="0" x2="600" y2="600"/>
+                        <line x1="300" y1="0" x2="300" y2="600"/>
+                        <line x1="900" y1="0" x2="900" y2="600"/>
+                        <line x1="0" y1="150" x2="1200" y2="150"/>
+                        <line x1="0" y1="450" x2="1200" y2="450"/>
                     </g>
                     
-                    <!-- Continents simplifiés -->
+                    <!-- Continents avec formes plus réalistes -->
                     <!-- Afrique -->
-                    <g fill="#ff6b35" stroke="#ffffff" stroke-width="2">
-                        <ellipse cx="600" cy="350" rx="120" ry="80"/>
-                        <text x="600" y="355" text-anchor="middle" fill="white" font-size="14" font-weight="bold">AFRIQUE</text>
+                    <g fill="#ff6b35" stroke="#ffffff" stroke-width="2" opacity="0.8">
+                        <path d="M 650 250 Q 680 200, 720 220 T 750 280 Q 740 350, 700 400 T 650 420 Q 620 380, 600 340 T 620 280 Z"/>
+                        <text x="680" y="340" text-anchor="middle" fill="white" font-size="16" font-weight="bold">AFRIQUE</text>
                     </g>
                     
                     <!-- Asie -->
-                    <g fill="#ffd93d" stroke="#ffffff" stroke-width="2">
-                        <ellipse cx="750" cy="200" rx="150" ry="100"/>
-                        <text x="750" y="205" text-anchor="middle" fill="white" font-size="14" font-weight="bold">ASIE</text>
+                    <g fill="#ffd93d" stroke="#ffffff" stroke-width="2" opacity="0.8">
+                        <path d="M 850 150 Q 920 120, 1000 180 T 1050 250 Q 1020 320, 950 340 T 880 300 Q 860 220, 850 150 Z"/>
+                        <text x="950" y="240" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ASIE</text>
                     </g>
                     
-                    <!-- Amérique -->
-                    <g fill="#6bcf7f" stroke="#ffffff" stroke-width="2">
-                        <ellipse cx="200" cy="200" rx="120" ry="100"/>
-                        <text x="200" y="205" text-anchor="middle" fill="white" font-size="14" font-weight="bold">AMÉRIQUE</text>
+                    <!-- Amérique du Nord -->
+                    <g fill="#6bcf7f" stroke="#ffffff" stroke-width="2" opacity="0.8">
+                        <path d="M 150 150 Q 200 120, 250 140 T 280 200 Q 270 250, 240 280 T 180 260 Q 150 220, 140 180 Z"/>
+                        <text x="210" y="210" text-anchor="middle" fill="white" font-size="14" font-weight="bold">AMÉRIQUE</text>
+                    </g>
+                    
+                    <!-- Amérique du Sud -->
+                    <g fill="#6bcf7f" stroke="#ffffff" stroke-width="2" opacity="0.8">
+                        <path d="M 200 350 Q 230 340, 250 380 T 240 450 Q 220 480, 190 460 T 170 400 Q 180 370, 200 350 Z"/>
                     </g>
                     
                     <!-- Moyen-Orient -->
-                    <g fill="#4a90e2" stroke="#ffffff" stroke-width="2">
-                        <ellipse cx="550" cy="280" rx="80" ry="60"/>
-                        <text x="550" y="285" text-anchor="middle" fill="white" font-size="12" font-weight="bold">MOYEN-ORIENT</text>
+                    <g fill="#4a90e2" stroke="#ffffff" stroke-width="2" opacity="0.8">
+                        <path d="M 600 200 Q 630 190, 650 210 T 640 250 Q 620 260, 600 240 T 590 220 Z"/>
+                        <text x="620" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">MOYEN-ORIENT</text>
                     </g>
                     
-                    <!-- Points pour les pays ciblés -->
-                    <g fill="#ff0000" stroke="#ffffff" stroke-width="2">
+                    <!-- Europe -->
+                    <g fill="#9b59b6" stroke="#ffffff" stroke-width="2" opacity="0.8">
+                        <path d="M 550 120 Q 580 110, 600 130 T 590 160 Q 570 170, 550 150 T 540 130 Z"/>
+                        <text x="570" y="145" text-anchor="middle" fill="white" font-size="12" font-weight="bold">EUROPE</text>
+                    </g>
+                    
+                    <!-- Points pour les pays ciblés avec coordonnées améliorées -->
+                    <g fill="#ff0000" stroke="#ffffff" stroke-width="1.5">
                         ${this.generateTargetPoints()}
                     </g>
+                    
+                    <!-- Titre de la carte -->
+                    <text x="600" y="40" text-anchor="middle" fill="white" font-size="24" font-weight="bold" opacity="0.9">
+                        50 Pays Ciblés par Health On Wheels
+                    </text>
                 </svg>
                 
-                <!-- Légende -->
+                <!-- Légende améliorée -->
                 <div style="
                     position: absolute;
                     top: 20px;
                     left: 20px;
-                    background: rgba(255, 255, 255, 0.9);
-                    padding: 15px;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 20px;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                    max-width: 200px;
                 ">
-                    <h4 style="margin: 0 0 10px 0; color: #1e293b; font-size: 16px;">50 Pays Ciblés</h4>
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 16px; height: 16px; background: #ff6b35; border-radius: 3px;"></div>
-                            <span style="color: #1e293b; font-size: 14px;">Afrique: 22 pays</span>
+                    <h4 style="margin: 0 0 15px 0; color: #1e293b; font-size: 18px; font-weight: 700;">Zones d'Intervention</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 20px; height: 20px; background: #ff6b35; border-radius: 4px; box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);"></div>
+                            <div>
+                                <div style="color: #1e293b; font-size: 14px; font-weight: 600;">Afrique</div>
+                                <div style="color: #64748b; font-size: 12px;">22 pays</div>
+                            </div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 16px; height: 16px; background: #ffd93d; border-radius: 3px;"></div>
-                            <span style="color: #1e293b; font-size: 14px;">Asie: 14 pays</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 20px; height: 20px; background: #ffd93d; border-radius: 4px; box-shadow: 0 2px 8px rgba(255, 217, 61, 0.3);"></div>
+                            <div>
+                                <div style="color: #1e293b; font-size: 14px; font-weight: 600;">Asie & Pacifique</div>
+                                <div style="color: #64748b; font-size: 12px;">14 pays</div>
+                            </div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 16px; height: 16px; background: #6bcf7f; border-radius: 3px;"></div>
-                            <span style="color: #1e293b; font-size: 14px;">Amérique: 10 pays</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 20px; height: 20px; background: #6bcf7f; border-radius: 4px; box-shadow: 0 2px 8px rgba(107, 207, 127, 0.3);"></div>
+                            <div>
+                                <div style="color: #1e293b; font-size: 14px; font-weight: 600;">Amérique</div>
+                                <div style="color: #64748b; font-size: 12px;">10 pays</div>
+                            </div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 16px; height: 16px; background: #4a90e2; border-radius: 3px;"></div>
-                            <span style="color: #1e293b; font-size: 14px;">Moyen-Orient: 4 pays</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 20px; height: 20px; background: #4a90e2; border-radius: 4px; box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);"></div>
+                            <div>
+                                <div style="color: #1e293b; font-size: 14px; font-weight: 600;">Moyen-Orient</div>
+                                <div style="color: #64748b; font-size: 12px;">4 pays</div>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div style="
+                        margin-top: 15px;
+                        padding-top: 15px;
+                        border-top: 1px solid #e2e8f0;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    ">
+                        <div style="width: 12px; height: 12px; background: #ff0000; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);"></div>
+                        <div style="color: #1e293b; font-size: 13px; font-weight: 600;">Pays ciblés</div>
                     </div>
                 </div>
             </div>
@@ -184,25 +229,40 @@ class SimpleMap {
 
     generateTargetPoints() {
         const coordinates = {
-            'SN': {x: 580, y: 380}, 'ML': {x: 550, y: 340}, 'NE': {x: 620, y: 320}, 'BF': {x: 560, y: 350},
-            'GN': {x: 540, y: 360}, 'CI': {x: 570, y: 390}, 'NG': {x: 600, y: 330}, 'GH': {x: 570, y: 370},
-            'ET': {x: 680, y: 300}, 'KE': {x: 690, y: 340}, 'UG': {x: 670, y: 320}, 'TZ': {x: 700, y: 400},
-            'RW': {x: 680, y: 380}, 'MG': {x: 720, y: 450}, 'CD': {x: 650, y: 400}, 'CF': {x: 630, y: 330},
-            'TD': {x: 640, y: 310}, 'CM': {x: 600, y: 300}, 'MZ': {x: 720, y: 420}, 'AO': {x: 650, y: 430},
-            'MW': {x: 690, y: 410}, 'ZM': {x: 680, y: 390}, 'IN': {x: 780, y: 250}, 'PK': {x: 750, y: 270},
-            'BD': {x: 820, y: 280}, 'NP': {x: 800, y: 260}, 'BT': {x: 810, y: 250}, 'ID': {x: 850, y: 380},
-            'PH': {x: 870, y: 320}, 'MM': {x: 830, y: 300}, 'LA': {x: 820, y: 320}, 'KH': {x: 840, y: 330},
-            'VN': {x: 860, y: 310}, 'AF': {x: 730, y: 280}, 'UZ': {x: 760, y: 240}, 'TJ': {x: 770, y: 250},
-            'BR': {x: 250, y: 350}, 'BO': {x: 220, y: 380}, 'PE': {x: 180, y: 320}, 'CO': {x: 150, y: 280},
-            'EC': {x: 120, y: 300}, 'PY': {x: 280, y: 420}, 'GT': {x: 100, y: 220}, 'HN': {x: 80, y: 240},
-            'HT': {x: 90, y: 260}, 'NI': {x: 70, y: 230}, 'YE': {x: 580, y: 290}, 'SY': {x: 570, y: 270},
-            'IQ': {x: 590, y: 260}, 'MA': {x: 480, y: 300}, 'MR': {x: 520, y: 330}
+            // Afrique - coordonnées améliorées
+            'SN': {x: 620, y: 380}, 'ML': {x: 600, y: 340}, 'NE': {x: 680, y: 320}, 'BF': {x: 630, y: 350},
+            'GN': {x: 590, y: 360}, 'CI': {x: 640, y: 390}, 'NG': {x: 670, y: 330}, 'GH': {x: 640, y: 370},
+            'ET': {x: 750, y: 300}, 'KE': {x: 760, y: 340}, 'UG': {x: 740, y: 320}, 'TZ': {x: 780, y: 400},
+            'RW': {x: 750, y: 380}, 'MG': {x: 800, y: 450}, 'CD': {x: 720, y: 400}, 'CF': {x: 700, y: 330},
+            'TD': {x: 710, y: 310}, 'CM': {x: 670, y: 300}, 'MZ': {x: 820, y: 420}, 'AO': {x: 750, y: 430},
+            'MW': {x: 790, y: 410}, 'ZM': {x: 780, y: 390}, 'MA': {x: 580, y: 280}, 'MR': {x: 620, y: 330},
+            
+            // Asie - coordonnées améliorées
+            'IN': {x: 920, y: 250}, 'PK': {x: 880, y: 270}, 'BD': {x: 960, y: 280}, 'NP': {x: 940, y: 260},
+            'BT': {x: 950, y: 250}, 'ID': {x: 1050, y: 380}, 'PH': {x: 1070, y: 320}, 'MM': {x: 1030, y: 300},
+            'LA': {x: 1020, y: 320}, 'KH': {x: 1040, y: 330}, 'VN': {x: 1060, y: 310}, 'AF': {x: 850, y: 280},
+            'UZ': {x: 900, y: 240}, 'TJ': {x: 910, y: 250},
+            
+            // Amérique - coordonnées améliorées
+            'BR': {x: 250, y: 400}, 'BO': {x: 220, y: 430}, 'PE': {x: 180, y: 350}, 'CO': {x: 150, y: 310},
+            'EC': {x: 120, y: 330}, 'PY': {x: 280, y: 470}, 'GT': {x: 100, y: 250}, 'HN': {x: 80, y: 270},
+            'HT': {x: 90, y: 290}, 'NI': {x: 70, y: 260},
+            
+            // Moyen-Orient - coordonnées améliorées
+            'YE': {x: 680, y: 290}, 'SY': {x: 670, y: 270}, 'IQ': {x: 690, y: 260}
         };
 
         let points = '';
         Object.entries(coordinates).forEach(([code, pos]) => {
             if (this.targetCountries[code]) {
-                points += `<circle cx="${pos.x}" cy="${pos.y}" r="4" fill="#ff0000" stroke="#ffffff" stroke-width="1"/>`;
+                // Ajouter un effet de pulsation
+                points += `
+                    <circle cx="${pos.x}" cy="${pos.y}" r="6" fill="#ff0000" stroke="#ffffff" stroke-width="2">
+                        <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="${pos.x}" cy="${pos.y}" r="3" fill="#ffffff" stroke="#ff0000" stroke-width="1"/>
+                `;
             }
         });
 

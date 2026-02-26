@@ -721,18 +721,21 @@
                 openBtn.replaceWith(openBtn.cloneNode(true));
                 const newBtn = document.getElementById('open-map-btn');
                 
-                // Ajouter un seul écouteur
+                // Ajouter un seul écouteur - PRIORITÉ À LEAFLET (vraie carte)
                 newBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('� Button clicked directly!');
+                    console.log('🔥 Button clicked directly!');
                     
-                    // Utiliser uniquement l'instance LeafletMap
+                    // Utiliser LeafletMap en priorité (vraie carte géographique)
                     if (window.leafletMapInstance) {
-                        console.log('🗺️ Using LeafletMap instance...');
+                        console.log('🗺️ Using LeafletMap instance (real geographic map)...');
                         window.leafletMapInstance.showModal();
+                    } else if (window.simpleMapInstance) {
+                        console.log('🗺️ Using SimpleMap instance (fallback)...');
+                        window.simpleMapInstance.showModal();
                     } else {
-                        console.error('❌ LeafletMap instance not found!');
+                        console.error('❌ No map instance found!');
                     }
                 });
             } else {
@@ -752,6 +755,13 @@
                 console.log('✅ LeafletMap instance found:', window.leafletMapInstance);
             } else {
                 console.error('❌ LeafletMap instance NOT found!');
+            }
+            
+            // Vérifier que l'instance SimpleMap existe
+            if (window.simpleMapInstance) {
+                console.log('✅ SimpleMap instance found:', window.simpleMapInstance);
+            } else {
+                console.error('❌ SimpleMap instance NOT found!');
             }
             
             console.log('=== END DEBUG ===');
