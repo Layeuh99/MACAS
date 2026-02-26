@@ -7,6 +7,10 @@
     <meta name="description" content="Clinique médicale mobile qui dessert les communautés rurales à travers le monde">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <!-- Progress Bar -->
@@ -237,108 +241,18 @@
             </div>
         </section>
 
-        <!-- Interactive Map Modal -->
-        <div id="map-modal" class="map-modal" style="display: none;">
-            <div class="modal-overlay" id="map-modal-overlay"></div>
-            <div class="map-modal-content">
-                <button class="modal-close" id="close-map-modal" aria-label="Fermer">
-                    <span>×</span>
-                </button>
-                
-                <div class="map-modal-header">
-                    <h2 data-translate="map-modal-title">Carte Interactive des 50 Pays Ciblés</h2>
-                    <p data-translate="map-modal-subtitle">Découvrez notre portée mondiale et les défis spécifiques à chaque région</p>
-                </div>
-
-                <!-- Region Context Cards -->
-                <div class="region-context-cards">
-                    <div class="region-context-card africa-priority">
-                        <div class="region-header">
-                            <span class="region-icon">🌍</span>
-                            <h3 data-translate="region-africa-title">Afrique - Priorité Absolue</h3>
-                            <span class="priority-badge">Priorité 1</span>
-                        </div>
-                        <p data-translate="region-africa-desc">
-                            Le besoin le plus critique en raison de l'éloignement des centres de santé en zone rurale. 
-                            Nos cliniques mobiles parcouvrent des centaines de kilomètres pour atteindre les populations les plus isolées.
-                        </p>
-                        <div class="region-stats">
-                            <span class="stat">20 pays</span>
-                            <span class="focus">Éloignement des centres de santé</span>
-                        </div>
+        <!-- World Map Section -->
+        <section id="world-map-section" class="world-map-section" role="region" aria-labelledby="world-map-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="world-map-title" class="section-title" data-translate="world-map-title">Carte Interactive des 50 Pays Ciblés</h2>
+                    <p class="section-subtitle" data-translate="world-map-subtitle">Découvrez notre portée mondiale et les défis spécifiques à chaque région</p>
+                    <div class="section-actions">
+                        <button id="open-map-btn" class="btn btn-primary" data-translate="open-map-btn">
+                            🌍 Ouvrir la Carte Interactive
+                        </button>
                     </div>
-
-                    <div class="region-context-card asia-priority">
-                        <div class="region-header">
-                            <span class="region-icon">🏔️</span>
-                            <h3 data-translate="region-asia-title">Asie & Pacifique</h3>
-                            <span class="priority-badge">Priorité 2</span>
-                        </div>
-                        <p data-translate="region-asia-desc">
-                            Le défi est souvent lié au relief (Himalaya) ou à l'éparpillement des îles. 
-                            La télémédecine et les drones nous permettent de surmonter ces barrières géographiques.
-                        </p>
-                        <div class="region-stats">
-                            <span class="stat">14 pays</span>
-                            <span class="focus">Relief montagneux et îles</span>
-                        </div>
-                    </div>
-
-                    <div class="region-context-card latin-priority">
-                        <div class="region-header">
-                            <span class="region-icon">🌎️</span>
-                            <h3 data-translate="region-latin-title">Amérique Latine & Caraïbes</h3>
-                            <span class="priority-badge">Priorité 3</span>
-                        </div>
-                        <p data-translate="region-latin-desc">
-                            Les cliniques mobiles sont essentielles pour atteindre les populations indigènes en Amazonie 
-                            ou dans les Andes, là où les infrastructures traditionnelles sont inexistantes.
-                        </p>
-                        <div class="region-stats">
-                            <span class="stat">10 pays</span>
-                            <span class="focus">Populations indigènes</span>
-                        </div>
-                    </div>
-
-                    <div class="region-context-card middle-east-priority">
-                        <div class="region-header">
-                            <span class="region-icon">🏜️</span>
-                            <h3 data-translate="region-middle-east-title">Moyen-Orient & Afrique du Nord</h3>
-                            <span class="priority-badge">Priorité 4</span>
-                        </div>
-                        <p data-translate="region-middle-east-desc">
-                            Le défi est principalement lié aux zones désertiques et aux zones de reconstruction post-conflit. 
-                            Nos unités mobiles apportent des soins essentiels dans ces environnements extrêmes.
-                        </p>
-                        <div class="region-stats">
-                            <span class="stat">6 pays</span>
-                            <span class="focus">Zones désertiques et reconstruction</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Legend -->
-                <div class="map-legend">
-                    <h3 data-translate="legend-title">Légende</h3>
-                    <div class="legend-items">
-                        <div class="legend-item">
-                            <div class="legend-color africa"></div>
-                            <span data-translate="legend-africa">Afrique</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color asia"></div>
-                            <span data-translate="legend-asia">Asie & Pacifique</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color latin-america"></div>
-                            <span data-translate="legend-latin">Amérique latine & Caraïbes</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color middle-east"></div>
-                            <span data-translate="legend-middle-east">Moyen-Orient & Afrique du Nord</span>
-                        </div>
-                    </div>
-                </div>
+                </header>
 
                 <!-- World Map Container -->
                 <div class="map-container">
@@ -347,25 +261,37 @@
                     </svg>
                     
                     <!-- Country Tooltip -->
-                    <div id="country-tooltip" class="country-tooltip" style="display: none;">
-                        <div class="tooltip-title"></div>
-                        <div class="tooltip-region"></div>
-                    </div>
+                    <div id="country-tooltip" class="country-tooltip"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Modal with Dashboard -->
+        <div id="map-modal" class="map-modal" role="dialog" aria-labelledby="map-modal-title" aria-hidden="true">
+            <div class="map-modal-overlay" id="map-modal-overlay"></div>
+            <div class="map-modal-content">
+                <button class="modal-close" id="close-map-modal" aria-label="Fermer">
+                    <span>×</span>
+                </button>
+                
+                <div class="map-modal-header">
+                    <h2 id="map-modal-title" data-translate="map-modal-title">Carte Interactive des 50 Pays Ciblés</h2>
+                    <p data-translate="map-modal-subtitle">Découvrez notre portée mondiale et les défis spécifiques à chaque région</p>
                 </div>
 
-                <!-- Statistics -->
-                <div class="map-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">50</div>
-                        <div class="stat-label" data-translate="stat-countries">Pays ciblés</div>
+                <!-- Content Container with Map and Dashboard -->
+                <div class="map-dashboard-container">
+                    <!-- Leaflet Map Container -->
+                    <div class="map-section">
+                        <div id="leaflet-map" class="leaflet-map-container"></div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">4</div>
-                        <div class="stat-label" data-translate="stat-regions">Régions</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">2B+</div>
-                        <div class="stat-label" data-translate="stat-population">Population touchée</div>
+                    
+                    <!-- Dashboard Section -->
+                    <div class="dashboard-section">
+                        <h3 class="dashboard-title">Dashboard</h3>
+                        <div id="dashboard-content" class="dashboard-content">
+                            <!-- Dashboard will be inserted here by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -770,5 +696,33 @@
     <script src="translations.js"></script>
     <script src="script.js"></script>
     <script src="leaflet-map-integrated.js"></script>
+    
+    <!-- Debug Script -->
+    <script>
+        // Vérifier que Leaflet est chargé
+        setTimeout(() => {
+            if (typeof L !== 'undefined') {
+                console.log('Leaflet is loaded successfully!');
+            } else {
+                console.error('Leaflet is NOT loaded!');
+            }
+            
+            // Vérifier que le bouton existe
+            const openBtn = document.getElementById('open-map-btn');
+            if (openBtn) {
+                console.log('Open button found:', openBtn);
+            } else {
+                console.error('Open button NOT found!');
+            }
+            
+            // Vérifier que le modal existe
+            const modal = document.getElementById('map-modal');
+            if (modal) {
+                console.log('Modal found:', modal);
+            } else {
+                console.error('Modal NOT found!');
+            }
+        }, 1000);
+    </script>
 </body>
 </html>

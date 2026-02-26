@@ -1,150 +1,156 @@
 // Leaflet Interactive Map for Health On Wheels
-class LeafletMapModal {
+class LeafletMap {
     constructor() {
-        this.modal = document.getElementById('map-modal');
-        this.modalOverlay = document.getElementById('map-modal-overlay');
-        this.closeBtn = document.getElementById('close-map-modal');
-        this.openMapBtn = null;
         this.map = null;
         this.geoJsonLayer = null;
-        
         this.targetCountries = {
-            // Afrique
-            'SN': 'Sénégal', 'ML': 'Mali', 'NE': 'Niger', 'BF': 'Burkina Faso',
-            'GN': 'Guinée', 'CI': 'Côte d\'Ivoire', 'NG': 'Nigeria', 'GH': 'Ghana',
-            'ET': 'Éthiopie', 'KE': 'Kenya', 'UG': 'Ouganda', 'TZ': 'Tanzanie',
-            'RW': 'Rwanda', 'MG': 'Madagascar', 'CD': 'RDC', 'CF': 'Centrafrique',
-            'TD': 'Tchad', 'CM': 'Cameroun', 'MZ': 'Mozambique', 'AO': 'Angola',
-            'MW': 'Malawi', 'ZM': 'Zambie',
-            
-            // Asie & Pacifique
-            'IN': 'Inde', 'PK': 'Pakistan', 'BD': 'Bangladesh', 'NP': 'Népal',
-            'BT': 'Bhoutan', 'ID': 'Indonésie', 'PH': 'Philippines', 'MM': 'Myanmar',
-            'LA': 'Laos', 'KH': 'Cambodge', 'VN': 'Vietnam', 'AF': 'Afghanistan',
-            'UZ': 'Ouzbékistan', 'TJ': 'Tadjikistan',
-            
-            // Amérique latine & Caraïbes
-            'BR': 'Brésil', 'BO': 'Bolivie', 'PE': 'Pérou', 'CO': 'Colombie',
-            'EC': 'Équateur', 'PY': 'Paraguay', 'GT': 'Guatemala', 'HN': 'Honduras',
-            'HT': 'Haïti', 'NI': 'Nicaragua',
-            
-            // Moyen-Orient & Afrique du Nord
-            'YE': 'Yémen', 'SY': 'Syrie', 'IQ': 'Irak', 'MA': 'Maroc', 'MR': 'Mauritanie'
+            'SN': 'Sénégal', 'ML': 'Mali', 'NE': 'Niger', 'BF': 'Burkina Faso', 'GN': 'Guinée',
+            'CI': "Côte d'Ivoire", 'NG': 'Nigeria', 'GH': 'Ghana', 'ET': 'Éthiopie', 'KE': 'Kenya',
+            'UG': 'Ouganda', 'TZ': 'Tanzanie', 'RW': 'Rwanda', 'MG': 'Madagascar', 'CD': 'Congo',
+            'CF': 'Centrafrique', 'TD': 'Tchad', 'CM': 'Cameroun', 'MZ': 'Mozambique', 'AO': 'Angola',
+            'MW': 'Malawi', 'ZM': 'Zambie', 'IN': 'Inde', 'PK': 'Pakistan', 'BD': 'Bangladesh',
+            'NP': 'Népal', 'BT': 'Bhoutan', 'ID': 'Indonésie', 'PH': 'Philippines', 'MM': 'Myanmar',
+            'LA': 'Laos', 'KH': 'Cambodge', 'VN': 'Viêt Nam', 'AF': 'Afghanistan', 'UZ': 'Ouzbékistan',
+            'TJ': 'Tadjikistan', 'BR': 'Brésil', 'BO': 'Bolivie', 'PE': 'Pérou', 'CO': 'Colombie',
+            'EC': 'Équateur', 'PY': 'Paraguay', 'GT': 'Guatemala', 'HN': 'Honduras', 'HT': 'Haïti',
+            'NI': 'Nicaragua', 'YE': 'Yémen', 'SY': 'Syrie', 'IQ': 'Irak', 'MA': 'Maroc',
+            'MR': 'Mauritanie'
         };
-
-        this.regionColors = {
-            africa: '#ff6b35',
-            asia: '#ffd93d',
-            latin: '#6bcf7f',
-            middleEast: '#4a90e2',
-            other: '#e0e0e0'
-        };
-
-        this.init();
+        
+        console.log('LeafletMap: Constructor completed');
     }
 
-    init() {
-        this.setupEventListeners();
-        this.setupLanguageSupport();
-        this.loadLeaflet();
-    }
+    setupModalListeners() {
+        const openMapBtn = document.getElementById('open-map-btn');
+        const closeMapBtn = document.getElementById('close-map-modal');
+        const modalOverlay = document.getElementById('map-modal-overlay');
+        const modal = document.getElementById('map-modal');
 
-    loadLeaflet() {
-        // Charger Leaflet CSS si pas déjà chargé
-        if (!document.querySelector('link[href*="leaflet.css"]')) {
-            const leafletCSS = document.createElement('link');
-            leafletCSS.rel = 'stylesheet';
-            leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-            document.head.appendChild(leafletCSS);
+        console.log('LeafletMap: Setting up event listeners...');
+        console.log('Open button:', openMapBtn);
+        console.log('Close button:', closeMapBtn);
+        console.log('Modal:', modal);
+
+        if (openMapBtn) {
+            openMapBtn.addEventListener('click', (e) => {
+                console.log('LeafletMap: Open button clicked!');
+                e.preventDefault();
+                this.showModal();
+            });
+        } else {
+            console.error('LeafletMap: Open button not found!');
         }
 
-        // Charger Leaflet JS si pas déjà chargé
-        if (!window.L) {
-            const leafletJS = document.createElement('script');
-            leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            leafletJS.onload = () => this.initializeMap();
-            document.head.appendChild(leafletJS);
+        if (closeMapBtn) {
+            closeMapBtn.addEventListener('click', () => {
+                console.log('LeafletMap: Close button clicked');
+                this.hideModal();
+            });
+        }
+
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', () => {
+                console.log('LeafletMap: Overlay clicked');
+                this.hideModal();
+            });
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && modal.classList.contains('show')) {
+                console.log('LeafletMap: Escape key pressed');
+                this.hideModal();
+            }
+        });
+    }
+
+    showModal() {
+        const modal = document.getElementById('map-modal');
+        console.log('LeafletMap: Showing modal...', modal);
+        
+        if (modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            // Initialiser la carte quand le modal s'ouvre
+            setTimeout(() => {
+                if (!this.map) {
+                    console.log('LeafletMap: Initializing map...');
+                    this.initializeMap();
+                } else {
+                    console.log('LeafletMap: Invalidating map size...');
+                    this.map.invalidateSize();
+                }
+            }, 300);
         } else {
-            this.initializeMap();
+            console.error('LeafletMap: Modal not found!');
+        }
+    }
+
+    hideModal() {
+        const modal = document.getElementById('map-modal');
+        console.log('LeafletMap: Hiding modal...');
+        
+        if (modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
         }
     }
 
     initializeMap() {
-        if (!this.modal) return;
-
-        // Créer le conteneur pour la carte s'il n'existe pas
-        let mapContainer = this.modal.querySelector('#leaflet-world-map');
-        if (!mapContainer) {
-            // Trouver où insérer la carte (après les cartes contextuelles)
-            const regionCards = this.modal.querySelector('.region-context-cards');
-            const mapContainerDiv = document.createElement('div');
-            mapContainerDiv.className = 'map-container';
-            mapContainerDiv.id = 'leaflet-world-map';
-            mapContainerDiv.style.cssText = `
-                width: 100%;
-                height: 400px;
-                border-radius: 8px;
-                margin: 20px 40px;
-                position: relative;
-                background: white;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                overflow: hidden;
-            `;
-            
-            if (regionCards) {
-                regionCards.parentNode.insertBefore(mapContainerDiv, regionCards.nextSibling);
-            } else {
-                this.modal.insertBefore(mapContainerDiv, this.modal.querySelector('.map-legend'));
-            }
-            
-            mapContainer = mapContainerDiv;
-        }
-
-        // S'assurer que le conteneur est visible
-        mapContainer.style.display = 'block';
-        mapContainer.style.visibility = 'visible';
-        mapContainer.style.opacity = '1';
-
-        console.log('LeafletMap: Map container created/found:', mapContainer);
-
-        // Initialiser la carte Leaflet avec un petit délai
+        console.log('LeafletMap: Initializing map...');
+        
         setTimeout(() => {
             try {
                 if (this.map) {
                     this.map.remove();
                 }
                 
-                this.map = L.map('leaflet-world-map', {
+                // Vérifier que Leaflet est disponible
+                if (typeof L === 'undefined') {
+                    console.error('LeafletMap: Leaflet library not loaded!');
+                    this.showMapError();
+                    return;
+                }
+                
+                // Vérifier que le conteneur existe
+                const mapContainer = document.getElementById('leaflet-map');
+                if (!mapContainer) {
+                    console.error('LeafletMap: Map container not found!');
+                    this.showMapError();
+                    return;
+                }
+                
+                // Créer la carte dans le conteneur du modal
+                this.map = L.map('leaflet-map', {
                     center: [20, 0],
                     zoom: 2.5,
-                    minZoom: 2,
-                    maxZoom: 6,
-                    worldCopyJump: true,
-                    attributionControl: false,
-                    zoomControl: true
+                    minZoom: 2
                 });
-
-                console.log('LeafletMap: Map initialized');
-
-                // Ajouter le fond de carte OpenStreetMap
+                
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors',
-                    maxZoom: 19
+                    attribution: 'OpenStreetMap contributors'
                 }).addTo(this.map);
 
-                console.log('LeafletMap: Tile layer added');
+                console.log('LeafletMap: Map initialized successfully');
 
-                // Ajouter la légende personnalisée
+                // Load GeoJSON data (continue même si erreur)
+                this.loadGeoJSON();
+
+                // Add custom legend (qui crée le dashboard)
                 this.addCustomLegend();
-                
-                // Ajouter les labels des pays ciblés
+
+                // Add country labels (continue même si erreur)
                 this.addCountryLabels();
 
-                // Charger les données GeoJSON
-                this.loadGeoJSON();
+                // Add labels to GeoJSON countries (continue même si erreur)
+                this.addLabelsToCountries();
+
+                console.log('LeafletMap: All map components loaded');
             } catch (error) {
                 console.error('LeafletMap: Error initializing map:', error);
-                this.showMapError();
+                // Ne pas afficher l'erreur immédiatement, essayer de continuer
+                console.log('LeafletMap: Attempting to continue despite error...');
             }
         }, 300);
     }
@@ -159,155 +165,71 @@ class LeafletMapModal {
             .then(data => {
                 console.log('LeafletMap: GeoJSON data loaded, features:', data.features.length);
                 
-                // Supprimer l'ancienne couche si elle existe
+                // Add GeoJSON layer to map
+                this.geoJsonLayer = L.geoJSON(data, {
+                    style: (feature) => {
+                        const countryCode = feature.properties.iso_a2;
+                        const region = this.getRegion(countryCode);
+                        return {
+                            fillColor: this.getRegionColor(region),
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            dashArray: '3',
+                            fillOpacity: 0.7
+                        };
+                    },
+                    onEachFeature: (feature, layer) => {
+                        const countryName = this.targetCountries[feature.properties.iso_a2];
+                        if (countryName) {
+                            layer.bindTooltip(countryName, {
+                                permanent: false,
+                                sticky: true,
+                                className: 'country-tooltip'
+                            });
+                        }
+                    }
+                }).addTo(this.map);
+                
+                // Fit map to show all countries
                 if (this.geoJsonLayer) {
-                    this.map.removeLayer(this.geoJsonLayer);
+                    this.map.fitBounds(this.geoJsonLayer.getBounds());
                 }
                 
-                this.geoJsonLayer = L.geoJSON(data, {
-                    style: (feature) => this.getCountryStyle(feature),
-                    onEachFeature: (feature, layer) => this.setupFeatureEvents(feature, layer)
-                }).addTo(this.map);
-
                 console.log('LeafletMap: GeoJSON layer added to map');
-
-                // Ajouter les labels sur les pays ciblés
-                this.addLabelsToCountries();
-
-                // Adapter la vue pour montrer tous les pays ciblés
-                setTimeout(() => {
-                    const bounds = this.geoJsonLayer.getBounds();
-                    if (bounds.isValid()) {
-                        this.map.fitBounds(bounds, { padding: [20, 20] });
-                        console.log('LeafletMap: Map bounds fitted');
-                    }
-                }, 100);
-                
-                // Mettre à jour les statistiques
-                this.updateStatistics();
             })
             .catch(error => {
                 console.error('LeafletMap: Error loading GeoJSON:', error);
-                this.showMapError();
+                // Continuer sans GeoJSON
+                console.log('LeafletMap: Continuing without GeoJSON data...');
             });
-    }
-
-    getCountryStyle(feature) {
-        const countryCode = feature.properties.iso_a2;
-        const isTarget = this.targetCountries.hasOwnProperty(countryCode);
-        const region = this.getRegion(countryCode);
-        
-        // Couleurs exactes comme dans la légende
-        const regionColors = {
-            africa: '#ff6b35',      // Orange exact
-            asia: '#ffd93d',        // Jaune exact
-            latin: '#6bcf7f',       // Vert exact
-            middleEast: '#4a90e2',  // Bleu exact
-            other: '#e0e0e0'        // Gris exact
-        };
-        
-        const regionStrokes = {
-            africa: '#e55a2b',      // Orange foncé
-            asia: '#e6c230',        // Jaune foncé
-            latin: '#5ab86a',       // Vert foncé
-            middleEast: '#3a7bc8',  // Bleu foncé
-            other: '#c0c0c0'        // Gris foncé
-        };
-        
-        return {
-            fillColor: regionColors[region],
-            weight: isTarget ? 2 : 1,
-            opacity: 1,
-            color: regionStrokes[region],
-            fillOpacity: isTarget ? 0.8 : 0.3
-        };
-    }
-
-    setupFeatureEvents(feature, layer) {
-        const countryCode = feature.properties.iso_a2;
-        const countryName = feature.properties.name;
-        const isTarget = this.targetCountries.hasOwnProperty(countryCode);
-        const region = this.getRegion(countryCode);
-        const regionName = this.getRegionName(region);
-        
-        // Tooltip
-        const tooltipContent = isTarget 
-            ? `<strong>${this.targetCountries[countryCode] || countryName}</strong><br><em>${regionName}</em>`
-            : `<strong>${countryName}</strong><br><em>Pays non ciblé</em>`;
-        
-        layer.bindTooltip(tooltipContent, {
-            permanent: false,
-            sticky: true,
-            direction: 'top',
-            offset: [0, -10],
-            className: 'country-tooltip'
-        });
-        
-        // Hover effects avec couleurs exactes
-        layer.on({
-            mouseover: (e) => {
-                const layer = e.target;
-                if (isTarget) {
-                    // Couleurs de survol plus vives mais cohérentes
-                    const hoverColors = {
-                        africa: '#ff8c42',
-                        asia: '#ffe066',
-                        latin: '#7dd87d',
-                        middleEast: '#5ba0f2',
-                        other: '#f0f0f0'
-                    };
-                    
-                    const hoverStrokes = {
-                        africa: '#cc4a20',
-                        asia: '#cca020',
-                        latin: '#4a9a4a',
-                        middleEast: '#2a80c0',
-                        other: '#a0a0a0'
-                    };
-                    
-                    layer.setStyle({
-                        weight: 3,
-                        color: hoverStrokes[region],
-                        fillOpacity: 0.95,
-                        fillColor: hoverColors[region]
-                    });
-                }
-            },
-            mouseout: (e) => {
-                const layer = e.target;
-                // Restaurer les couleurs originales exactes
-                layer.setStyle(this.getCountryStyle(feature));
-            }
-        });
-        
-        // Click sur pays ciblés
-        if (isTarget) {
-            layer.on('click', (e) => {
-                const popupContent = `
-                    <div style="min-width: 200px;">
-                        <h3 style="margin: 0 0 10px 0; color: #0ea5e9;">${this.targetCountries[countryCode]}</h3>
-                        <p style="margin: 0 0 10px 0;"><strong>Région:</strong> ${regionName}</p>
-                        <p style="margin: 0; font-size: 0.9rem; color: #666;">
-                            Health On Wheels intervient dans ce pays pour apporter des soins de santé essentiels aux populations les plus vulnérables.
-                        </p>
-                    </div>
-                `;
-                layer.bindPopup(popupContent).openPopup();
-            });
-        }
     }
 
     getRegion(countryCode) {
-        const africaCountries = ['SN', 'ML', 'NE', 'BF', 'GN', 'CI', 'NG', 'GH', 'ET', 'KE', 'UG', 'TZ', 'RW', 'MG', 'CD', 'CF', 'TD', 'CM', 'MZ', 'AO', 'MW', 'ZM'];
-        const asiaCountries = ['IN', 'PK', 'BD', 'NP', 'BT', 'ID', 'PH', 'MM', 'LA', 'KH', 'VN', 'AF', 'UZ', 'TJ'];
-        const latinCountries = ['BR', 'BO', 'PE', 'CO', 'EC', 'PY', 'GT', 'HN', 'HT', 'NI'];
-        const middleEastCountries = ['YE', 'SY', 'IQ', 'MA', 'MR'];
+        const regionCountries = {
+            africa: ['SN', 'ML', 'NE', 'BF', 'GN', 'CI', 'NG', 'GH', 'ET', 'KE', 'UG', 'TZ', 'RW', 'MG', 'CD', 'CF', 'TD', 'CM', 'MZ', 'AO', 'MW', 'ZM'],
+            asia: ['IN', 'PK', 'BD', 'NP', 'BT', 'ID', 'PH', 'MM', 'LA', 'KH', 'VN', 'AF', 'UZ', 'TJ'],
+            latin: ['BR', 'BO', 'PE', 'CO', 'EC', 'PY', 'GT', 'HN', 'HT', 'NI'],
+            middleEast: ['YE', 'SY', 'IQ', 'MA', 'MR']
+        };
         
-        if (africaCountries.includes(countryCode)) return 'africa';
-        if (asiaCountries.includes(countryCode)) return 'asia';
-        if (latinCountries.includes(countryCode)) return 'latin';
-        if (middleEastCountries.includes(countryCode)) return 'middleEast';
+        for (const [region, countries] of Object.entries(regionCountries)) {
+            if (countries.includes(countryCode)) {
+                return region;
+            }
+        }
         return 'other';
+    }
+
+    getRegionColor(region) {
+        const colors = {
+            africa: '#ff6b35',
+            asia: '#ffd93d',
+            latin: '#6bcf7f',
+            middleEast: '#4a90e2',
+            other: '#e0e0e0'
+        };
+        return colors[region] || colors.other;
     }
 
     getRegionName(region) {
@@ -321,28 +243,11 @@ class LeafletMapModal {
         return regionNames[region] || 'Autre';
     }
 
-    // Ajouter la légende personnalisée avec style standard et icônes
+    // Ajouter un dashboard premium sous la carte
     addCustomLegend() {
-        const legend = L.control({ position: 'bottomleft' });
-        
-        legend.onAdd = (map) => {
-            const div = L.DomUtil.create('div', 'leaflet-custom-legend');
-            div.style.cssText = `
-                background: white;
-                border-radius: 8px;
-                padding: 16px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 13px;
-                line-height: 1.5;
-                width: 220px;
-                max-width: 220px;
-                border: 1px solid #e2e8f0;
-                margin: 10px;
-                position: relative;
-                z-index: 1000;
-            `;
-            
+        // Le dashboard sera inséré dans la section dashboard du HTML
+        const dashboardContainer = document.getElementById('dashboard-content');
+        if (dashboardContainer) {
             // Calculer les statistiques exactes
             const africaCount = this.getRegionCountriesCount('africa');
             const asiaCount = this.getRegionCountriesCount('asia');
@@ -352,170 +257,189 @@ class LeafletMapModal {
             // Calculer le total des pays ciblés
             const totalTargetCountries = africaCount + asiaCount + latinCount + middleEastCount;
             
-            div.innerHTML = `
-                <div style="font-weight: 700; margin-bottom: 12px; color: #1e293b; font-size: 14px; text-align: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
-                    📍 Localisation des Interventions
+            dashboardContainer.innerHTML = `
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    padding: 16px;
+                    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+                    border-radius: 12px;
+                    border: 1px solid #e2e8f0;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        width: 16px;
+                        height: 16px;
+                        background: #ff6b35;
+                        border: 2px solid white;
+                        border-radius: 3px;
+                        margin-right: 12px;
+                        flex-shrink: 0;
+                        box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+                    "></div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 2px;">Afrique</div>
+                        <div style="font-size: 12px; color: #64748b; font-weight: 500;">Priorité Absolue</div>
+                    </div>
+                    <div style="
+                        font-size: 18px;
+                        font-weight: 800;
+                        color: #ff6b35;
+                        text-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
+                    ">${africaCount}</div>
                 </div>
                 
-                <div style="margin-bottom: 12px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 8px; padding: 6px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
-                        <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
-                            <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: #ff6b35;
-                                border: 2px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 6px;
-                                    height: 6px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="min-width: 0;">
-                            <div style="font-weight: 600; color: #1e293b; font-size: 12px; white-space: nowrap;">Afrique</div>
-                            <div style="font-size: 10px; color: #64748b;">${africaCount} pays ciblés</div>
-                        </div>
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    padding: 16px;
+                    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+                    border-radius: 12px;
+                    border: 1px solid #e2e8f0;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        width: 16px;
+                        height: 16px;
+                        background: #ffd93d;
+                        border: 2px solid white;
+                        border-radius: 3px;
+                        margin-right: 12px;
+                        flex-shrink: 0;
+                        box-shadow: 0 2px 8px rgba(255, 217, 61, 0.3);
+                    "></div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 2px;">Asie & Pacifique</div>
+                        <div style="font-size: 12px; color: #64748b; font-weight: 500;">Priorité 2</div>
                     </div>
-                    
-                    <div style="display: flex; align-items: center; margin-bottom: 8px; padding: 6px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
-                        <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
-                            <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: #ffd93d;
-                                border: 2px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 6px;
-                                    height: 6px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="min-width: 0;">
-                            <div style="font-weight: 600; color: #1e293b; font-size: 12px; white-space: nowrap;">Asie & Pacifique</div>
-                            <div style="font-size: 10px; color: #64748b;">${asiaCount} pays ciblés</div>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; align-items: center; margin-bottom: 8px; padding: 6px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
-                        <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
-                            <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: #6bcf7f;
-                                border: 2px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 6px;
-                                    height: 6px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="min-width: 0;">
-                            <div style="font-weight: 600; color: #1e293b; font-size: 12px; white-space: nowrap;">Amérique latine</div>
-                            <div style="font-size: 10px; color: #64748b;">${latinCount} pays ciblés</div>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; align-items: center; margin-bottom: 8px; padding: 6px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
-                        <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
-                            <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: #4a90e2;
-                                border: 2px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 6px;
-                                    height: 6px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="min-width: 0;">
-                            <div style="font-weight: 600; color: #1e293b; font-size: 12px; white-space: nowrap;">Moyen-Orient</div>
-                            <div style="font-size: 10px; color: #64748b;">${middleEastCount} pays ciblés</div>
-                        </div>
-                    </div>
+                    <div style="
+                        font-size: 18px;
+                        font-weight: 800;
+                        color: #ffd93d;
+                        text-shadow: 0 2px 4px rgba(255, 217, 61, 0.2);
+                    ">${asiaCount}</div>
                 </div>
                 
-                <div style="border-top: 1px solid #e2e8f0; padding-top: 8px; margin-top: 8px;">
-                    <div style="display: flex; align-items: center; padding: 6px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
-                        <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
-                            <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: #e0e0e0;
-                                border: 2px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 6px;
-                                    height: 6px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="min-width: 0;">
-                            <div style="font-weight: 600; color: #64748b; font-size: 12px; white-space: nowrap;">Autres pays</div>
-                            <div style="font-size: 10px; color: #64748b;">126 pays non ciblés</div>
-                        </div>
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    padding: 16px;
+                    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+                    border-radius: 12px;
+                    border: 1px solid #e2e8f0;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        width: 16px;
+                        height: 16px;
+                        background: #6bcf7f;
+                        border: 2px solid white;
+                        border-radius: 3px;
+                        margin-right: 12px;
+                        flex-shrink: 0;
+                        box-shadow: 0 2px 8px rgba(107, 207, 127, 0.3);
+                    "></div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 2px;">Amérique Latine</div>
+                        <div style="font-size: 12px; color: #64748b; font-weight: 500;">Priorité 3</div>
                     </div>
+                    <div style="
+                        font-size: 18px;
+                        font-weight: 800;
+                        color: #6bcf7f;
+                        text-shadow: 0 2px 4px rgba(107, 207, 127, 0.2);
+                    ">${latinCount}</div>
                 </div>
                 
-                <div style="margin-top: 12px; text-align: center; font-size: 10px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 8px;">
-                    📊 ${totalTargetCountries} pays ciblés • 🌍 Source: Natural Earth Data
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    padding: 16px;
+                    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+                    border-radius: 12px;
+                    border: 1px solid #e2e8f0;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        width: 16px;
+                        height: 16px;
+                        background: #4a90e2;
+                        border: 2px solid white;
+                        border-radius: 3px;
+                        margin-right: 12px;
+                        flex-shrink: 0;
+                        box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+                    "></div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 2px;">Moyen-Orient</div>
+                        <div style="font-size: 12px; color: #64748b; font-weight: 500;">Priorité 4</div>
+                    </div>
+                    <div style="
+                        font-size: 18px;
+                        font-weight: 800;
+                        color: #4a90e2;
+                        text-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+                    ">${middleEastCount}</div>
+                </div>
+                
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    padding: 20px;
+                    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(30, 41, 59, 0.3);
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        width: 20px;
+                        height: 20px;
+                        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+                        border: 3px solid white;
+                        border-radius: 50%;
+                        margin-right: 16px;
+                        flex-shrink: 0;
+                        box-shadow: 0 4px 16px rgba(251, 191, 36, 0.4);
+                    "></div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 800; color: white; font-size: 16px; margin-bottom: 4px;">Total Mondial</div>
+                        <div style="font-size: 13px; color: #cbd5e1; font-weight: 500;">Pays ciblés</div>
+                    </div>
+                    <div style="
+                        font-size: 24px;
+                        font-weight: 900;
+                        color: #fbbf24;
+                        text-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+                    ">${totalTargetCountries}</div>
                 </div>
             `;
             
-            return div;
-        };
-        
-        legend.addTo(this.map);
-        console.log('LeafletMap: Standard legend with normal location markers added');
+            // Ajouter des animations d'entrée
+            const items = dashboardContainer.querySelectorAll('div');
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    item.style.transition = 'all 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
     }
 
     // Compter les pays par région (corrigé)
@@ -531,7 +455,7 @@ class LeafletMapModal {
         return regionCountries[region].filter(code => this.targetCountries[code]).length;
     }
 
-    // Ajouter les labels des pays ciblés avec icônes de localisation standards
+    // Ajouter les labels des pays ciblés avec marqueurs carrés très simples
     addCountryLabels() {
         // Coordonnées approximatives des capitales pour les labels
         const capitalCoordinates = {
@@ -588,428 +512,165 @@ class LeafletMapModal {
             'MR': [18.1, -15.9]     // Nouakchott
         };
 
-        // Ajouter les labels pour les pays ciblés avec icônes de localisation standards
-        Object.entries(capitalCoordinates).forEach(([code, coords]) => {
-            if (this.targetCountries[code]) {
-                const countryName = this.targetCountries[code];
-                const region = this.getRegion(code);
-                
-                // Couleurs des icônes selon la région
-                const iconColors = {
-                    africa: '#ff6b35',
-                    asia: '#ffd93d',
-                    latin: '#6bcf7f',
-                    middleEast: '#4a90e2'
-                };
-                
-                // Adapter le nom pour les longs noms
-                const displayName = countryName.length > 12 ? countryName.substring(0, 10) + '...' : countryName;
-                
-                const label = L.divIcon({
-                    className: 'country-label',
-                    html: `<div style="
-                        display: flex;
-                        align-items: center;
-                        background: rgba(255, 255, 255, 0.95);
-                        padding: 6px 12px;
-                        border-radius: 8px;
-                        border: 2px solid #e2e8f0;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                        pointer-events: none;
-                    ">
-                        <div style="
-                            width: 20px;
-                            height: 20px;
-                            margin-right: 8px;
-                            flex-shrink: 0;
+        try {
+            // Ajouter les labels pour les pays ciblés avec marqueurs carrés très simples
+            Object.entries(capitalCoordinates).forEach(([code, coords]) => {
+                if (this.targetCountries[code]) {
+                    const countryName = this.targetCountries[code];
+                    const region = this.getRegion(code);
+                    
+                    // Couleurs des marqueurs selon la région
+                    const markerColors = {
+                        africa: '#ff6b35',
+                        asia: '#ffd93d',
+                        latin: '#6bcf7f',
+                        middleEast: '#4a90e2'
+                    };
+                    
+                    // Adapter le nom pour les longs noms
+                    const displayName = countryName.length > 15 ? countryName.substring(0, 13) + '...' : countryName;
+                    
+                    // Créer un label très simple
+                    const label = L.divIcon({
+                        className: 'country-label',
+                        html: `<div style="
+                            display: flex;
+                            align-items: center;
+                            pointer-events: none;
                         ">
                             <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: ${iconColors[region]};
-                                border: 3px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 8px;
-                                    height: 8px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="
-                            font-size: 11px;
-                            font-weight: 700;
-                            color: #1e293b;
-                            white-space: nowrap;
-                            max-width: 100px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-                        ">${displayName}</div>
-                    </div>`,
-                    iconSize: [0, 0],
-                    iconAnchor: [0, 0]
-                });
-                
-                L.marker(coords, { icon: label }).addTo(this.map);
-            }
-        });
-
-        console.log('LeafletMap: Country labels added with standard location markers');
-    }
-
-    // Ajouter les labels sur les pays GeoJSON avec icônes de localisation standards
-    addLabelsToCountries() {
-        if (!this.geoJsonLayer) return;
-
-        this.geoJsonLayer.eachLayer((layer) => {
-            const feature = layer.feature;
-            const countryCode = feature.properties.iso_a2;
-            const countryName = this.targetCountries[countryCode];
-            
-            if (countryName) {
-                // Calculer le centre du polygone
-                const bounds = layer.getBounds();
-                const center = bounds.getCenter();
-                const region = this.getRegion(countryCode);
-                
-                // Couleurs des icônes selon la région
-                const iconColors = {
-                    africa: '#ff6b35',
-                    asia: '#ffd93d',
-                    latin: '#6bcf7f',
-                    middleEast: '#4a90e2'
-                };
-                
-                // Adapter le nom pour les longs noms
-                const displayName = countryName.length > 12 ? countryName.substring(0, 10) + '...' : countryName;
-                
-                // Créer un label avec icône de localisation standard
-                const label = L.divIcon({
-                    className: 'country-label-geo',
-                    html: `<div style="
-                        display: flex;
-                        align-items: center;
-                        background: rgba(255, 255, 255, 0.95);
-                        padding: 6px 12px;
-                        border-radius: 8px;
-                        border: 2px solid #e2e8f0;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                        pointer-events: none;
-                    ">
-                        <div style="
-                            width: 20px;
-                            height: 20px;
-                            margin-right: 8px;
-                            flex-shrink: 0;
-                        ">
+                                width: 12px;
+                                height: 12px;
+                                background: ${markerColors[region]};
+                                border: 2px solid white;
+                                border-radius: 2px;
+                                margin-right: 6px;
+                                flex-shrink: 0;
+                            "></div>
                             <div style="
-                                width: 16px;
-                                height: 16px;
-                                background: ${iconColors[region]};
-                                border: 3px solid white;
-                                border-radius: 50%;
-                                position: relative;
-                                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-                            ">
-                                <div style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                    width: 8px;
-                                    height: 8px;
-                                    background: white;
-                                    border-radius: 50%;
-                                "></div>
-                            </div>
-                        </div>
-                        <div style="
-                            font-size: 11px;
-                            font-weight: 700;
-                            color: #1e293b;
-                            white-space: nowrap;
-                            max-width: 100px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-                        ">${displayName}</div>
-                    </div>`,
-                    iconSize: [0, 0],
-                    iconAnchor: [0, 0]
-                });
-                
-                L.marker(center, { icon: label }).addTo(this.map);
-            }
-        });
-
-        console.log('LeafletMap: GeoJSON country labels added with standard location markers');
-    }
-
-    
-    // Mettre à jour les statistiques avec données enrichies et cohérentes
-    updateStatistics() {
-        const statsContainer = this.modal.querySelector('.map-stats');
-        if (statsContainer) {
-            const totalCountries = Object.keys(this.targetCountries).length;
-            const regions = new Set();
-            
-            // Compter les régions
-            Object.keys(this.targetCountries).forEach(code => {
-                regions.add(this.getRegion(code));
+                                font-size: 11px;
+                                font-weight: 600;
+                                color: #1e293b;
+                                white-space: nowrap;
+                                text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+                            ">${displayName}</div>
+                        </div>`,
+                        iconSize: [0, 0],
+                        iconAnchor: [0, 0]
+                    });
+                    
+                    L.marker(coords, { icon: label }).addTo(this.map);
+                }
             });
-            
-            // Calculer les comptes exacts par région
-            const africaCount = this.getRegionCountriesCount('africa');
-            const asiaCount = this.getRegionCountriesCount('asia');
-            const latinCount = this.getRegionCountriesCount('latin');
-            const middleEastCount = this.getRegionCountriesCount('middleEast');
-            
-            // Calculer les populations estimées
-            const populationData = {
-                africa: { countries: africaCount, population: '1.4B', density: '45/km²' },
-                asia: { countries: asiaCount, population: '4.6B', density: '150/km²' },
-                latin: { countries: latinCount, population: '650M', density: '32/km²' },
-                middleEast: { countries: middleEastCount, population: '450M', density: '25/km²' }
-            };
-            
-            const totalPopulation = Object.values(populationData).reduce((sum, data) => {
-                return sum + (data.population === '2B+' ? 2000000000 : parseInt(data.population.replace(/[^0-9]/g, '')) * 1000000);
-            }, 0);
-            
-            statsContainer.innerHTML = `
-                <div style="background: linear-gradient(135deg, #f8fafc 0%, #e8f2f7 100%); border-radius: 12px; padding: 20px; margin: 20px 40px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-                    <h3 style="font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 16px; text-align: center;">📊 Statistiques des Interventions</h3>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 16px;">
-                        <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0;">
-                            <div style="font-size: 24px; font-weight: 700; color: #0ea5e9; margin-bottom: 4px;">${totalCountries}</div>
-                            <div style="font-size: 12px; color: #64748b; font-weight: 500;">Pays ciblés</div>
-                        </div>
-                        
-                        <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0;">
-                            <div style="font-size: 24px; font-weight: 700; color: #10b981; margin-bottom: 4px;">${regions.size}</div>
-                            <div style="font-size: 12px; color: #64748b; font-weight: 500;">Régions couvertes</div>
-                        </div>
-                        
-                        <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0;">
-                            <div style="font-size: 24px; font-weight: 700; color: #f59e0b; margin-bottom: 4px;">${this.formatPopulation(totalPopulation)}</div>
-                            <div style="font-size: 12px; color: #64748b; font-weight: 500;">Population totale</div>
-                        </div>
-                        
-                        <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0;">
-                            <div style="font-size: 24px; font-weight: 700; color: #8b5cf6; margin-bottom: 4px;">177</div>
-                            <div style="font-size: 12px; color: #64748b; font-weight: 500;">Pays au total</div>
-                        </div>
-                    </div>
-                    
-                    <div style="background: white; border-radius: 8px; padding: 16px; border: 1px solid #e2e8f0;">
-                        <h4 style="font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">📈 Répartition par Région</h4>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-                            <div style="display: flex; align-items: center; padding: 8px; background: rgba(255, 107, 53, 0.1); border-radius: 6px;">
-                                <div style="width: 12px; height: 12px; background: #ff6b35; border-radius: 2px; margin-right: 8px;"></div>
-                                <div>
-                                    <div style="font-weight: 600; color: #ff6b35;">Afrique</div>
-                                    <div style="font-size: 10px; color: #64748b;">${africaCount} pays • ${populationData.africa.population}</div>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; align-items: center; padding: 8px; background: rgba(255, 217, 61, 0.1); border-radius: 6px;">
-                                <div style="width: 12px; height: 12px; background: #ffd93d; border-radius: 2px; margin-right: 8px;"></div>
-                                <div>
-                                    <div style="font-weight: 600; color: #d97706;">Asie & Pacifique</div>
-                                    <div style="font-size: 10px; color: #64748b;">${asiaCount} pays • ${populationData.asia.population}</div>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; align-items: center; padding: 8px; background: rgba(107, 207, 127, 0.1); border-radius: 6px;">
-                                <div style="width: 12px; height: 12px; background: #6bcf7f; border-radius: 2px; margin-right: 8px;"></div>
-                                <div>
-                                    <div style="font-weight: 600; color: #059669;">Amérique latine</div>
-                                    <div style="font-size: 10px; color: #64748b;">${latinCount} pays • ${populationData.latin.population}</div>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; align-items: center; padding: 8px; background: rgba(74, 144, 226, 0.1); border-radius: 6px;">
-                                <div style="width: 12px; height: 12px; background: #4a90e2; border-radius: 2px; margin-right: 8px;"></div>
-                                <div>
-                                    <div style="font-weight: 600; color: #2563eb;">Moyen-Orient & Afrique du Nord</div>
-                                    <div style="font-size: 10px; color: #64748b;">${middleEastCount} pays • ${populationData.middleEast.population}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            console.log('LeafletMap: Enhanced statistics updated with exact counts');
+
+            console.log('LeafletMap: Country labels added with very simple square markers');
+        } catch (error) {
+            console.error('LeafletMap: Error adding country labels:', error);
+            console.log('LeafletMap: Continuing without country labels...');
         }
     }
 
-    // Formater pour les nombres
-    formatPopulation(num) {
-        if (num >= 1000000000) {
-            return (num / 1000000).toFixed(1) + 'B';
-        } else if (num >= 1000) {
-            return (num / 1000).toFixed(0) + 'M';
+    // Ajouter les labels sur les pays GeoJSON avec marqueurs carrés très simples
+    addLabelsToCountries() {
+        if (!this.geoJsonLayer) {
+            console.log('LeafletMap: No GeoJSON layer found, skipping labels');
+            return;
         }
-        return num.toString();
+
+        try {
+            this.geoJsonLayer.eachLayer((layer) => {
+                const feature = layer.feature;
+                const countryCode = feature.properties.iso_a2;
+                const countryName = this.targetCountries[countryCode];
+                
+                if (countryName) {
+                    // Calculer le centre du polygone
+                    const bounds = layer.getBounds();
+                    const center = bounds.getCenter();
+                    const region = this.getRegion(countryCode);
+                    
+                    // Couleurs des marqueurs selon la région
+                    const markerColors = {
+                        africa: '#ff6b35',
+                        asia: '#ffd93d',
+                        latin: '#6bcf7f',
+                        middleEast: '#4a90e2'
+                    };
+                    
+                    // Adapter le nom pour les longs noms
+                    const displayName = countryName.length > 15 ? countryName.substring(0, 13) + '...' : countryName;
+                    
+                    // Créer un label très simple
+                    const label = L.divIcon({
+                        className: 'country-label-geo',
+                        html: `<div style="
+                            display: flex;
+                            align-items: center;
+                            pointer-events: none;
+                        ">
+                            <div style="
+                                width: 10px;
+                                height: 10px;
+                                background: ${markerColors[region]};
+                                border: 2px solid white;
+                                border-radius: 2px;
+                                margin-right: 5px;
+                                flex-shrink: 0;
+                            "></div>
+                            <div style="
+                                font-size: 10px;
+                                font-weight: 600;
+                                color: #1e293b;
+                                white-space: nowrap;
+                                text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+                            ">${displayName}</div>
+                        </div>`,
+                        iconSize: [0, 0],
+                        iconAnchor: [0, 0]
+                    });
+                    
+                    L.marker(center, { icon: label }).addTo(this.map);
+                }
+            });
+
+            console.log('LeafletMap: GeoJSON country labels added with very simple square markers');
+        } catch (error) {
+            console.error('LeafletMap: Error adding GeoJSON labels:', error);
+            console.log('LeafletMap: Continuing without GeoJSON labels...');
+        }
     }
 
     showMapError() {
-        console.log('LeafletMap: Showing map error');
-        const mapContainer = document.getElementById('leaflet-world-map');
+        const mapContainer = document.getElementById('leaflet-map');
         if (mapContainer) {
             mapContainer.innerHTML = `
-                <div style="display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 20px; background: #f8f9fa;">
-                    <div>
-                        <h3 style="color: #e74c3c; margin-bottom: 15px;">Erreur de chargement</h3>
-                        <p style="color: #666; margin-bottom: 15px;">Impossible de charger les données de la carte.</p>
-                        <button onclick="location.reload()" style="padding: 10px 20px; background: #0ea5e9; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                            Réessayer
-                        </button>
-                    </div>
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 20px;
+                    color: #64748b;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                ">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🗺️</div>
+                    <h3 style="margin-bottom: 8px; color: #1e293b;">Carte non disponible</h3>
+                    <p>Impossible de charger la carte interactive. Veuillez réessayer plus tard.</p>
                 </div>
             `;
         }
     }
-
-    setupEventListeners() {
-        setTimeout(() => {
-            // Open map button
-            this.openMapBtn = document.getElementById('open-map-btn');
-            if (this.openMapBtn) {
-                this.openMapBtn.addEventListener('click', (e) => {
-                    console.log('LeafletMap: Button clicked!');
-                    e.preventDefault();
-                    this.showModal();
-                });
-                console.log('LeafletMap: Button listener attached');
-            }
-
-            // Close modal
-            if (this.closeBtn) {
-                this.closeBtn.addEventListener('click', () => this.hideModal());
-            }
-
-            // Close on overlay
-            if (this.modalOverlay) {
-                this.modalOverlay.addEventListener('click', () => this.hideModal());
-            }
-
-            // Close on escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.modal.classList.contains('show')) {
-                    this.hideModal();
-                }
-            });
-
-            // Global click backup
-            document.addEventListener('click', (e) => {
-                if (e.target === this.openMapBtn || e.target.closest('#open-map-btn')) {
-                    this.showModal();
-                }
-            });
-        }, 200);
-    }
-
-    setupLanguageSupport() {
-        // Écouter les changements de langue
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('lang-btn')) {
-                setTimeout(() => this.applyTranslations(), 150);
-            }
-        });
-    }
-
-    applyTranslations() {
-        const currentLang = localStorage.getItem('language') || 'fr';
-        
-        if (!this.modal) return;
-        
-        // Appliquer les traductions
-        const translatableElements = this.modal.querySelectorAll('[data-translate]');
-        translatableElements.forEach(element => {
-            const key = element.getAttribute('data-translate');
-            if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
-                element.textContent = window.translations[currentLang][key];
-            }
-        });
-    }
-
-    showModal() {
-        console.log('LeafletMap: showModal called');
-        if (this.modal) {
-            console.log('LeafletMap: Modal found, showing...');
-            
-            // Forcer l'affichage du modal
-            this.modal.style.cssText = `
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                background: rgba(0, 0, 0, 0.8) !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                z-index: 999999 !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            `;
-            
-            this.modal.classList.add('show');
-            this.applyTranslations();
-            document.body.style.overflow = 'hidden';
-            
-            console.log('LeafletMap: Modal should now be visible');
-            
-            // Initialiser la carte avec un délai plus long
-            setTimeout(() => {
-                console.log('LeafletMap: Initializing map after modal show...');
-                this.initializeMap();
-            }, 500);
-        } else {
-            console.error('LeafletMap: Modal not found!');
-        }
-    }
-
-    hideModal() {
-        if (this.modal) {
-            this.modal.classList.remove('show');
-            this.modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    }
 }
 
-// Initialiser la carte Leaflet
-let leafletMapInstance;
-
-document.addEventListener('DOMContentLoaded', () => {
-    leafletMapInstance = new LeafletMapModal();
-});
-
-if (document.readyState !== 'loading') {
-    leafletMapInstance = new LeafletMapModal();
-}
-
-// Support des changements de langue
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('lang-btn')) {
-        setTimeout(() => {
-            if (leafletMapInstance && leafletMapInstance.modal) {
-                leafletMapInstance.applyTranslations();
-            }
-        }, 150);
-    }
+// Initialize map when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('LeafletMap: DOM loaded, initializing map...');
+    window.leafletMapInstance = new LeafletMap();
+    
+    // Setup event listeners after a short delay to ensure DOM is ready
+    setTimeout(() => {
+        window.leafletMapInstance.setupModalListeners();
+    }, 100);
 });
