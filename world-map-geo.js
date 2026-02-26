@@ -1,10 +1,21 @@
 // Professional World Map Data for Geomatician
 class WorldMapGeo {
     constructor() {
+        this.modal = document.getElementById('map-modal');
+        this.modalOverlay = document.getElementById('map-modal-overlay');
+        this.closeBtn = document.getElementById('close-map-modal');
+        this.openMapBtn = null; // Will be set in setupEventListeners
         this.svg = document.getElementById('world-map');
         this.tooltip = document.getElementById('country-tooltip');
+        
         this.countries = this.getTargetCountries();
-        this.init();
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.init());
+        } else {
+            this.init();
+        }
     }
 
     // Target countries with realistic geographic data
@@ -335,30 +346,77 @@ class WorldMapGeo {
 
     // Setup event listeners
     setupEventListeners() {
-        // Open map button from hero section
-        const openMapBtn = document.getElementById('open-map-btn');
-        if (openMapBtn) {
-            openMapBtn.addEventListener('click', () => this.showModal());
-        }
-
-        // Close modal
-        const closeBtn = document.getElementById('close-map-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.hideModal());
-        }
-
-        // Close on overlay click
-        const modalOverlay = document.getElementById('map-modal-overlay');
-        if (modalOverlay) {
-            modalOverlay.addEventListener('click', () => this.hideModal());
-        }
-
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal.classList.contains('show')) {
-                this.hideModal();
+        // Wait a bit to ensure DOM is ready
+        setTimeout(() => {
+            // Open map button from hero section
+            this.openMapBtn = document.getElementById('open-map-btn');
+            console.log('WorldMapGeo: Looking for open-map-btn button:', this.openMapBtn);
+            
+            if (this.openMapBtn) {
+                // Add click listener
+                this.openMapBtn.addEventListener('click', (e) => {
+                    console.log('WorldMapGeo: Button clicked! Opening modal...');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.showModal();
+                });
+                
+                console.log('WorldMapGeo: Map button found and event listener attached');
+            } else {
+                console.error('WorldMapGeo: Map button not found!');
+                
+                // Try to find any button with similar text
+                const allButtons = document.querySelectorAll('button');
+                console.log('WorldMapGeo: All buttons on page:', allButtons.length);
+                allButtons.forEach((btn, index) => {
+                    if (btn.textContent.includes('Pays') || btn.textContent.includes('Découvrir')) {
+                        console.log(`WorldMapGeo: Button ${index}:`, btn.textContent, btn.id);
+                    }
+                });
             }
-        });
+
+            // Close modal
+            if (this.closeBtn) {
+                this.closeBtn.addEventListener('click', (e) => {
+                    console.log('WorldMapGeo: Close button clicked');
+                    e.preventDefault();
+                    this.hideModal();
+                });
+                console.log('WorldMapGeo: Close button listener attached');
+            } else {
+                console.log('WorldMapGeo: Close button not found');
+            }
+
+            // Close on overlay click
+            if (this.modalOverlay) {
+                this.modalOverlay.addEventListener('click', (e) => {
+                    console.log('WorldMapGeo: Overlay clicked');
+                    e.preventDefault();
+                    this.hideModal();
+                });
+                console.log('WorldMapGeo: Overlay listener attached');
+            } else {
+                console.log('WorldMapGeo: Overlay not found');
+            }
+
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.modal && this.modal.classList.contains('show')) {
+                    console.log('WorldMapGeo: Escape key pressed');
+                    this.hideModal();
+                }
+            });
+
+            // Add a global click listener as backup
+            document.addEventListener('click', (e) => {
+                if (e.target === this.openMapBtn || e.target.closest('#open-map-btn')) {
+                    console.log('WorldMapGeo: Global click listener caught the button click!');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.showModal();
+                }
+            });
+        }, 200);
     }
 
     // Setup language support
@@ -392,24 +450,80 @@ class WorldMapGeo {
 
     // Show modal
     showModal() {
+        console.log('WorldMapGeo: showModal called, modal:', this.modal);
         if (this.modal) {
-            this.modal.style.display = 'flex';
-            setTimeout(() => {
-                this.modal.classList.add('show');
-                this.applyTranslations();
-            }, 10);
+            console.log('WorldMapGeo: Modal found, showing...');
+            
+            // Force display with styles
+            this.modal.style.cssText = `
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                background: rgba(0, 0, 0, 0.8) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                z-index: 999999 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                clip: auto !important;
+                clip-path: none !important;
+                pointer-events: auto !important;
+            `;
+            
+            console.log('WorldMapGeo: Modal styles applied');
+            
+            // Also add show class
+            this.modal.classList.add('show');
+            
+            this.applyTranslations(); // Apply translations when modal opens
+            console.log('WorldMapGeo: Modal should now be visible');
+            
+            // Force body scroll lock
             document.body.style.overflow = 'hidden';
+            
+            // Check if modal is actually visible
+            setTimeout(() => {
+                const rect = this.modal.getBoundingClientRect();
+                console.log('WorldMapGeo: Modal rect:', rect);
+                console.log('WorldMapGeo: Modal display:', window.getComputedStyle(this.modal).display);
+                console.log('WorldMapGeo: Modal visibility:', window.getComputedStyle(this.modal).visibility);
+                console.log('WorldMapGeo: Modal opacity:', window.getComputedStyle(this.modal).opacity);
+                console.log('WorldMapGeo: Modal z-index:', window.getComputedStyle(this.modal).zIndex);
+                
+                if (rect.width === 0 || rect.height === 0) {
+                    console.error('WorldMapGeo: Modal has no dimensions!');
+                } else {
+                    console.log('WorldMapGeo: Modal has proper dimensions');
+                }
+            }, 100);
+            
+        } else {
+            console.error('WorldMapGeo: Modal not found!');
         }
     }
 
     // Hide modal
     hideModal() {
+        console.log('WorldMapGeo: hideModal called');
         if (this.modal) {
+            console.log('WorldMapGeo: Removing show class');
             this.modal.classList.remove('show');
+            
+            // Also hide with styles
+            this.modal.style.display = 'none';
+            this.modal.style.opacity = '0';
+            this.modal.style.visibility = 'hidden';
+            
             setTimeout(() => {
-                this.modal.style.display = 'none';
+                console.log('WorldMapGeo: Modal hidden');
+                document.body.style.overflow = '';
             }, 300);
-            document.body.style.overflow = '';
+        } else {
+            console.log('WorldMapGeo: Modal not found for hiding');
         }
     }
 

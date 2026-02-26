@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Interactive - Health On Wheels</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-container {
+            width: 95%;
+            max-width: 1200px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .map-header {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .map-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .map-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        #world-map {
+            width: 100%;
+            height: calc(100% - 80px);
+            position: relative;
+        }
+
+        .map-legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            max-width: 200px;
+        }
+
+        .map-legend h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .legend-color.africa { background: #ff6b35; }
+        .legend-color.asia { background: #ffd93d; }
+        .legend-color.latin { background: #6bcf7f; }
+        .legend-color.middle-east { background: #4a90e2; }
+        .legend-color.other { background: #e0e0e0; }
+
+        .map-stats {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .map-stats h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .stat-item {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .stat-number {
+            font-weight: 700;
+            color: #0ea5e9;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .map-container {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .map-header {
+                padding: 15px 20px;
+            }
+
+            .map-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .map-legend {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px;
+                max-width: 150px;
+            }
+
+            .map-stats {
+                top: 90px;
+                left: 10px;
+                padding: 10px;
+            }
+
+            .close-btn {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .map-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .map-header p {
+                font-size: 0.9rem;
+            }
+
+            .map-legend h3,
+            .map-stats h3 {
+                font-size: 0.8rem;
+            }
+
+            .legend-item,
+            .stat-item {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <div class="map-header">
+            <button class="close-btn" onclick="window.close()">×</button>
+            <h1>🌍 50 Pays Ciblés</h1>
+            <p>Carte interactive des interventions Health On Wheels</p>
+        </div>
+        
+        <div id="world-map"></div>
+        
+        <div class="map-stats">
+            <h3>Statistiques</h3>
+            <div class="stat-item">
+                <span class="stat-number">50</span> pays ciblés
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4</span> régions
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2B+</span> population touchée
+            </div>
+        </div>
+        
+        <div class="map-legend">
+            <h3>Légende</h3>
+            <div class="legend-item">
+                <div class="legend-color africa"></div>
+                <span>Afrique</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color asia"></div>
+                <span>Asie & Pacifique</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color latin"></div>
+                <span>Amérique latine</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color middle-east"></div>
+                <span>Moyen-Orient</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color other"></div>
+                <span>Autres pays</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Configuration des pays ciblés
+        const targetCountries = {
+            // Afrique
+            'SN': 'Sénégal', 'ML': 'Mali', 'NE': 'Niger', 'BF': 'Burkina Faso',
+            'GN': 'Guinée', 'CI': 'Côte d\'Ivoire', 'NG': 'Nigeria', 'GH': 'Ghana',
+            'ET': 'Éthiopie', 'KE': 'Kenya', 'UG': 'Ouganda', 'TZ': 'Tanzanie',
+            'RW': 'Rwanda', 'MG': 'Madagascar', 'CD': 'RDC', 'CF': 'Centrafrique',
+            'TD': 'Tchad', 'CM': 'Cameroun', 'MZ': 'Mozambique', 'AO': 'Angola',
+            'MW': 'Malawi', 'ZM': 'Zambie',
+            
+            // Asie & Pacifique
+            'IN': 'Inde', 'PK': 'Pakistan', 'BD': 'Bangladesh', 'NP': 'Népal',
+            'BT': 'Bhoutan', 'ID': 'Indonésie', 'PH': 'Philippines', 'MM': 'Myanmar',
+            'LA': 'Laos', 'KH': 'Cambodge', 'VN': 'Vietnam', 'AF': 'Afghanistan',
+            'UZ': 'Ouzbékistan', 'TJ': 'Tadjikistan',
+            
+            // Amérique latine & Caraïbes
+            'BR': 'Brésil', 'BO': 'Bolivie', 'PE': 'Pérou', 'CO': 'Colombie',
+            'EC': 'Équateur', 'PY': 'Paraguay', 'GT': 'Guatemala', 'HN': 'Honduras',
+            'HT': 'Haïti', 'NI': 'Nicaragua',
+            
+            // Moyen-Orient & Afrique du Nord
+            'YE': 'Yémen', 'SY': 'Syrie', 'IQ': 'Irak', 'MA': 'Maroc', 'MR': 'Mauritanie'
+        };
+
+        // Configuration des régions et couleurs
+        const regionColors = {
+            africa: '#ff6b35',
+            asia: '#ffd93d',
+            latin: '#6bcf7f',
+            middleEast: '#4a90e2',
+            other: '#e0e0e0'
+        };
+
+        // Fonction pour déterminer la région d'un pays
+        function getRegion(countryCode) {
+            const africaCountries = ['SN', 'ML', 'NE', 'BF', 'GN', 'CI', 'NG', 'GH', 'ET', 'KE', 'UG', 'TZ', 'RW', 'MG', 'CD', 'CF', 'TD', 'CM', 'MZ', 'AO', 'MW', 'ZM'];
+            const asiaCountries = ['IN', 'PK', 'BD', 'NP', 'BT', 'ID', 'PH', 'MM', 'LA', 'KH', 'VN', 'AF', 'UZ', 'TJ'];
+            const latinCountries = ['BR', 'BO', 'PE', 'CO', 'EC', 'PY', 'GT', 'HN', 'HT', 'NI'];
+            const middleEastCountries = ['YE', 'SY', 'IQ', 'MA', 'MR'];
+            
+            if (africaCountries.includes(countryCode)) return 'africa';
+            if (asiaCountries.includes(countryCode)) return 'asia';
+            if (latinCountries.includes(countryCode)) return 'latin';
+            if (middleEastCountries.includes(countryCode)) return 'middleEast';
+            return 'other';
+        }
+
+        // Fonction pour obtenir le nom de la région
+        function getRegionName(region) {
+            const regionNames = {
+                africa: 'Afrique',
+                asia: 'Asie & Pacifique',
+                latin: 'Amérique latine',
+                middleEast: 'Moyen-Orient & Afrique du Nord',
+                other: 'Autre'
+            };
+            return regionNames[region] || 'Autre';
+        }
+
+        // Initialisation de la carte
+        function initMap() {
+            // Création de la carte
+            const map = L.map('world-map', {
+                center: [20, 0],
+                zoom: 2.5,
+                minZoom: 2,
+                maxZoom: 6,
+                worldCopyJump: true,
+                attributionControl: false
+            });
+
+            // Ajout du fond de carte OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Chargement des données GeoJSON des pays
+            fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    // Création de la couche GeoJSON
+                    const geoJsonLayer = L.geoJSON(data, {
+                        style: function(feature) {
+                            const countryCode = feature.properties.iso_a2;
+                            const isTarget = targetCountries.hasOwnProperty(countryCode);
+                            const region = getRegion(countryCode);
+                            
+                            return {
+                                fillColor: regionColors[region],
+                                weight: isTarget ? 2 : 1,
+                                opacity: 1,
+                                color: isTarget ? '#333' : '#999',
+                                fillOpacity: isTarget ? 0.7 : 0.3
+                            };
+                        },
+                        onEachFeature: function(feature, layer) {
+                            const countryCode = feature.properties.iso_a2;
+                            const countryName = feature.properties.name;
+                            const isTarget = targetCountries.hasOwnProperty(countryCode);
+                            const region = getRegion(countryCode);
+                            const regionName = getRegionName(region);
+                            
+                            // Création du tooltip
+                            const tooltipContent = isTarget 
+                                ? `<strong>${targetCountries[countryCode] || countryName}</strong><br><em>${regionName}</em>`
+                                : `<strong>${countryName}</strong><br><em>Pays non ciblé</em>`;
+                            
+                            layer.bindTooltip(tooltipContent, {
+                                permanent: false,
+                                sticky: true,
+                                direction: 'top',
+                                offset: [0, -10],
+                                className: 'country-tooltip'
+                            });
+                            
+                            // Animation au survol
+                            layer.on({
+                                mouseover: function(e) {
+                                    const layer = e.target;
+                                    if (isTarget) {
+                                        layer.setStyle({
+                                            weight: 3,
+                                            color: '#000',
+                                            fillOpacity: 0.9
+                                        });
+                                    }
+                                },
+                                mouseout: function(e) {
+                                    const layer = e.target;
+                                    const region = getRegion(countryCode);
+                                    layer.setStyle({
+                                        weight: isTarget ? 2 : 1,
+                                        color: isTarget ? '#333' : '#999',
+                                        fillOpacity: isTarget ? 0.7 : 0.3,
+                                        fillColor: regionColors[region]
+                                    });
+                                }
+                            });
+                            
+                            // Clic sur les pays ciblés
+                            if (isTarget) {
+                                layer.on('click', function(e) {
+                                    const countryName = targetCountries[countryCode];
+                                    const regionName = getRegionName(region);
+                                    
+                                    // Création d'un popup avec plus d'informations
+                                    const popupContent = `
+                                        <div style="min-width: 200px;">
+                                            <h3 style="margin: 0 0 10px 0; color: #0ea5e9;">${countryName}</h3>
+                                            <p style="margin: 0 0 10px 0;"><strong>Région:</strong> ${regionName}</p>
+                                            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                                Health On Wheels intervient dans ce pays pour apporter des soins de santé essentiels aux populations les plus vulnérables.
+                                            </p>
+                                        </div>
+                                    `;
+                                    
+                                    layer.bindPopup(popupContent).openPopup();
+                                });
+                            }
+                        }
+                    }).addTo(map);
+
+                    // Adapter la vue pour montrer tous les pays ciblés
+                    const bounds = geoJsonLayer.getBounds();
+                    map.fitBounds(bounds, { padding: [20, 20] });
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des données GeoJSON:', error);
+                    
+                    // Message d'erreur
+                    document.getElementById('world-map').innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 20px;">
+                            <div>
+                                <h3 style="color: #e74c3c; margin-bottom: 15px;">Erreur de chargement</h3>
+                                <p style="color: #666;">Impossible de charger les données de la carte. Veuillez vérifier votre connexion Internet.</p>
+                                <button onclick="location.reload()" style="margin-top: 15px; padding: 10px 20px; background: #0ea5e9; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                    Réessayer
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+            // Ajout du contrôle d'échelle
+            L.control.scale({
+                position: 'bottomleft',
+                metric: true,
+                imperial: false
+            }).addTo(map);
+
+            // Ajout de l'attribution
+            map.attributionControl.addAttribution('Données pays © Natural Earth');
+        }
+
+        // Initialisation quand le DOM est chargé
+        document.addEventListener('DOMContentLoaded', initMap);
+    </script>
+</body>
+</html>
