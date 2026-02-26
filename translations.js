@@ -16,6 +16,31 @@ const translations = {
         'hero-btn-primary': 'Découvrir le projet',
         'hero-btn-secondary': 'Soutenir l\'initiative',
         
+        // Map Button
+        'open-map-btn': '🌍 Découvrir les 50 Pays Ciblés',
+        'map-description': 'Explorez notre carte interactive pour découvrir les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.',
+        
+        // Map Modal
+        'map-modal-title': 'Carte Interactive des 50 Pays Ciblés',
+        'map-modal-subtitle': 'Découvrez notre portée mondiale et les défis spécifiques à chaque région',
+        'region-africa-title': 'Afrique - Priorité Absolue',
+        'region-africa-desc': 'Le besoin le plus critique en raison de l\'éloignement des centres de santé en zone rurale. Nos cliniques mobiles parcouvrent des centaines de kilomètres pour atteindre les populations les plus isolées.',
+        'region-asia-title': 'Asie & Pacifique',
+        'region-asia-desc': 'Le défi est souvent lié au relief (Himalaya) ou à l\'éparpillement des îles. La télémédecine et les drones nous permettent de surmonter ces barrières géographiques.',
+        'region-latin-title': 'Amérique Latine & Caraïbes',
+        'region-latin-desc': 'Les cliniques mobiles sont essentielles pour atteindre les populations indigènes en Amazonie ou dans les Andes, là où les infrastructures traditionnelles sont inexistantes.',
+        'region-middle-east-title': 'Moyen-Orient & Afrique du Nord',
+        'region-middle-east-desc': 'Le défi est principalement lié aux zones désertiques et aux zones de reconstruction post-conflit. Nos unités mobiles apportent des soins essentiels dans ces environnements extrêmes.',
+        
+        // Legend
+        'legend-africa': 'Afrique',
+        'legend-asia': 'Asie & Pacifique',
+        'legend-latin': 'Amérique latine & Caraïbes',
+        'legend-middle-east': 'Moyen-Orient & Afrique du Nord',
+        'stat-countries': 'Pays ciblés',
+        'stat-regions': 'Régions',
+        'stat-population': 'Population touchée',
+        
         // Stats
         'stat-1-label': 'Personnes soignées par mois',
         'stat-2-label': 'Pays ciblés',
@@ -127,6 +152,48 @@ const translations = {
         'action-impact-number': '2000+',
         'action-impact-text': 'vies changées chaque mois',
         
+        // Target Countries Section
+        'target-countries-title': '50 Pays Ciblés',
+        'target-countries-subtitle': 'Notre portée mondiale pour l\'accès aux soins de santé',
+        'countries-intro': 'Health On Wheels opère dans 50 pays à travers le monde, concentrant nos efforts sur les régions où l\'accès aux soins de santé est le plus critique. Découvrez notre impact mondial.',
+        'region-africa': 'Afrique',
+        'region-asia': 'Asie & Pacifique',
+        'region-latin': 'Amérique latine & Caraïbes',
+        'region-middle-east': 'Moyen-Orient & Afrique du Nord',
+        'africa-west': 'Afrique de l\'Ouest',
+        'africa-east': 'Afrique de l\'Est',
+        'africa-central': 'Afrique Centrale',
+        'africa-south': 'Afrique Australe',
+        'asia-south': 'Asie du Sud',
+        'asia-southeast': 'Asie du Sud-Est',
+        'asia-central': 'Asie Centrale',
+        'latin-south': 'Amérique du Sud',
+        'latin-central': 'Amérique centrale & Caraïbes',
+        'map-cta-title': 'Visualisez Notre Impact Mondial',
+        'map-cta-description': 'Explorez notre carte interactive pour voir la répartition géographique de nos interventions et découvrir l\'impact de Health On Wheels dans chaque région.',
+        'map-modal-title': 'Carte Interactive des 50 Pays Ciblés',
+        'map-modal-subtitle': 'Découvrez notre portée mondiale et les défis spécifiques à chaque région',
+        'region-africa-title': 'Afrique - Priorité Absolue',
+        'region-africa-desc': 'Le besoin le plus critique en raison de l\'éloignement des centres de santé en zone rurale. Nos cliniques mobiles parcouvrent des centaines de kilomètres pour atteindre les populations les plus isolées.',
+        'region-asia-title': 'Asie & Pacifique',
+        'region-asia-desc': 'Le défi est souvent lié au relief (Himalaya) ou à l\'éparpillement des îles. La télémédecine et les drones nous permettent de surmonter ces barrières géographiques.',
+        'region-latin-title': 'Amérique Latine & Caraïbes',
+        'region-latin-desc': 'Les cliniques mobiles sont essentielles pour atteindre les populations indigènes en Amazonie ou dans les Andes, là où les infrastructures traditionnelles sont inexistantes.',
+        'region-middle-east-title': 'Moyen-Orient & Afrique du Nord',
+        'region-middle-east-desc': 'Le défi est principalement lié aux zones désertiques et aux zones de reconstruction post-conflit. Nos unités mobiles apportent des soins essentiels dans ces environnements extrêmes.',
+        
+        // Legend
+        'legend-africa': 'Afrique',
+        'legend-asia': 'Asie & Pacifique',
+        'legend-latin': 'Amérique latine & Caraïbes',
+        'legend-middle-east': 'Moyen-Orient & Afrique du Nord',
+        'stat-countries': 'Pays ciblés',
+        'stat-regions': 'Régions',
+        'stat-population': 'Population touchée',
+        'toggle-title': 'Découvrez Notre Portée Mondiale',
+        'toggle-description': 'Explorez les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.',
+        'show-map-btn': 'Voir la Carte Interactive',
+        
         // Footer
         'footer-contact': 'Contact',
         'footer-legal': 'Légal',
@@ -173,6 +240,31 @@ const translations = {
         'hero-team-credit': 'A project led by the MACAS team',
         'hero-btn-primary': 'Discover the project',
         'hero-btn-secondary': 'Support the initiative',
+        
+        // Map Button
+        'open-map-btn': '🌍 Discover 50 Target Countries',
+        'map-description': 'Explore our interactive map to discover the 50 countries where Health On Wheels brings essential healthcare to the most vulnerable populations.',
+        
+        // Map Modal
+        'map-modal-title': 'Interactive Map of 50 Target Countries',
+        'map-modal-subtitle': 'Discover our global reach and specific challenges for each region',
+        'region-africa-title': 'Africa - Absolute Priority',
+        'region-africa-desc': 'The most critical need due to remote healthcare centers in rural areas. Our mobile clinics travel hundreds of kilometers to reach the most isolated populations.',
+        'region-asia-title': 'Asia & Pacific',
+        'region-asia-desc': 'Challenges often related to mountainous terrain (Himalaya) or scattered islands. Telemedicine and drones help us overcome these geographical barriers.',
+        'region-latin-title': 'Latin America & Caribbean',
+        'region-latin-desc': 'Mobile clinics are essential for reaching indigenous populations in the Amazon or Andes, where traditional infrastructure is non-existent.',
+        'region-middle-east-title': 'Middle East & North Africa',
+        'region-middle-east-desc': 'Challenges primarily related to desert zones and post-conflict reconstruction. Our mobile units bring essential care in these extreme environments.',
+        
+        // Legend
+        'legend-africa': 'Africa',
+        'legend-asia': 'Asia & Pacific',
+        'legend-latin': 'Latin America & Caribbean',
+        'legend-middle-east': 'Middle East & North Africa',
+        'stat-countries': 'Target countries',
+        'stat-regions': 'Regions',
+        'stat-population': 'Population reached',
         
         // Stats
         'stat-1-label': 'People treated per month',
@@ -267,6 +359,21 @@ const translations = {
         'modal-impact-title': 'Impact',
         'modal-close': 'Close',
         
+        // World Map Section
+        'map-title': '50 Target Countries',
+        'map-subtitle': 'Our global mission for healthcare access',
+        'legend-title': 'Legend',
+        'legend-africa': 'Africa',
+        'legend-asia': 'Asia & Pacific',
+        'legend-latin': 'Latin America & Caribbean',
+        'legend-middle-east': 'Middle East & North Africa',
+        'stat-countries': 'Target countries',
+        'stat-regions': 'Regions',
+        'stat-population': 'Population reached',
+        'toggle-title': 'Discover Our Global Reach',
+        'toggle-description': 'Explore the 50 countries where Health On Wheels brings essential healthcare to the most vulnerable populations.',
+        'show-map-btn': 'View Interactive Map',
+        
         // Action Section
         'action-title': 'Join Our Mission',
         'action-subtitle': 'Every contribution matters',
@@ -285,12 +392,40 @@ const translations = {
         'action-impact-number': '2000+',
         'action-impact-text': 'lives changed each month',
         
-        // Footer
+        // Target Countries Section
+        'target-countries-title': '50 Target Countries',
+        'target-countries-subtitle': 'Our global reach for healthcare access',
+        'countries-intro': 'Health On Wheels operates in 50 countries worldwide, focusing our efforts on regions where healthcare access is most critical. Discover our global impact.',
+        'region-africa': 'Africa',
+        'region-asia': 'Asia & Pacific',
+        'region-latin': 'Latin America & Caribbean',
+        'region-middle-east': 'Middle East & North Africa',
+        'africa-west': 'West Africa',
+        'africa-east': 'East Africa',
+        'africa-central': 'Central Africa',
+        'africa-south': 'Southern Africa',
+        'asia-south': 'South Asia',
+        'asia-southeast': 'Southeast Asia',
+        'asia-central': 'Central Asia',
+        'latin-south': 'South America',
+        'latin-central': 'Central America & Caribbean',
+        'map-cta-title': 'Visualize Our Global Impact',
+        'map-cta-description': 'Explore our interactive map to see the geographic distribution of our interventions and discover Health On Wheels\' impact in each region.',
+        'map-modal-title': 'Interactive Map of 50 Target Countries',
+        'map-modal-subtitle': 'Discover our global reach and specific challenges for each region',
+        'region-africa-title': 'Africa - Absolute Priority',
+        'region-africa-desc': 'The most critical need due to remote healthcare centers in rural areas. Our mobile clinics travel hundreds of kilometers to reach the most isolated populations.',
+        'region-asia-title': 'Asia & Pacific',
+        'region-asia-desc': 'Challenges often related to mountainous terrain (Himalaya) or scattered islands. Telemedicine and drones help us overcome these geographical barriers.',
+        'region-latin-title': 'Latin America & Caribbean',
+        'region-latin-desc': 'Mobile clinics are essential for reaching indigenous populations in the Amazon or Andes, where traditional infrastructure is non-existent.',
+        'region-middle-east-title': 'Middle East & North Africa',
+        'region-middle-east-desc': 'Challenges primarily related to desert zones and post-conflict reconstruction. Our mobile units bring essential care in these extreme environments.',
         'footer-contact': 'Contact',
         'footer-legal': 'Legal',
         'footer-social': 'Follow MACAS',
         'footer-mission': 'Bringing healthcare to people, not people to hospitals',
-        'footer-copyright': '© 2024 Health On Wheels',
+        'footer-copyright': ' 2024 Health On Wheels',
         'footer-by': 'By MACAS',
         'footer-rights': 'All rights reserved',
         

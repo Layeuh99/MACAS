@@ -87,6 +87,15 @@
                         <div class="stat-label" data-translate="stat-3-label">Milliards FCFA - Coût projet pilote</div>
                     </div>
                 </div>
+
+                <div class="hero-cta">
+                    <button class="btn btn-primary btn-large" id="open-map-btn" data-translate="open-map-btn">
+                        🌍 Découvrir les 50 Pays Ciblés
+                    </button>
+                    <p class="cta-description" data-translate="map-description">
+                        Explorez notre carte interactive pour découvrir les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -227,6 +236,140 @@
                 </div>
             </div>
         </section>
+
+        <!-- Interactive Map Modal -->
+        <div id="map-modal" class="map-modal" style="display: none;">
+            <div class="modal-overlay" id="map-modal-overlay"></div>
+            <div class="map-modal-content">
+                <button class="modal-close" id="close-map-modal" aria-label="Fermer">
+                    <span>×</span>
+                </button>
+                
+                <div class="map-modal-header">
+                    <h2 data-translate="map-modal-title">Carte Interactive des 50 Pays Ciblés</h2>
+                    <p data-translate="map-modal-subtitle">Découvrez notre portée mondiale et les défis spécifiques à chaque région</p>
+                </div>
+
+                <!-- Region Context Cards -->
+                <div class="region-context-cards">
+                    <div class="region-context-card africa-priority">
+                        <div class="region-header">
+                            <span class="region-icon">🌍</span>
+                            <h3 data-translate="region-africa-title">Afrique - Priorité Absolue</h3>
+                            <span class="priority-badge">Priorité 1</span>
+                        </div>
+                        <p data-translate="region-africa-desc">
+                            Le besoin le plus critique en raison de l'éloignement des centres de santé en zone rurale. 
+                            Nos cliniques mobiles parcouvrent des centaines de kilomètres pour atteindre les populations les plus isolées.
+                        </p>
+                        <div class="region-stats">
+                            <span class="stat">20 pays</span>
+                            <span class="focus">Éloignement des centres de santé</span>
+                        </div>
+                    </div>
+
+                    <div class="region-context-card asia-priority">
+                        <div class="region-header">
+                            <span class="region-icon">🏔️</span>
+                            <h3 data-translate="region-asia-title">Asie & Pacifique</h3>
+                            <span class="priority-badge">Priorité 2</span>
+                        </div>
+                        <p data-translate="region-asia-desc">
+                            Le défi est souvent lié au relief (Himalaya) ou à l'éparpillement des îles. 
+                            La télémédecine et les drones nous permettent de surmonter ces barrières géographiques.
+                        </p>
+                        <div class="region-stats">
+                            <span class="stat">14 pays</span>
+                            <span class="focus">Relief montagneux et îles</span>
+                        </div>
+                    </div>
+
+                    <div class="region-context-card latin-priority">
+                        <div class="region-header">
+                            <span class="region-icon">🌎️</span>
+                            <h3 data-translate="region-latin-title">Amérique Latine & Caraïbes</h3>
+                            <span class="priority-badge">Priorité 3</span>
+                        </div>
+                        <p data-translate="region-latin-desc">
+                            Les cliniques mobiles sont essentielles pour atteindre les populations indigènes en Amazonie 
+                            ou dans les Andes, là où les infrastructures traditionnelles sont inexistantes.
+                        </p>
+                        <div class="region-stats">
+                            <span class="stat">10 pays</span>
+                            <span class="focus">Populations indigènes</span>
+                        </div>
+                    </div>
+
+                    <div class="region-context-card middle-east-priority">
+                        <div class="region-header">
+                            <span class="region-icon">🏜️</span>
+                            <h3 data-translate="region-middle-east-title">Moyen-Orient & Afrique du Nord</h3>
+                            <span class="priority-badge">Priorité 4</span>
+                        </div>
+                        <p data-translate="region-middle-east-desc">
+                            Le défi est principalement lié aux zones désertiques et aux zones de reconstruction post-conflit. 
+                            Nos unités mobiles apportent des soins essentiels dans ces environnements extrêmes.
+                        </p>
+                        <div class="region-stats">
+                            <span class="stat">6 pays</span>
+                            <span class="focus">Zones désertiques et reconstruction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="map-legend">
+                    <h3 data-translate="legend-title">Légende</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color africa"></div>
+                            <span data-translate="legend-africa">Afrique</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color asia"></div>
+                            <span data-translate="legend-asia">Asie & Pacifique</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color latin-america"></div>
+                            <span data-translate="legend-latin">Amérique latine & Caraïbes</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color middle-east"></div>
+                            <span data-translate="legend-middle-east">Moyen-Orient & Afrique du Nord</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- World Map Container -->
+                <div class="map-container">
+                    <svg id="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Simplified world map paths will be added here -->
+                    </svg>
+                    
+                    <!-- Country Tooltip -->
+                    <div id="country-tooltip" class="country-tooltip" style="display: none;">
+                        <div class="tooltip-title"></div>
+                        <div class="tooltip-region"></div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="map-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">50</div>
+                        <div class="stat-label" data-translate="stat-countries">Pays ciblés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label" data-translate="stat-regions">Régions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2B+</div>
+                        <div class="stat-label" data-translate="stat-population">Population touchée</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Stakeholders Section -->
         <section id="stakeholders" class="stakeholders" role="region" aria-labelledby="stakeholders-title">
@@ -626,5 +769,6 @@
     <!-- JavaScript -->
     <script src="translations.js"></script>
     <script src="script.js"></script>
+    <script src="world-map-geo.js"></script>
 </body>
 </html>

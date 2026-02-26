@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des 50 Pays Ciblés - Health On Wheels</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="world-map.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="Logo equipe/Health On Wheels.jpeg" alt="Health On Wheels" class="nav-logo">
+                <span class="team-badge">par MACAS</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="#" class="nav-link active" id="map-toggle">50 pays ciblés</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Section Header -->
+        <section class="map-section" id="map-section" style="display: none;">
+            <div class="container">
+                <header class="section-header">
+                    <h1 class="section-title" data-translate="map-title">50 Pays Ciblés</h1>
+                    <p class="section-subtitle" data-translate="map-subtitle">Notre mission mondiale pour l'accès aux soins de santé</p>
+                </header>
+
+                <!-- Legend -->
+                <div class="map-legend">
+                    <h3 data-translate="legend-title">Légende</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color africa"></div>
+                            <span data-translate="legend-africa">Afrique</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color asia"></div>
+                            <span data-translate="legend-asia">Asie & Pacifique</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color latin-america"></div>
+                            <span data-translate="legend-latin">Amérique latine & Caraïbes</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color middle-east"></div>
+                            <span data-translate="legend-middle-east">Moyen-Orient & Afrique du Nord</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- World Map Container -->
+                <div class="map-container">
+                    <svg id="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Simplified world map paths will be added here -->
+                    </svg>
+                    
+                    <!-- Country Tooltip -->
+                    <div id="country-tooltip" class="country-tooltip" style="display: none;">
+                        <div class="tooltip-title"></div>
+                        <div class="tooltip-region"></div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="map-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">50</div>
+                        <div class="stat-label" data-translate="stat-countries">Pays ciblés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label" data-translate="stat-regions">Régions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2B+</div>
+                        <div class="stat-label" data-translate="stat-population">Population touchée</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Toggle Section -->
+        <section class="map-toggle-section" id="map-toggle-section">
+            <div class="container">
+                <div class="toggle-content">
+                    <h2 data-translate="toggle-title">Découvrez Notre Portée Mondiale</h2>
+                    <p data-translate="toggle-description">
+                        Explorez les 50 pays où Health On Wheels apporte des soins de santé essentiels 
+                        aux populations les plus vulnérables.
+                    </p>
+                    <button class="btn btn-primary btn-large" id="show-map-btn" data-translate="show-map-btn">
+                        Voir la Carte Interactive
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="Logo equipe/Health On Wheels.jpeg" alt="Health On Wheels" class="footer-logo">
+                    <h3>Health On Wheels</h3>
+                    <p class="footer-mission">
+                        Apporter la santé aux populations, pas les populations aux hôpitaux
+                    </p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Email: contact@healthonwheels.org</p>
+                    <p>Téléphone: +237 123 456 789</p>
+                    <p>Université Amadou Mahtar Mbow, Diamniadio</p>
+                    <p>À 30 km de Dakar, Sénégal</p>
+                </div>
+                
+                <div class="footer-legal">
+                    <h4>Légal</h4>
+                    <p>&copy; 2024 Health On Wheels</p>
+                    <p>Par MACAS</p>
+                    <p>Tous droits réservés</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="translations.js"></script>
+    <script src="world-map.js"></script>
+</body>
+</html>

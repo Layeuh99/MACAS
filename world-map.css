@@ -1,0 +1,303 @@
+/* World Map Styles */
+.map-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e8f2f7 100%);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.map-section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.map-legend {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.map-legend h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.legend-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.legend-color.africa {
+    background: #16a34a;
+}
+
+.legend-color.asia {
+    background: #dc2626;
+}
+
+.legend-color.latin-america {
+    background: #2563eb;
+}
+
+.legend-color.middle-east {
+    background: #ca8a04;
+}
+
+.map-container {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+#world-map {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+}
+
+/* Country paths */
+.country-path {
+    fill: #e5e7eb;
+    stroke: #9ca3af;
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.country-path:hover {
+    stroke-width: 2;
+    filter: brightness(0.9);
+}
+
+.country-path.highlighted {
+    stroke-width: 1.5;
+    stroke: #1f2937;
+}
+
+.country-path.africa {
+    fill: #16a34a;
+}
+
+.country-path.asia {
+    fill: #dc2626;
+}
+
+.country-path.latin-america {
+    fill: #2563eb;
+}
+
+.country-path.middle-east {
+    fill: #ca8a04;
+}
+
+.country-path.africa:hover {
+    fill: #15803d;
+}
+
+.country-path.asia:hover {
+    fill: #b91c1c;
+}
+
+.country-path.latin-america:hover {
+    fill: #1d4ed8;
+}
+
+.country-path.middle-east:hover {
+    fill: #a16207;
+}
+
+/* Tooltip */
+.country-tooltip {
+    position: absolute;
+    background: #1f2937;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.country-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tooltip-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.tooltip-region {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Map Stats */
+.map-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.map-stats .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-stats .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.map-stats .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0ea5e9;
+    margin-bottom: 8px;
+}
+
+.map-stats .stat-label {
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Toggle Section */
+.map-toggle-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    color: white;
+    text-align: center;
+}
+
+.toggle-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.toggle-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.toggle-content p {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .map-section {
+        padding: 60px 0;
+    }
+    
+    .map-container {
+        padding: 20px;
+    }
+    
+    .legend-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .map-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .toggle-content h2 {
+        font-size: 2rem;
+    }
+    
+    .map-stats .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-section {
+        padding: 40px 0;
+    }
+    
+    .map-legend {
+        padding: 16px;
+    }
+    
+    .map-container {
+        padding: 16px;
+    }
+    
+    #world-map {
+        max-height: 300px;
+    }
+    
+    .toggle-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .toggle-content p {
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.map-section.active .map-legend {
+    animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.map-section.active .map-container {
+    animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+.map-section.active .map-stats {
+    animation: fadeInUp 0.6s ease 0.6s both;
+}
