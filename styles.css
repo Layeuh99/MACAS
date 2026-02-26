@@ -300,23 +300,28 @@ p {
   color: var(--gray-900);
 }
 
+.macas-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: var(--spacing-sm);
+}
+
 .macas-badge {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
   border-radius: var(--radius-sm);
-  margin-left: var(--spacing-sm);
 }
 
 .team-badge {
   background-color: var(--secondary-color);
   color: var(--white);
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: var(--font-weight-medium);
-  margin-left: var(--spacing-sm);
-  display: none; /* Masqué car on utilise le logo MACAS maintenant */
+  white-space: nowrap;
 }
 
 [data-theme="dark"] .team-badge {
@@ -1595,12 +1600,33 @@ p {
   color: var(--gray-900);
 }
 
+.footer-brand .macas-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: var(--spacing-sm);
+}
+
 .footer-brand .macas-badge {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
   border-radius: var(--radius-sm);
-  margin-left: var(--spacing-sm);
+}
+
+.footer-brand .team-badge {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .footer-brand .team-badge {
+  background-color: var(--secondary-color);
+  color: var(--white);
 }
 
 .footer-mission {
