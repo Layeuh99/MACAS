@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
     <!-- Progress Bar -->
@@ -246,10 +246,10 @@
             <div class="container">
                 <header class="section-header">
                     <h2 id="world-map-title" class="section-title" data-translate="world-map-title">Carte Interactive des 50 Pays Ciblés</h2>
-                    <p class="section-subtitle" data-translate="world-map-subtitle">Découvrez notre portée mondiale et les défis spécifiques à chaque région</p>
+                    <p class="section-subtitle" data-translate="world-map-subtitle">Explorez notre carte interactive pour découvrir les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.</p>
                     <div class="section-actions">
                         <button id="open-map-btn" class="btn btn-primary" data-translate="open-map-btn">
-                            🌍 Ouvrir la Carte Interactive
+                            🌍 Découvrir les 50 Pays Ciblés
                         </button>
                     </div>
                 </header>
@@ -695,33 +695,66 @@
     <!-- JavaScript -->
     <script src="translations.js"></script>
     <script src="script.js"></script>
+    <script src="simple-map.js"></script>
     <script src="leaflet-map-integrated.js"></script>
     
     <!-- Debug Script -->
     <script>
+        // Test immédiat
+        console.log('Debug script loaded!');
+        
         // Vérifier que Leaflet est chargé
         setTimeout(() => {
+            console.log('=== DEBUG CHECK ===');
+            
             if (typeof L !== 'undefined') {
-                console.log('Leaflet is loaded successfully!');
+                console.log('✅ Leaflet is loaded successfully!');
             } else {
-                console.error('Leaflet is NOT loaded!');
+                console.error('❌ Leaflet is NOT loaded!');
             }
             
             // Vérifier que le bouton existe
             const openBtn = document.getElementById('open-map-btn');
             if (openBtn) {
-                console.log('Open button found:', openBtn);
+                console.log('✅ Open button found:', openBtn);
+                // Supprimer tous les écouteurs existants
+                openBtn.replaceWith(openBtn.cloneNode(true));
+                const newBtn = document.getElementById('open-map-btn');
+                
+                // Ajouter un seul écouteur
+                newBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('� Button clicked directly!');
+                    
+                    // Utiliser uniquement l'instance LeafletMap
+                    if (window.leafletMapInstance) {
+                        console.log('🗺️ Using LeafletMap instance...');
+                        window.leafletMapInstance.showModal();
+                    } else {
+                        console.error('❌ LeafletMap instance not found!');
+                    }
+                });
             } else {
-                console.error('Open button NOT found!');
+                console.error('❌ Open button NOT found!');
             }
             
             // Vérifier que le modal existe
             const modal = document.getElementById('map-modal');
             if (modal) {
-                console.log('Modal found:', modal);
+                console.log('✅ Modal found:', modal);
             } else {
-                console.error('Modal NOT found!');
+                console.error('❌ Modal NOT found!');
             }
+            
+            // Vérifier que l'instance LeafletMap existe
+            if (window.leafletMapInstance) {
+                console.log('✅ LeafletMap instance found:', window.leafletMapInstance);
+            } else {
+                console.error('❌ LeafletMap instance NOT found!');
+            }
+            
+            console.log('=== END DEBUG ===');
         }, 1000);
     </script>
 </body>

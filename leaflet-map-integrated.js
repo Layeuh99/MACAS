@@ -1,4 +1,4 @@
-// Leaflet Interactive Map for Health On Wheels
+// Leaflet Interactive Map for Health On Wheels - VERSION SIMPLIFIÉE
 class LeafletMap {
     constructor() {
         this.map = null;
@@ -35,6 +35,7 @@ class LeafletMap {
             openMapBtn.addEventListener('click', (e) => {
                 console.log('LeafletMap: Open button clicked!');
                 e.preventDefault();
+                e.stopPropagation();
                 this.showModal();
             });
         } else {
@@ -72,16 +73,16 @@ class LeafletMap {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
             
-            // Initialiser la carte quand le modal s'ouvre
+            // Initialiser la carte après un court délai pour que le modal soit visible
             setTimeout(() => {
                 if (!this.map) {
                     console.log('LeafletMap: Initializing map...');
                     this.initializeMap();
                 } else {
-                    console.log('LeafletMap: Invalidating map size...');
+                    console.log('LeafletMap: Map already exists, invalidating size...');
                     this.map.invalidateSize();
                 }
-            }, 300);
+            }, 100);
         } else {
             console.error('LeafletMap: Modal not found!');
         }
@@ -100,59 +101,131 @@ class LeafletMap {
     initializeMap() {
         console.log('LeafletMap: Initializing map...');
         
-        setTimeout(() => {
-            try {
-                if (this.map) {
-                    this.map.remove();
-                }
-                
-                // Vérifier que Leaflet est disponible
-                if (typeof L === 'undefined') {
-                    console.error('LeafletMap: Leaflet library not loaded!');
-                    this.showMapError();
-                    return;
-                }
-                
-                // Vérifier que le conteneur existe
-                const mapContainer = document.getElementById('leaflet-map');
-                if (!mapContainer) {
-                    console.error('LeafletMap: Map container not found!');
-                    this.showMapError();
-                    return;
-                }
-                
-                // Créer la carte dans le conteneur du modal
-                this.map = L.map('leaflet-map', {
-                    center: [20, 0],
-                    zoom: 2.5,
-                    minZoom: 2
-                });
-                
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: 'OpenStreetMap contributors'
-                }).addTo(this.map);
-
-                console.log('LeafletMap: Map initialized successfully');
-
-                // Load GeoJSON data (continue même si erreur)
-                this.loadGeoJSON();
-
-                // Add custom legend (qui crée le dashboard)
-                this.addCustomLegend();
-
-                // Add country labels (continue même si erreur)
-                this.addCountryLabels();
-
-                // Add labels to GeoJSON countries (continue même si erreur)
-                this.addLabelsToCountries();
-
-                console.log('LeafletMap: All map components loaded');
-            } catch (error) {
-                console.error('LeafletMap: Error initializing map:', error);
-                // Ne pas afficher l'erreur immédiatement, essayer de continuer
-                console.log('LeafletMap: Attempting to continue despite error...');
+        try {
+            // Vérifier que Leaflet est disponible
+            if (typeof L === 'undefined') {
+                console.error('LeafletMap: Leaflet library not loaded!');
+                this.showMapError();
+                return;
             }
-        }, 300);
+            
+            // Vérifier que le conteneur existe
+            const mapContainer = document.getElementById('leaflet-map');
+            if (!mapContainer) {
+                console.error('LeafletMap: Map container not found!');
+                this.showMapError();
+                return;
+            }
+            
+            console.log('LeafletMap: Map container found:', mapContainer);
+            console.log('LeafletMap: Map container parent:', mapContainer.parentElement);
+            console.log('LeafletMap: Map container parent styles:', window.getComputedStyle(mapContainer.parentElement));
+            
+            // S'assurer que le conteneur a une taille et est visible
+            mapContainer.style.width = '100%';
+            mapContainer.style.height = '100%';
+            mapContainer.style.minHeight = '400px';
+            mapContainer.style.display = 'block';
+            mapContainer.style.visibility = 'visible';
+            mapContainer.style.position = 'relative';
+            mapContainer.style.background = '#ff0000'; // Rouge vif pour voir le conteneur
+            mapContainer.style.zIndex = '1';
+            
+            console.log('LeafletMap: Container styles applied');
+            console.log('LeafletMap: Container size after styles:', {
+                width: mapContainer.offsetWidth,
+                height: mapContainer.offsetHeight,
+                display: window.getComputedStyle(mapContainer).display,
+                visibility: window.getComputedStyle(mapContainer).visibility,
+                background: window.getComputedStyle(mapContainer).background
+            });
+            
+            // Supprimer l'ancienne carte si elle existe
+            if (this.map) {
+                this.map.remove();
+                this.map = null;
+            }
+            
+            console.log('LeafletMap: Creating map instance...');
+            
+            // Créer la carte avec des options simples
+            this.map = L.map('leaflet-map', {
+                center: [20, 0],
+                zoom: 2.5,
+                minZoom: 2,
+                maxZoom: 18,
+                worldCopyJump: true,
+                preferCanvas: true
+            });
+            
+            console.log('LeafletMap: Map instance created:', this.map);
+            
+            // Ajouter les tiles avec fallback si OpenStreetMap ne marche pas
+            let tileLayer;
+            try {
+                tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 18
+                });
+            } catch (error) {
+                console.error('LeafletMap: Error with OpenStreetMap tiles:', error);
+                // Utiliser une alternative
+                tileLayer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>',
+                    maxZoom: 18
+                });
+            }
+            
+            tileLayer.addTo(this.map);
+            console.log('LeafletMap: Tile layer added');
+            
+            // Forcer un zoom pour vérifier que la carte fonctionne
+            setTimeout(() => {
+                if (this.map) {
+                    this.map.setView([20, 0], 2.5);
+                    console.log('LeafletMap: Map view forced to [20, 0], zoom 2.5');
+                    
+                    // Vérifier si les tiles se chargent
+                    setTimeout(() => {
+                        const tiles = document.querySelectorAll('.leaflet-tile');
+                        console.log('LeafletMap: Tiles found:', tiles.length);
+                        if (tiles.length > 0) {
+                            console.log('LeafletMap: Tiles are loading successfully!');
+                            // Enlever le fond rouge
+                            mapContainer.style.background = '';
+                        } else {
+                            console.error('LeafletMap: No tiles found!');
+                        }
+                    }, 1000);
+                }
+            }, 500);
+
+            // Forcer le rafraîchissement après un court délai
+            setTimeout(() => {
+                if (this.map) {
+                    this.map.invalidateSize();
+                    console.log('LeafletMap: Map size invalidated');
+                    
+                    // Enlever le fond rouge après que la carte soit chargée
+                    mapContainer.style.background = '';
+                }
+            }, 200);
+
+            console.log('LeafletMap: Map initialized successfully');
+
+            // Charger les autres composants après un court délai
+            setTimeout(() => {
+                this.loadGeoJSON();
+                this.addCustomLegend();
+                this.addCountryLabels();
+                this.addLabelsToCountries();
+                console.log('LeafletMap: All map components loaded');
+            }, 500);
+            
+        } catch (error) {
+            console.error('LeafletMap: Error initializing map:', error);
+            this.showMapError();
+        }
     }
 
     loadGeoJSON() {
@@ -200,8 +273,6 @@ class LeafletMap {
             })
             .catch(error => {
                 console.error('LeafletMap: Error loading GeoJSON:', error);
-                // Continuer sans GeoJSON
-                console.log('LeafletMap: Continuing without GeoJSON data...');
             });
     }
 
@@ -566,7 +637,6 @@ class LeafletMap {
             console.log('LeafletMap: Country labels added with very simple square markers');
         } catch (error) {
             console.error('LeafletMap: Error adding country labels:', error);
-            console.log('LeafletMap: Continuing without country labels...');
         }
     }
 
@@ -636,7 +706,6 @@ class LeafletMap {
             console.log('LeafletMap: GeoJSON country labels added with very simple square markers');
         } catch (error) {
             console.error('LeafletMap: Error adding GeoJSON labels:', error);
-            console.log('LeafletMap: Continuing without GeoJSON labels...');
         }
     }
 
@@ -667,10 +736,12 @@ class LeafletMap {
 // Initialize map when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('LeafletMap: DOM loaded, initializing map...');
+    
+    // Créer l'instance immédiatement
     window.leafletMapInstance = new LeafletMap();
     
-    // Setup event listeners after a short delay to ensure DOM is ready
-    setTimeout(() => {
-        window.leafletMapInstance.setupModalListeners();
-    }, 100);
+    // Setup event listeners immédiatement
+    window.leafletMapInstance.setupModalListeners();
+    
+    console.log('LeafletMap: Setup completed');
 });
