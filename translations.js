@@ -157,11 +157,11 @@ const translations = {
         'modal-partner-title': '🤝 Devenir partenaire',
         'modal-partner-email': '📧 Mail: macassene@gmail.com',
         'modal-partner-phone': '📞 Phone: +221 78 537 13 11',
+        'modal-partner-whatsapp': '💬 WhatsApp: +221 75 557 60 94',
         'modal-support-title': '💚 Soutenir le projet',
         'modal-support-bank': '🏦 Bank Account: 5290 5827 9041 1271',
         'modal-join-title': '🌟 Rejoindre l\'initiative',
-        'modal-join-email': '📧 Mail: macassene@gmail.com',
-        'modal-join-phone': '📞 Phone: +221 78 537 13 11',
+        'modal-join-form': '📝 Formulaire d\'inscription',
         
         // Target Countries Section
         'target-countries-title': '50 Pays Ciblés',
@@ -227,25 +227,50 @@ const translations = {
         'footer-rights-text': 'Tous droits réservés',
         
         // Team member details
-        'member-director-name': 'Directeur Général',
-        'member-director-desc': 'Leader visionnaire avec 15+ ans d\'expérience en santé mondiale. Expert en projets à impact social et gestion d\'équipes multiculturelles.',
-        'member-director-skills': ['Stratégie', 'Gestion Internationale', 'Développement Durable', 'Leadership'],
-        'member-director-impact': 'Architecte de la vision mondiale, coordonne les partenariats et assure l\'alignement stratégique.',
+        'member-director-name': 'Abdoul Aziz GUISSE',
+        'member-director-desc': 'Élève ingénieur en Management des organisations (UAM, Diamniadio). Il pilote la vision globale de Health On Wheels, structure la stratégie d\'impact et aligne les partenaires autour d\'objectifs mesurables.',
+        'member-director-skills': ['Vision & Stratégie', 'Coordination', 'Gouvernance', 'Planification'],
+        'member-director-impact': 'Assure la cohérence entre mission sociale, modèle opérationnel et durabilité du projet.',
         
-        'member-medical-name': 'Directrice Médicale',
-        'member-medical-desc': 'Médecin humanitaire expert en santé publique et médecine d\'urgence. Spécialisée en interventions zones rurales et systèmes mobiles.',
-        'member-medical-skills': ['Médecine d\'Urgence', 'Santé Publique', 'Logistique Médicale', 'Formation'],
-        'member-medical-impact': 'Garante de la qualité des soins, supervise les protocoles médicaux et forme le personnel sur le terrain.',
+        'member-medical-name': 'Cheikh Sadibou THIAM',
+        'member-medical-desc': 'Élève ingénieur en Management des organisations (UAM, Diamniadio). Il transforme la vision en dispositifs opérationnels, en structurant les processus de soins et l\'organisation terrain.',
+        'member-medical-skills': ['Opérations & Soins', 'Processus', 'Qualité', 'Organisation'],
+        'member-medical-impact': 'Optimise la qualité des services et la fiabilité des parcours patients.',
         
-        'member-cto-name': 'CTO',
-        'member-cto-desc': 'Ingénieur logiciel spécialisé HealthTech. Expert en télémédecine, IA médicale et solutions mobiles.',
-        'member-cto-skills': ['Télémédecine', 'IA et ML', 'Développement Mobile', 'Cybersécurité'],
-        'member-cto-impact': 'Innovateur technologique, développe les solutions numériques et optimise les opérations via la tech.',
+        'member-cto-name': 'Mouhsine Abdallah Babacar DIAO',
+        'member-cto-desc': 'Élève ingénieur en géomatique (UAM, Diamniadio). Il conçoit la dimension technologique et cartographique pour prioriser les zones critiques et mesurer l\'impact.',
+        'member-cto-skills': ['Géomatique', 'Données', 'Cartographie', 'Innovation'],
+        'member-cto-impact': 'Pilote l\'intelligence géospatiale pour optimiser les itinéraires et la planification.',
         
-        'member-operations-name': 'Directrice des Opérations',
-        'member-operations-desc': 'Experte en logistique humanitaire avec 10 ans d\'expérience. Spécialiste en chaîne d\'approvisionnement médicale.',
-        'member-operations-skills': ['Logistique Humanitaire', 'Gestion de Flotte', 'Coordination Terrain', 'Optimisation'],
-        'member-operations-impact': 'Cerveau opérationnel, assure le fonctionnement parfait des cliniques mobiles.'
+        'member-operations-name': 'Directeur des Opérations',
+        'member-operations-desc': 'Profil à confirmer. Cette fonction assure la logistique terrain, la coordination des équipes et la continuité des opérations des cliniques mobiles.',
+        'member-operations-skills': ['Logistique', 'Coordination', 'Terrain', 'Suivi'],
+        'member-operations-impact': 'Garantit l\'efficacité opérationnelle et la présence continue sur le terrain.'
+        ,
+        // Carte & Dashboard
+        'region-africa-name': 'Afrique',
+        'region-asia-name': 'Asie & Pacifique',
+        'region-latin-name': 'Amérique Latine',
+        'region-middle-east-name': 'Moyen-Orient & Afrique du Nord',
+        'region-all-name': 'Toutes les régions',
+        'dashboard-title': 'Tableau de bord',
+        'dashboard-subtitle': 'Clic sur une région de la carte pour filtrer',
+        'filter-all': 'Toutes',
+        'filter-africa': 'Afrique',
+        'filter-asia': 'Asie & Pacifique',
+        'filter-latin': 'Amérique Latine',
+        'filter-middle-east': 'Moyen-Orient',
+        'kpi-countries': 'Pays ciblés',
+        'kpi-population': 'Population',
+        'kpi-clinics': 'Cliniques',
+        'section-distribution': 'Répartition des pays',
+        'section-clinics': 'Cliniques par région',
+        'section-selected': 'Région sélectionnée',
+        'section-global': 'Vue globale',
+        'label-countries': 'pays',
+        'label-people': 'personnes desservies',
+        'label-clinics': 'cliniques mobiles',
+        'map-overlay-title': 'Région sélectionnée'
     },
     
     en: {
@@ -419,11 +444,11 @@ const translations = {
         'modal-partner-title': '🤝 Become a Partner',
         'modal-partner-email': '📧 Mail: macassene@gmail.com',
         'modal-partner-phone': '📞 Phone: +221 78 537 13 11',
+        'modal-partner-whatsapp': '💬 WhatsApp: +221 75 557 60 94',
         'modal-support-title': '💚 Support the Project',
         'modal-support-bank': '🏦 Bank Account: 5290 5827 9041 1271',
         'modal-join-title': '🌟 Join the Initiative',
-        'modal-join-email': '📧 Mail: macassene@gmail.com',
-        'modal-join-phone': '📞 Phone: +221 78 537 13 11',
+        'modal-join-form': '📝 Registration form',
         
         // Target Countries Section
         'target-countries-title': '50 Target Countries',
@@ -477,25 +502,50 @@ const translations = {
         'footer-rights-text': 'All rights reserved',
         
         // Team member details
-        'member-director-name': 'General Director',
-        'member-director-desc': 'Visionary leader with 15+ years in global health. Expert in social impact projects and multicultural team management.',
-        'member-director-skills': ['Strategy', 'International Management', 'Sustainable Development', 'Leadership'],
-        'member-director-impact': 'Architect of global vision, coordinates partnerships and ensures strategic alignment.',
+        'member-director-name': 'Abdoul Aziz GUISSE',
+        'member-director-desc': 'Engineering student in Organizational Management (UAM, Diamniadio). He leads the overall vision, structures the impact strategy, and aligns partners around measurable goals.',
+        'member-director-skills': ['Vision & Strategy', 'Coordination', 'Governance', 'Planning'],
+        'member-director-impact': 'Ensures coherence between social mission, operational model, and long-term sustainability.',
         
-        'member-medical-name': 'Medical Director',
-        'member-medical-desc': 'Humanitarian doctor expert in public health and emergency medicine. Specialized in rural area interventions and mobile systems.',
-        'member-medical-skills': ['Emergency Medicine', 'Public Health', 'Medical Logistics', 'Training'],
-        'member-medical-impact': 'Guarantor of care quality, supervises medical protocols and trains field staff.',
+        'member-medical-name': 'Cheikh Sadibou THIAM',
+        'member-medical-desc': 'Engineering student in Organizational Management (UAM, Diamniadio). He turns the vision into concrete operations by structuring care processes and field organization.',
+        'member-medical-skills': ['Operations & Care', 'Processes', 'Quality', 'Organization'],
+        'member-medical-impact': 'Improves service quality and reliability of patient pathways.',
         
-        'member-cto-name': 'CTO',
-        'member-cto-desc': 'Software engineer specialized in HealthTech. Expert in telemedicine, medical AI and mobile solutions.',
-        'member-cto-skills': ['Telemedicine', 'AI and ML', 'Mobile Development', 'Cybersecurity'],
-        'member-cto-impact': 'Technology innovator, develops digital solutions and optimizes operations via tech.',
+        'member-cto-name': 'Mouhsine Abdallah Babacar DIAO',
+        'member-cto-desc': 'Geomatics engineering student (UAM, Diamniadio). He designs the tech and mapping dimension to prioritize critical areas and measure impact.',
+        'member-cto-skills': ['Geomatics', 'Data', 'Cartography', 'Innovation'],
+        'member-cto-impact': 'Leads geospatial intelligence to optimize routes and planning.',
         
         'member-operations-name': 'Operations Director',
-        'member-operations-desc': 'Humanitarian logistics expert with 10 years experience. Specialist in medical supply chain.',
-        'member-operations-skills': ['Humanitarian Logistics', 'Fleet Management', 'Field Coordination', 'Optimization'],
-        'member-operations-impact': 'Operational brain, ensures perfect functioning of mobile clinics.'
+        'member-operations-desc': 'Profile to confirm. This role ensures field logistics, team coordination, and continuity of mobile clinic operations.',
+        'member-operations-skills': ['Logistics', 'Coordination', 'Field Ops', 'Monitoring'],
+        'member-operations-impact': 'Guarantees operational efficiency and sustained field presence.'
+        ,
+        // Map & Dashboard
+        'region-africa-name': 'Africa',
+        'region-asia-name': 'Asia & Pacific',
+        'region-latin-name': 'Latin America',
+        'region-middle-east-name': 'Middle East & North Africa',
+        'region-all-name': 'All regions',
+        'dashboard-title': 'Dashboard',
+        'dashboard-subtitle': 'Click a region on the map to filter',
+        'filter-all': 'All',
+        'filter-africa': 'Africa',
+        'filter-asia': 'Asia & Pacific',
+        'filter-latin': 'Latin America',
+        'filter-middle-east': 'Middle East',
+        'kpi-countries': 'Target countries',
+        'kpi-population': 'Population',
+        'kpi-clinics': 'Clinics',
+        'section-distribution': 'Country distribution',
+        'section-clinics': 'Clinics by region',
+        'section-selected': 'Selected region',
+        'section-global': 'Global view',
+        'label-countries': 'countries',
+        'label-people': 'people served',
+        'label-clinics': 'mobile clinics',
+        'map-overlay-title': 'Selected region'
     }
 };
 
@@ -543,6 +593,11 @@ class LanguageManager {
         
         // Translate all elements
         this.translatePage();
+
+        // Refresh map/dashboard language if available
+        if (window.leafletMapInstance && typeof window.leafletMapInstance.refreshLanguage === 'function') {
+            window.leafletMapInstance.refreshLanguage();
+        }
     }
     
     translatePage() {

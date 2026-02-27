@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health On Wheels - MACAS</title>
     <meta name="description" content="Clinique médicale mobile qui dessert les communautés rurales à travers le monde">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=5">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -82,8 +82,8 @@
                 
                 <div class="nav-controls">
                     <div class="language-switcher" id="languageSwitcher">
-                        <button class="lang-btn active" data-lang="fr" onclick="translateToFrench()">FR</button>
-                        <button class="lang-btn" data-lang="en" onclick="translateToEnglish()">EN</button>
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
                     </div>
                     <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
                         <span class="theme-icon">🌙</span>
@@ -284,8 +284,21 @@
                 <span class="action-modal-close">&times;</span>
                 <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;" data-translate="modal-partner-title">🤝 Devenir partenaire</h4>
                 <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
-                    <div style="margin-bottom: 10px;" data-translate="modal-partner-email">📧 Mail: macassene@gmail.com</div>
-                    <div data-translate="modal-partner-phone">📞 Phone: +221 78 537 13 11</div>
+                    <div style="margin-bottom: 10px;">
+                        <a href="mailto:macassene@gmail.com">
+                            <span data-translate="modal-partner-email">📧 Mail: macassene@gmail.com</span>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="tel:+221785371311">
+                            <span data-translate="modal-partner-phone">📞 Phone: +221 78 537 13 11</span>
+                        </a>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <a href="https://wa.me/221755576094" target="_blank" rel="noopener">
+                            <span data-translate="modal-partner-whatsapp">💬 WhatsApp: +221 75 557 60 94</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -307,8 +320,11 @@
                 <span class="action-modal-close">&times;</span>
                 <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;" data-translate="modal-join-title">🌟 Rejoindre l'initiative</h4>
                 <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
-                    <div style="margin-bottom: 10px;" data-translate="modal-join-email">📧 Mail: macassene@gmail.com</div>
-                    <div data-translate="modal-join-phone">📞 Phone: +221 78 537 13 11</div>
+                    <div>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdx4BcujzPMgAG1esF2lh5BCTjRnB7uN-SxT-yE3FoIOi0OMQ/viewform?usp=sharing&ouid=116810860755205749790" target="_blank" rel="noopener">
+                            <span data-translate="modal-join-form">📝 Formulaire d'inscription</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -323,10 +339,10 @@
                 
                 <div class="map-dashboard-container">
                     <div class="map-section">
-                        <div id="leaflet-map"></div>
+                        <div id="leaflet-map" class="leaflet-map-container"></div>
                     </div>
                     <div class="dashboard-section">
-                        <div id="dashboard-content"></div>
+                        <div id="dashboard-content" class="dashboard-content"></div>
                     </div>
                 </div>
             </div>
@@ -427,7 +443,7 @@
                                     <div class="avatar-placeholder">👩‍⚕️</div>
                                 </div>
                                 <div class="member-info">
-                                    <h3 data-translate="member-medical-name">Directrice Médicale</h3>
+                                    <h3 data-translate="member-medical-name">Directeur Médical</h3>
                                     <p class="member-role" data-translate="team-member-2-role">Opérations & Soins</p>
                                     <button class="member-btn" onclick="openMemberModal('medical')" data-translate="team-btn">
                                         <span>+</span>
@@ -457,7 +473,7 @@
                                     <div class="avatar-placeholder">👩‍🔧</div>
                                 </div>
                                 <div class="member-info">
-                                    <h3 data-translate="member-operations-name">Directrice des Opérations</h3>
+                                    <h3 data-translate="member-operations-name">Directeur des Opérations</h3>
                                     <p class="member-role" data-translate="team-member-4-role">Logistique & Terrain</p>
                                     <button class="member-btn" onclick="openMemberModal('operations')" data-translate="team-btn">
                                         <span>+</span>
@@ -528,7 +544,7 @@
                 
                 <div class="footer-contact">
                     <h4 data-translate="footer-contact-title">Contact</h4>
-                    <p data-translate="footer-email">Email: sksevoevo@gmail.com</p>
+                    <p data-translate="footer-email">Email: macassene@gmail.com</p>
                     <p data-translate="footer-phone">Téléphone: +221 78 537 13 11</p>
                     <p data-translate="footer-headquarters">Siège mondial</p>
                     <p data-translate="footer-address">Université Amadou Mahtar Mbow, Diamniadio</p>
@@ -619,7 +635,7 @@
                 </button>
                 <div class="modal-header">
                     <div class="modal-avatar">👩‍⚕️</div>
-                    <h3 data-translate="member-medical-name">Directrice Médicale</h3>
+                    <h3 data-translate="member-medical-name">Directeur Médical</h3>
                     <p class="modal-role" data-translate="team-member-2-role">Opérations & Soins</p>
                 </div>
                 <div class="modal-body">
@@ -697,7 +713,7 @@
                 </button>
                 <div class="modal-header">
                     <div class="modal-avatar">👩‍🔧</div>
-                    <h3 data-translate="member-operations-name">Directrice des Opérations</h3>
+                    <h3 data-translate="member-operations-name">Directeur des Opérations</h3>
                     <p class="modal-role" data-translate="team-member-4-role">Logistique & Terrain</p>
                 </div>
                 <div class="modal-body">
@@ -729,9 +745,9 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="translations.js?v=5"></script>
     <script src="script.js"></script>
-    <script src="simple-map.js"></script>
-    <script src="leaflet-map-integrated.js"></script>
+    <script src="leaflet-map-integrated.js?v=5"></script>
     
     <!-- Debug Script -->
     <script>
@@ -803,81 +819,8 @@
         }, 1000);
     </script>
     
-    <!-- Solution simple pour les modales -->
+    <!-- Gestion des modales d'action -->
     <script>
-        // État actuel
-        let currentLang = 'fr';
-        
-        // Traductions
-        const modalTranslations = {
-            fr: {
-                partner: '🤝 Devenir partenaire',
-                support: '💚 Soutenir le projet',
-                join: '🌟 Rejoindre l\'initiative'
-            },
-            en: {
-                partner: '🤝 Become a Partner',
-                support: '💚 Support the Project',
-                join: '🌟 Join the Initiative'
-            }
-        };
-        
-        // Fonction de traduction simple
-        function translateModals() {
-            console.log('🔄 Translating to:', currentLang);
-            
-            // Traduire les titres des modales
-            const partnerTitle = document.querySelector('#partner-modal h4');
-            const supportTitle = document.querySelector('#support-modal h4');
-            const joinTitle = document.querySelector('#join-modal h4');
-            
-            if (partnerTitle) {
-                partnerTitle.textContent = modalTranslations[currentLang].partner;
-                console.log('✅ Partner modal title:', modalTranslations[currentLang].partner);
-            }
-            
-            if (supportTitle) {
-                supportTitle.textContent = modalTranslations[currentLang].support;
-                console.log('✅ Support modal title:', modalTranslations[currentLang].support);
-            }
-            
-            if (joinTitle) {
-                joinTitle.textContent = modalTranslations[currentLang].join;
-                console.log('✅ Join modal title:', modalTranslations[currentLang].join);
-            }
-        }
-        
-        // Gestion des boutons de langue
-        function setupLanguageButtons() {
-            const frBtn = document.querySelector('[data-lang="fr"]');
-            const enBtn = document.querySelector('[data-lang="en"]');
-            
-            if (frBtn) {
-                frBtn.onclick = () => {
-                    currentLang = 'fr';
-                    translateModals();
-                    console.log('🇫🇷 French selected');
-                    
-                    // Mettre à jour les boutons
-                    frBtn.classList.add('active');
-                    enBtn.classList.remove('active');
-                };
-            }
-            
-            if (enBtn) {
-                enBtn.onclick = () => {
-                    currentLang = 'en';
-                    translateModals();
-                    console.log('🇬🇧 English selected');
-                    
-                    // Mettre à jour les boutons
-                    enBtn.classList.add('active');
-                    frBtn.classList.remove('active');
-                };
-            }
-        }
-        
-        // Gestion des modales
         function setupModals() {
             // Boutons d'action
             const actionButtons = document.querySelectorAll('.action-buttons button');
@@ -900,8 +843,6 @@
                         targetModal.style.display = 'block';
                         document.body.style.overflow = 'hidden';
                         
-                        // Traduire immédiatement
-                        translateModals();
                     };
                 }
             });
@@ -933,9 +874,7 @@
         // Initialisation
         document.addEventListener('DOMContentLoaded', () => {
             console.log('🚀 Initializing modal system...');
-            setupLanguageButtons();
             setupModals();
-            translateModals(); // Traduction initiale
         });
     </script>
     
