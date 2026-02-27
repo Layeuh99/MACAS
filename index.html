@@ -82,8 +82,8 @@
                 
                 <div class="nav-controls">
                     <div class="language-switcher" id="languageSwitcher">
-                        <button class="lang-btn active" data-lang="fr">FR</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn active" data-lang="fr" onclick="translateToFrench()">FR</button>
+                        <button class="lang-btn" data-lang="en" onclick="translateToEnglish()">EN</button>
                     </div>
                     <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
                         <span class="theme-icon">🌙</span>
@@ -282,10 +282,10 @@
         <div id="partner-modal" class="action-modal" style="display: none;">
             <div class="action-modal-content">
                 <span class="action-modal-close">&times;</span>
-                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;">🤝 Devenir partenaire</h4>
+                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;" data-translate="modal-partner-title">🤝 Devenir partenaire</h4>
                 <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
-                    <div style="margin-bottom: 10px;">📧 Mail: macassene@gmail.com</div>
-                    <div>📞 Phone: +221 78 537 13 11</div>
+                    <div style="margin-bottom: 10px;" data-translate="modal-partner-email">📧 Mail: macassene@gmail.com</div>
+                    <div data-translate="modal-partner-phone">📞 Phone: +221 78 537 13 11</div>
                 </div>
             </div>
         </div>
@@ -294,9 +294,9 @@
         <div id="support-modal" class="action-modal" style="display: none;">
             <div class="action-modal-content">
                 <span class="action-modal-close">&times;</span>
-                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;">💚 Soutenir le projet</h4>
+                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;" data-translate="modal-support-title">💚 Soutenir le projet</h4>
                 <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
-                    <div>🏦 Bank Account: 5290 5827 9041 1271</div>
+                    <div data-translate="modal-support-bank">🏦 Bank Account: 5290 5827 9041 1271</div>
                 </div>
             </div>
         </div>
@@ -305,10 +305,10 @@
         <div id="join-modal" class="action-modal" style="display: none;">
             <div class="action-modal-content">
                 <span class="action-modal-close">&times;</span>
-                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;">🌟 Rejoindre l'initiative</h4>
+                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;" data-translate="modal-join-title">🌟 Rejoindre l'initiative</h4>
                 <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
-                    <div style="margin-bottom: 10px;">📧 Mail: macassene@gmail.com</div>
-                    <div>📞 Phone: +221 78 537 13 11</div>
+                    <div style="margin-bottom: 10px;" data-translate="modal-join-email">📧 Mail: macassene@gmail.com</div>
+                    <div data-translate="modal-join-phone">📞 Phone: +221 78 537 13 11</div>
                 </div>
             </div>
         </div>
@@ -527,23 +527,23 @@
                 </div>
                 
                 <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p>Email: sksevoevo@gmail.com</p>
-                    <p>Téléphone: +221 78 537 13 11</p>
-                    <p>Siège mondial</p>
-                    <p>Université Amadou Mahtar Mbow, Diamniadio</p>
-                    <p>À 30 km de Dakar, Sénégal</p>
+                    <h4 data-translate="footer-contact-title">Contact</h4>
+                    <p data-translate="footer-email">Email: sksevoevo@gmail.com</p>
+                    <p data-translate="footer-phone">Téléphone: +221 78 537 13 11</p>
+                    <p data-translate="footer-headquarters">Siège mondial</p>
+                    <p data-translate="footer-address">Université Amadou Mahtar Mbow, Diamniadio</p>
+                    <p data-translate="footer-location">À 30 km de Dakar, Sénégal</p>
                 </div>
                 
                 <div class="footer-legal">
-                    <h4>Légal</h4>
-                    <p>&copy; 2026 Health On Wheels</p>
-                    <p>Par MACAS</p>
-                    <p>Tous droits réservés</p>
+                    <h4 data-translate="footer-legal-title">Légal</h4>
+                    <p data-translate="footer-copyright-text">&copy; 2026 Health On Wheels</p>
+                    <p data-translate="footer-by-text">Par MACAS</p>
+                    <p data-translate="footer-rights-text">Tous droits réservés</p>
                 </div>
                 
                 <div class="social-links">
-                    <h4>Suivez MACAS</h4>
+                    <h4 data-translate="footer-social">Suivez MACAS</h4>
                     <div class="social-icons">
                         <a href="https://www.instagram.com/macas_sn?igsh=MXNwMDY1enNtaWQ0bw%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="MACAS sur Instagram" class="social-link">
                             <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -729,7 +729,6 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="translations.js"></script>
     <script src="script.js"></script>
     <script src="simple-map.js"></script>
     <script src="leaflet-map-integrated.js"></script>
@@ -778,48 +777,6 @@
                 console.error('❌ Open button NOT found!');
             }
             
-            // Gestion des fenêtres modales d'action
-            const actionButtons = document.querySelectorAll('.action-buttons button');
-            const actionModals = document.querySelectorAll('.action-modal');
-            const actionModalCloses = document.querySelectorAll('.action-modal-close');
-            
-            // Ouvrir les modales
-            actionButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const action = this.getAttribute('data-action');
-                    const targetModal = document.getElementById(action + '-modal');
-                    
-                    if (targetModal) {
-                        targetModal.style.display = 'block';
-                        document.body.style.overflow = 'hidden';
-                    }
-                });
-            });
-            
-            // Fermer les modales avec le bouton X
-            actionModalCloses.forEach(closeBtn => {
-                closeBtn.addEventListener('click', function() {
-                    const modal = this.closest('.action-modal');
-                    if (modal) {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = '';
-                    }
-                });
-            });
-            
-            // Fermer les modales en cliquant à l'extérieur
-            actionModals.forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = '';
-                    }
-                });
-            });
-            
             // Vérifier que le modal existe
             const modal = document.getElementById('map-modal');
             if (modal) {
@@ -845,5 +802,143 @@
             console.log('=== END DEBUG ===');
         }, 1000);
     </script>
+    
+    <!-- Solution simple pour les modales -->
+    <script>
+        // État actuel
+        let currentLang = 'fr';
+        
+        // Traductions
+        const modalTranslations = {
+            fr: {
+                partner: '🤝 Devenir partenaire',
+                support: '💚 Soutenir le projet',
+                join: '🌟 Rejoindre l\'initiative'
+            },
+            en: {
+                partner: '🤝 Become a Partner',
+                support: '💚 Support the Project',
+                join: '🌟 Join the Initiative'
+            }
+        };
+        
+        // Fonction de traduction simple
+        function translateModals() {
+            console.log('🔄 Translating to:', currentLang);
+            
+            // Traduire les titres des modales
+            const partnerTitle = document.querySelector('#partner-modal h4');
+            const supportTitle = document.querySelector('#support-modal h4');
+            const joinTitle = document.querySelector('#join-modal h4');
+            
+            if (partnerTitle) {
+                partnerTitle.textContent = modalTranslations[currentLang].partner;
+                console.log('✅ Partner modal title:', modalTranslations[currentLang].partner);
+            }
+            
+            if (supportTitle) {
+                supportTitle.textContent = modalTranslations[currentLang].support;
+                console.log('✅ Support modal title:', modalTranslations[currentLang].support);
+            }
+            
+            if (joinTitle) {
+                joinTitle.textContent = modalTranslations[currentLang].join;
+                console.log('✅ Join modal title:', modalTranslations[currentLang].join);
+            }
+        }
+        
+        // Gestion des boutons de langue
+        function setupLanguageButtons() {
+            const frBtn = document.querySelector('[data-lang="fr"]');
+            const enBtn = document.querySelector('[data-lang="en"]');
+            
+            if (frBtn) {
+                frBtn.onclick = () => {
+                    currentLang = 'fr';
+                    translateModals();
+                    console.log('🇫🇷 French selected');
+                    
+                    // Mettre à jour les boutons
+                    frBtn.classList.add('active');
+                    enBtn.classList.remove('active');
+                };
+            }
+            
+            if (enBtn) {
+                enBtn.onclick = () => {
+                    currentLang = 'en';
+                    translateModals();
+                    console.log('🇬🇧 English selected');
+                    
+                    // Mettre à jour les boutons
+                    enBtn.classList.add('active');
+                    frBtn.classList.remove('active');
+                };
+            }
+        }
+        
+        // Gestion des modales
+        function setupModals() {
+            // Boutons d'action
+            const actionButtons = document.querySelectorAll('.action-buttons button');
+            const actionModals = document.querySelectorAll('.action-modal');
+            const actionModalCloses = document.querySelectorAll('.action-modal-close');
+            
+            // Ouvrir les modales
+            actionButtons.forEach((button, index) => {
+                const action = button.getAttribute('data-action');
+                const targetModal = document.getElementById(action + '-modal');
+                
+                if (targetModal) {
+                    button.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        console.log(`🔗 Opening ${action} modal`);
+                        
+                        // Ouvrir la modal
+                        targetModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                        
+                        // Traduire immédiatement
+                        translateModals();
+                    };
+                }
+            });
+            
+            // Fermer avec X
+            actionModalCloses.forEach(closeBtn => {
+                closeBtn.onclick = () => {
+                    const modal = closeBtn.closest('.action-modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = '';
+                        console.log('🔒 Modal closed');
+                    }
+                };
+            });
+            
+            // Fermer en cliquant à l'extérieur
+            actionModals.forEach(modal => {
+                modal.onclick = (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = '';
+                        console.log('🔒 Modal closed (outside click)');
+                    }
+                };
+            });
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Initializing modal system...');
+            setupLanguageButtons();
+            setupModals();
+            translateModals(); // Traduction initiale
+        });
+    </script>
+    
+    <!-- Debug Script -->
 </body>
 </html>

@@ -1,4 +1,5 @@
 // Translation system for Health On Wheels
+console.log('Translations: File loaded successfully!');
 const translations = {
     fr: {
         // Navigation
@@ -152,6 +153,16 @@ const translations = {
         'action-impact-number': '2000+',
         'action-impact-text': 'vies changées chaque mois',
         
+        // Action Modals
+        'modal-partner-title': '🤝 Devenir partenaire',
+        'modal-partner-email': '📧 Mail: macassene@gmail.com',
+        'modal-partner-phone': '📞 Phone: +221 78 537 13 11',
+        'modal-support-title': '💚 Soutenir le projet',
+        'modal-support-bank': '🏦 Bank Account: 5290 5827 9041 1271',
+        'modal-join-title': '🌟 Rejoindre l\'initiative',
+        'modal-join-email': '📧 Mail: macassene@gmail.com',
+        'modal-join-phone': '📞 Phone: +221 78 537 13 11',
+        
         // Target Countries Section
         'target-countries-title': '50 Pays Ciblés',
         'target-countries-subtitle': 'Notre portée mondiale pour l\'accès aux soins de santé',
@@ -196,12 +207,24 @@ const translations = {
         
         // Footer
         'footer-contact': 'Contact',
-        'footer-legal': 'Légal',
+        'footer-legal': 'Legal',
         'footer-social': 'Suivez MACAS',
         'footer-mission': 'Apporter la santé aux populations, pas les populations aux hôpitaux',
         'footer-copyright': '© 2024 Health On Wheels',
         'footer-by': 'Par MACAS',
         'footer-rights': 'Tous droits réservés',
+        
+        // Footer details
+        'footer-contact-title': 'Contact',
+        'footer-email': 'Email: sksevoevo@gmail.com',
+        'footer-phone': 'Téléphone: +221 78 537 13 11',
+        'footer-headquarters': 'Siège mondial',
+        'footer-address': 'Université Amadou Mahtar Mbow, Diamniadio',
+        'footer-location': 'À 30 km de Dakar, Sénégal',
+        'footer-legal-title': 'Légal',
+        'footer-copyright-text': '© 2026 Health On Wheels',
+        'footer-by-text': 'Par MACAS',
+        'footer-rights-text': 'Tous droits réservés',
         
         // Team member details
         'member-director-name': 'Directeur Général',
@@ -392,6 +415,16 @@ const translations = {
         'action-impact-number': '2000+',
         'action-impact-text': 'lives changed each month',
         
+        // Action Modals
+        'modal-partner-title': '🤝 Become a Partner',
+        'modal-partner-email': '📧 Mail: macassene@gmail.com',
+        'modal-partner-phone': '📞 Phone: +221 78 537 13 11',
+        'modal-support-title': '💚 Support the Project',
+        'modal-support-bank': '🏦 Bank Account: 5290 5827 9041 1271',
+        'modal-join-title': '🌟 Join the Initiative',
+        'modal-join-email': '📧 Mail: macassene@gmail.com',
+        'modal-join-phone': '📞 Phone: +221 78 537 13 11',
+        
         // Target Countries Section
         'target-countries-title': '50 Target Countries',
         'target-countries-subtitle': 'Our global reach for healthcare access',
@@ -431,6 +464,18 @@ const translations = {
         'footer-by': 'By MACAS',
         'footer-rights': 'All rights reserved',
         
+        // Footer details
+        'footer-contact-title': 'Contact',
+        'footer-email': 'Email: sksevoevo@gmail.com',
+        'footer-phone': 'Phone: +221 78 537 13 11',
+        'footer-headquarters': 'World Headquarters',
+        'footer-address': 'Amadou Mahtar Mbow University, Diamniadio',
+        'footer-location': '30 km from Dakar, Senegal',
+        'footer-legal-title': 'Legal',
+        'footer-copyright-text': '© 2026 Health On Wheels',
+        'footer-by-text': 'By MACAS',
+        'footer-rights-text': 'All rights reserved',
+        
         // Team member details
         'member-director-name': 'General Director',
         'member-director-desc': 'Visionary leader with 15+ years in global health. Expert in social impact projects and multicultural team management.',
@@ -457,14 +502,18 @@ const translations = {
 // Language management
 class LanguageManager {
     constructor() {
+        console.log('LanguageManager: Constructor starting...');
         this.currentLang = localStorage.getItem('language') || 'fr';
         this.translations = translations;
+        console.log('LanguageManager: Current language:', this.currentLang);
         this.init();
     }
     
     init() {
+        console.log('LanguageManager: Initializing...');
         this.setLanguage(this.currentLang);
         this.bindEvents();
+        console.log('LanguageManager: Initialization complete');
     }
     
     bindEvents() {
@@ -561,11 +610,30 @@ class LanguageManager {
             }
         });
         
+        // Action modals
+        this.translateActionModals();
+        
         // Team member modals
         this.translateTeamModals();
         
         // Footer
         this.translateFooter();
+    }
+    
+    translateActionModals() {
+        // Utiliser les attributs data-translate comme les autres éléments
+        const modalElements = document.querySelectorAll('[data-translate^="modal-"]');
+        console.log('Modal elements found:', modalElements.length);
+        
+        modalElements.forEach(element => {
+            const key = element.dataset.translate;
+            const translation = this.getTranslation(key);
+            console.log(`Translating ${key} to: ${translation}`);
+            
+            if (translation) {
+                element.textContent = translation;
+            }
+        });
     }
     
     translateTeamModals() {
@@ -714,13 +782,9 @@ class LanguageManager {
     }
 }
 
-// Initialize language manager
-let languageManager;
-
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
-    languageManager = new LanguageManager();
+// Initialize language manager when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Translations: Initializing language manager...');
+    window.languageManager = new LanguageManager();
+    console.log('Translations: Language manager initialized');
 });
-
-// Export for global access
-window.languageManager = languageManager;
