@@ -853,6 +853,7 @@ p {
 
 .costs-section {
   text-align: center;
+  margin-top: var(--spacing-2xl);
 }
 
 .costs-section h3 {
@@ -863,7 +864,7 @@ p {
 .costs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-xl);
+  gap: var(--spacing-2xl);
 }
 
 .cost-card {
@@ -872,6 +873,7 @@ p {
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   text-align: left;
+  padding-bottom: var(--spacing-sm);
 }
 
 .cost-header {
@@ -893,12 +895,74 @@ p {
 .cost-details {
   padding: var(--spacing-xl);
   list-style: none;
+  display: grid;
+  gap: var(--spacing-xs);
 }
 
 .cost-details li {
   padding: var(--spacing-sm) 0;
   border-bottom: 1px solid var(--gray-200);
   color: var(--gray-600);
+}
+
+.costs-table {
+  margin-top: var(--spacing-2xl);
+}
+
+.costs-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.costs-summary-table thead th {
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: var(--spacing-lg);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+}
+
+.costs-summary-table tbody td {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+
+.costs-summary-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.costs-summary {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: #f8fafc;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  text-align: left;
+}
+
+.costs-summary h4 {
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: var(--spacing-lg);
+  margin: calc(var(--spacing-lg) * -1);
+  margin-bottom: var(--spacing-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+[data-theme="dark"] .costs-summary {
+  background: var(--gray-50);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .costs-summary h4 {
+  background: var(--secondary-color);
+  color: var(--white);
 }
 
 .cost-details li:last-child {
@@ -2550,6 +2614,13 @@ p {
     font-size: 0.95rem;
     font-weight: 700;
     margin-bottom: 8px;
+}
+
+.costs-block-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 10px 0 12px;
+    color: #0f172a;
 }
 
 .dash-donut {
