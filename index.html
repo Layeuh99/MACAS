@@ -11,7 +11,44 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-</head>
+<style>
+            .action-modal {
+                position: fixed;
+                z-index: 10000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
+            }
+
+            .action-modal-content {
+                background-color: white;
+                margin: 15% auto;
+                padding: 30px;
+                border-radius: 12px;
+                width: 90%;
+                max-width: 400px;
+                position: relative;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .action-modal-close {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                color: #64748b;
+                font-size: 24px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .action-modal-close:hover {
+                color: #1e293b;
+            }
+        </style>
+    </head>
 <body>
     <!-- Progress Bar -->
     <div class="progress-bar" id="progressBar"></div>
@@ -241,6 +278,41 @@
             </div>
         </section>
 
+        <!-- Partner Modal -->
+        <div id="partner-modal" class="action-modal" style="display: none;">
+            <div class="action-modal-content">
+                <span class="action-modal-close">&times;</span>
+                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;">🤝 Devenir partenaire</h4>
+                <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
+                    <div style="margin-bottom: 10px;">📧 Mail: macassene@gmail.com</div>
+                    <div>📞 Phone: +221 78 537 13 11</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Modal -->
+        <div id="support-modal" class="action-modal" style="display: none;">
+            <div class="action-modal-content">
+                <span class="action-modal-close">&times;</span>
+                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;">💚 Soutenir le projet</h4>
+                <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
+                    <div>🏦 Bank Account: 5290 5827 9041 1271</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join Modal -->
+        <div id="join-modal" class="action-modal" style="display: none;">
+            <div class="action-modal-content">
+                <span class="action-modal-close">&times;</span>
+                <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 18px;">🌟 Rejoindre l'initiative</h4>
+                <div style="color: #64748b; font-size: 14px; line-height: 1.6;">
+                    <div style="margin-bottom: 10px;">📧 Mail: macassene@gmail.com</div>
+                    <div>📞 Phone: +221 78 537 13 11</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Map Modal with Dashboard -->
         <div id="map-modal" class="map-modal">
             <div class="map-modal-overlay"></div>
@@ -419,11 +491,12 @@
                     </div>
 
                     <div class="action-buttons">
-                        <a href="#partner" class="btn btn-primary btn-large" data-translate="action-partner-btn">Devenir partenaire</a>
-                        <a href="#support" class="btn btn-secondary btn-large" data-translate="action-support-btn">Soutenir le projet</a>
-                        <a href="#join" class="btn btn-outline btn-large" data-translate="action-join-btn">Rejoindre l'initiative</a>
+                        <button class="btn btn-primary btn-large" data-action="partner" data-translate="action-partner-btn">Devenir partenaire</button>
+                        <button class="btn btn-secondary btn-large" data-action="support" data-translate="action-support-btn">Soutenir le projet</button>
+                        <button class="btn btn-outline btn-large" data-action="join" data-translate="action-join-btn">Rejoindre l'initiative</button>
                     </div>
 
+                    
                     <div class="action-impact">
                         <div class="impact-highlight">
                             <div class="impact-number-large">2000</div>
@@ -704,6 +777,48 @@
             } else {
                 console.error('❌ Open button NOT found!');
             }
+            
+            // Gestion des fenêtres modales d'action
+            const actionButtons = document.querySelectorAll('.action-buttons button');
+            const actionModals = document.querySelectorAll('.action-modal');
+            const actionModalCloses = document.querySelectorAll('.action-modal-close');
+            
+            // Ouvrir les modales
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const action = this.getAttribute('data-action');
+                    const targetModal = document.getElementById(action + '-modal');
+                    
+                    if (targetModal) {
+                        targetModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            // Fermer les modales avec le bouton X
+            actionModalCloses.forEach(closeBtn => {
+                closeBtn.addEventListener('click', function() {
+                    const modal = this.closest('.action-modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // Fermer les modales en cliquant à l'extérieur
+            actionModals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
             
             // Vérifier que le modal existe
             const modal = document.getElementById('map-modal');
