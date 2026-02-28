@@ -34,6 +34,25 @@
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             }
 
+            .pdf-modal-content {
+                background-color: #fff;
+                margin: 5vh auto;
+                padding: 0;
+                border-radius: 12px;
+                width: 90%;
+                max-width: 980px;
+                height: 85vh;
+                position: relative;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                overflow: hidden;
+            }
+
+            .pdf-modal-content iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+
             .action-modal-close {
                 position: absolute;
                 right: 15px;
@@ -109,7 +128,7 @@
                     </p>
                     
                     <div class="hero-actions">
-                        <a href="#project" class="btn btn-primary" data-translate="hero-btn-primary">Découvrir le projet</a>
+                        <a href="PDF/MACAS.pdf" class="btn btn-primary" data-translate="hero-btn-primary" data-action="project">Découvrir le projet</a>
                         <a href="#action" class="btn btn-secondary" data-translate="hero-btn-secondary">Soutenir l'initiative</a>
                     </div>
                 </div>
@@ -359,6 +378,13 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div id="project-modal" class="action-modal" style="display: none;">
+            <div class="pdf-modal-content">
+                <span class="action-modal-close">&times;</span>
+                <iframe src="PDF/MACAS.pdf" title="MACAS - Projet"></iframe>
             </div>
         </div>
 
@@ -857,7 +883,7 @@
     <script>
         function setupModals() {
             // Boutons d'action
-            const actionButtons = document.querySelectorAll('.action-buttons button');
+            const actionButtons = document.querySelectorAll('[data-action]');
             const actionModals = document.querySelectorAll('.action-modal');
             const actionModalCloses = document.querySelectorAll('.action-modal-close');
             
