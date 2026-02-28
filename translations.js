@@ -106,6 +106,16 @@ const translations = {
         'costs-annual-item-3': 'Charges véhicules : 13 068 000 FCFA',
         'costs-annual-item-4': 'Maintenance matériel médical : 5 000 000 FCFA',
         'costs-annual-item-5': 'Médicaments + imprévus & assurances : 14 400 000 FCFA',
+        'costs-forecast-title': 'Produits prévisionnels (zone pilote / 1 an)',
+        'costs-forecast-amount': '86 850 000 FCFA',
+        'costs-forecast-item-1': 'Revenus billetterie : 2 350 000 FCFA',
+        'costs-forecast-item-2': 'Revenus télémédecine : 1 500 000 FCFA',
+        'costs-forecast-item-3': 'Revenus pharmacie de bord : 3 000 000 FCFA',
+        'costs-forecast-item-4': 'Revenus tests de diagnostic rapide : 1 000 000 FCFA',
+        'costs-forecast-item-5': 'Sponsoring (publicité) : 20 000 000 FCFA',
+        'costs-forecast-item-6': 'Subventions (États, OMS, etc.) : 32 000 000 FCFA',
+        'costs-forecast-item-7': 'Dons (en nature et numéraire) : 17 000 000 FCFA',
+        'costs-forecast-item-8': 'Vente de données : 10 000 000 FCFA',
         'costs-table-title': 'Tableau synthétique',
         'costs-table-col-1': 'Catégorie',
         'costs-table-col-2': 'Montant (FCFA)',
@@ -116,6 +126,7 @@ const translations = {
         'costs-summary-title': 'Résumé financier',
         'costs-summary-line-1': 'Investissement initial (CAPEX) : 96 000 000 FCFA',
         'costs-summary-line-2': 'Charges annuelles (OPEX) : 79 868 000 FCFA',
+        'costs-summary-line-3': 'Produits annuels prévisionnels : 86 850 000 FCFA',
         
         // Conflict Section
         'conflict-title': 'Gestion des Conflits Potentiels',
@@ -396,6 +407,16 @@ const translations = {
         'costs-annual-item-3': 'Vehicle costs: 13,068,000 FCFA',
         'costs-annual-item-4': 'Medical equipment maintenance: 5,000,000 FCFA',
         'costs-annual-item-5': 'Medicines + contingencies & insurance: 14,400,000 FCFA',
+        'costs-forecast-title': 'Projected revenues (pilot zone / 1 year)',
+        'costs-forecast-amount': '86,850,000 FCFA',
+        'costs-forecast-item-1': 'Ticketing revenue: 2,350,000 FCFA',
+        'costs-forecast-item-2': 'Telemedicine revenue: 1,500,000 FCFA',
+        'costs-forecast-item-3': 'Onboard pharmacy revenue: 3,000,000 FCFA',
+        'costs-forecast-item-4': 'Rapid diagnostic test revenue: 1,000,000 FCFA',
+        'costs-forecast-item-5': 'Sponsorship (advertising): 20,000,000 FCFA',
+        'costs-forecast-item-6': 'Grants (States, WHO, etc.): 32,000,000 FCFA',
+        'costs-forecast-item-7': 'Donations (in-kind and cash): 17,000,000 FCFA',
+        'costs-forecast-item-8': 'Data sales: 10,000,000 FCFA',
         'costs-table-title': 'Summary table',
         'costs-table-col-1': 'Category',
         'costs-table-col-2': 'Amount (FCFA)',
@@ -406,6 +427,7 @@ const translations = {
         'costs-summary-title': 'Financial summary',
         'costs-summary-line-1': 'Initial investment (CAPEX): 96,000,000 FCFA',
         'costs-summary-line-2': 'Annual charges (OPEX): 79,868,000 FCFA',
+        'costs-summary-line-3': 'Projected annual revenues: 86,850,000 FCFA',
         
         // Conflict Section
         'conflict-title': 'Potential Conflict Management',
@@ -640,9 +662,10 @@ class LanguageManager {
         // Translate elements with data-translate attribute
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.dataset.translate;
-            const translation = this.getTranslation(key);
+            const lang = this.currentLang;
             
-            if (translation) {
+            if (this.translations[lang] && this.translations[lang][key]) {
+                const translation = this.translations[lang][key];
                 if (element.tagName === 'INPUT' && element.type === 'placeholder') {
                     element.placeholder = translation;
                 } else {
@@ -873,9 +896,22 @@ class LanguageManager {
     }
 }
 
+function applyTranslations(lang) {
+    if (!window.languageManager) {
+        return;
+    }
+    if (lang && window.languageManager.getCurrentLanguage() !== lang) {
+        window.languageManager.setLanguage(lang);
+    } else {
+        window.languageManager.translatePage();
+    }
+}
+
 // Initialize language manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Translations: Initializing language manager...');
     window.languageManager = new LanguageManager();
+    const currentLanguage = window.languageManager.getCurrentLanguage() || 'fr';
+    applyTranslations(currentLanguage);
     console.log('Translations: Language manager initialized');
 });
