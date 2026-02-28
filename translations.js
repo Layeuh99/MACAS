@@ -18,11 +18,11 @@ const translations = {
         'hero-btn-secondary': 'Soutenir l\'initiative',
         
         // Map Button
-        'open-map-btn': '🌍 Découvrir les 50 Pays Ciblés',
-        'map-description': 'Explorez notre carte interactive pour découvrir les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.',
+        'open-map-btn': '🌍 Découvrir les 51 Pays Ciblés',
+        'map-description': 'Explorez notre carte interactive pour découvrir les 51 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.',
         
         // Map Modal
-        'map-modal-title': 'Carte Interactive des 50 Pays Ciblés',
+        'map-modal-title': 'Carte Interactive des 51 Pays Ciblés',
         'map-modal-subtitle': 'Découvrez notre portée mondiale et les défis spécifiques à chaque région',
         'region-africa-title': 'Afrique - Priorité Absolue',
         'region-africa-desc': 'Le besoin le plus critique en raison de l\'éloignement des centres de santé en zone rurale. Nos cliniques mobiles parcouvrent des centaines de kilomètres pour atteindre les populations les plus isolées.',
@@ -86,7 +86,7 @@ const translations = {
         
         // Costs Section
         'costs-title': 'Données Financières',
-        'costs-block-1': '1. Détail CAPEX & OPEX',
+        'costs-block-1': '',
         'costs-pilot-title': 'Investissement phase pilote (CAPEX)',
         'costs-pilot-amount': '96 000 000 FCFA',
         'costs-pilot-item-1': 'Camion occasion récente : 40 000 000 FCFA',
@@ -143,9 +143,9 @@ const translations = {
         'team-subtitle': '4 talents passionnés derrière Health On Wheels',
         'team-intro': 'Une équipe complémentaire réunie par une mission commune : rendre la santé accessible à tous.',
         'team-member-1-role': 'Vision & Stratégie',
-        'team-member-2-role': 'Opérations & Soins',
-        'team-member-3-role': 'Innovation & Tech',
-        'team-member-4-role': 'Logistique & Terrain',
+        'team-member-2-role': 'Directrice des Opérations – Logistique & Terrain',
+        'team-member-3-role': 'Géomaticien',
+        'team-member-4-role': 'Ingénieur en agronomie',
         'team-btn': '+',
         'modal-skills-title': 'Compétences Clés',
         'modal-impact-title': 'Impact',
@@ -180,9 +180,9 @@ const translations = {
         'modal-join-form': '📝 Formulaire d\'inscription',
         
         // Target Countries Section
-        'target-countries-title': '50 Pays Ciblés',
+        'target-countries-title': '51 Pays Ciblés',
         'target-countries-subtitle': 'Notre portée mondiale pour l\'accès aux soins de santé',
-        'countries-intro': 'Health On Wheels opère dans 50 pays à travers le monde, concentrant nos efforts sur les régions où l\'accès aux soins de santé est le plus critique. Découvrez notre impact mondial.',
+        'countries-intro': 'Health On Wheels opère dans 51 pays à travers le monde, concentrant nos efforts sur les régions où l\'accès aux soins de santé est le plus critique. Découvrez notre impact mondial.',
         'region-africa': 'Afrique',
         'region-asia': 'Asie & Pacifique',
         'region-latin': 'Amérique latine & Caraïbes',
@@ -198,7 +198,7 @@ const translations = {
         'latin-central': 'Amérique centrale & Caraïbes',
         'map-cta-title': 'Visualisez Notre Impact Mondial',
         'map-cta-description': 'Explorez notre carte interactive pour voir la répartition géographique de nos interventions et découvrir l\'impact de Health On Wheels dans chaque région.',
-        'map-modal-title': 'Carte Interactive des 50 Pays Ciblés',
+        'map-modal-title': 'Carte Interactive des 51 Pays Ciblés',
         'map-modal-subtitle': 'Découvrez notre portée mondiale et les défis spécifiques à chaque région',
         'region-africa-title': 'Afrique - Priorité Absolue',
         'region-africa-desc': 'Le besoin le plus critique en raison de l\'éloignement des centres de santé en zone rurale. Nos cliniques mobiles parcouvrent des centaines de kilomètres pour atteindre les populations les plus isolées.',
@@ -218,7 +218,7 @@ const translations = {
         'stat-regions': 'Régions',
         'stat-population': 'Population touchée',
         'toggle-title': 'Découvrez Notre Portée Mondiale',
-        'toggle-description': 'Explorez les 50 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.',
+        'toggle-description': 'Explorez les 51 pays où Health On Wheels apporte des soins de santé essentiels aux populations les plus vulnérables.',
         'show-map-btn': 'Voir la Carte Interactive',
         
         // Footer
@@ -232,7 +232,7 @@ const translations = {
         
         // Footer details
         'footer-contact-title': 'Contact',
-        'footer-email': 'Email: sksevoevo@gmail.com',
+        'footer-email': 'Email: macassene@gmail.com',
         'footer-phone': 'Téléphone: +221 78 537 13 11',
         'footer-headquarters': 'Siège mondial',
         'footer-address': 'Université Amadou Mahtar Mbow, Diamniadio',
@@ -249,20 +249,22 @@ const translations = {
         'member-director-impact': 'Assure la cohérence entre mission sociale, modèle opérationnel et durabilité du projet.',
         
         'member-medical-name': 'Cheikh Sadibou THIAM',
-        'member-medical-desc': 'Élève ingénieur en Management des organisations (UAM, Diamniadio). Il transforme la vision en dispositifs opérationnels, en structurant les processus de soins et l\'organisation terrain.',
-        'member-medical-skills': ['Opérations & Soins', 'Processus', 'Qualité', 'Organisation'],
-        'member-medical-impact': 'Optimise la qualité des services et la fiabilité des parcours patients.',
+        'member-medical-email': 'Email: thiam.sadibou@uam.edu.sn',
+        'member-medical-desc': 'Élève ingénieur en Management des organisations (UAM, Diamniadio). Il appuie l’organisation des opérations et la coordination des équipes pour le bon déroulement des missions sur le terrain.',
+        'member-medical-skills': ['Coordination opérationnelle', 'Organisation', 'Planification', 'Suivi'],
+        'member-medical-impact': 'Contribue à la continuité des opérations et à la bonne exécution des activités terrain.',
         
         'member-cto-name': 'Mouhsine Abdallah Babacar DIAO',
-        'member-cto-desc': 'Élève ingénieur en géomatique (UAM, Diamniadio). Il conçoit la dimension technologique et cartographique pour prioriser les zones critiques et mesurer l\'impact.',
-        'member-cto-skills': ['Géomatique', 'Données', 'Cartographie', 'Innovation'],
-        'member-cto-impact': 'Pilote l\'intelligence géospatiale pour optimiser les itinéraires et la planification.',
+        'member-cto-email': 'Email: diao.mouhsine@uam.edu.sn',
+        'member-cto-desc': 'Élève ingénieur en géomatique (UAM, Diamniadio). Il travaille sur la dimension cartographique et les données pour aider à prioriser les zones d’intervention et suivre les activités.',
+        'member-cto-skills': ['Systèmes d’information géographique (SIG)', 'Cartographie', 'Analyse spatiale', 'Traitement de données géographiques'],
+        'member-cto-impact': 'Contribue à la planification des itinéraires et à l’analyse des zones prioritaires.',
         
-        'member-operations-name': 'Directeur des Opérations',
-        'member-operations-desc': 'Profil à confirmer. Cette fonction assure la logistique terrain, la coordination des équipes et la continuité des opérations des cliniques mobiles.',
-        'member-operations-skills': ['Logistique', 'Coordination', 'Terrain', 'Suivi'],
-        'member-operations-impact': 'Garantit l\'efficacité opérationnelle et la présence continue sur le terrain.'
-        ,
+        'member-operations-name': 'Prosper Dib Ndour',
+        'member-operations-email': 'Email: ndour.prosper@uam.edu.sn',
+        'member-operations-desc': 'Étudiant ingénieur en agronomie, spécialisé en agroécologie et ressources végétales (UAM, Diamniadio). Il apporte une connaissance des dynamiques rurales utile à l’organisation des missions et à la gestion des ressources sur le terrain. Son approche intègre des préoccupations de durabilité.',
+        'member-operations-skills': ['Gestion des ressources', 'Logistique terrain en zones rurales', 'Dynamiques rurales', 'Approche durable'],
+        'member-operations-impact': 'Soutient l’organisation logistique des missions mobiles en tenant compte des contraintes locales.',
         // Carte & Dashboard
         'region-africa-name': 'Afrique',
         'region-asia-name': 'Asie & Pacifique',
@@ -306,11 +308,11 @@ const translations = {
         'hero-btn-secondary': 'Support the initiative',
         
         // Map Button
-        'open-map-btn': '🌍 Discover 50 Target Countries',
-        'map-description': 'Explore our interactive map to discover the 50 countries where Health On Wheels brings essential healthcare to the most vulnerable populations.',
+        'open-map-btn': '🌍 Discover 51 Target Countries',
+        'map-description': 'Explore our interactive map to discover the 51 countries where Health On Wheels brings essential healthcare to the most vulnerable populations.',
         
         // Map Modal
-        'map-modal-title': 'Interactive Map of 50 Target Countries',
+        'map-modal-title': 'Interactive Map of 51 Target Countries',
         'map-modal-subtitle': 'Discover our global reach and specific challenges for each region',
         'region-africa-title': 'Africa - Absolute Priority',
         'region-africa-desc': 'The most critical need due to remote healthcare centers in rural areas. Our mobile clinics travel hundreds of kilometers to reach the most isolated populations.',
@@ -431,16 +433,16 @@ const translations = {
         'team-subtitle': '4 passionate talents behind Health On Wheels',
         'team-intro': 'A complementary team united by a common mission: making health accessible to all.',
         'team-member-1-role': 'Vision & Strategy',
-        'team-member-2-role': 'Operations & Care',
-        'team-member-3-role': 'Innovation & Tech',
-        'team-member-4-role': 'Logistics & Field',
+        'team-member-2-role': 'Operations Director – Logistics & Field',
+        'team-member-3-role': 'Geomatician',
+        'team-member-4-role': 'Agronomy Engineer',
         'team-btn': '+',
         'modal-skills-title': 'Key Skills',
         'modal-impact-title': 'Impact',
         'modal-close': 'Close',
         
         // World Map Section
-        'map-title': '50 Target Countries',
+        'map-title': '51 Target Countries',
         'map-subtitle': 'Our global mission for healthcare access',
         'legend-title': 'Legend',
         'legend-africa': 'Africa',
@@ -451,7 +453,7 @@ const translations = {
         'stat-regions': 'Regions',
         'stat-population': 'Population reached',
         'toggle-title': 'Discover Our Global Reach',
-        'toggle-description': 'Explore the 50 countries where Health On Wheels brings essential healthcare to the most vulnerable populations.',
+        'toggle-description': 'Explore the 51 countries where Health On Wheels brings essential healthcare to the most vulnerable populations.',
         'show-map-btn': 'View Interactive Map',
         
         // Action Section
@@ -483,9 +485,9 @@ const translations = {
         'modal-join-form': '📝 Registration form',
         
         // Target Countries Section
-        'target-countries-title': '50 Target Countries',
+        'target-countries-title': '51 Target Countries',
         'target-countries-subtitle': 'Our global reach for healthcare access',
-        'countries-intro': 'Health On Wheels operates in 50 countries worldwide, focusing our efforts on regions where healthcare access is most critical. Discover our global impact.',
+        'countries-intro': 'Health On Wheels operates in 51 countries worldwide, focusing our efforts on regions where healthcare access is most critical. Discover our global impact.',
         'region-africa': 'Africa',
         'region-asia': 'Asia & Pacific',
         'region-latin': 'Latin America & Caribbean',
@@ -501,7 +503,7 @@ const translations = {
         'latin-central': 'Central America & Caribbean',
         'map-cta-title': 'Visualize Our Global Impact',
         'map-cta-description': 'Explore our interactive map to see the geographic distribution of our interventions and discover Health On Wheels\' impact in each region.',
-        'map-modal-title': 'Interactive Map of 50 Target Countries',
+        'map-modal-title': 'Interactive Map of 51 Target Countries',
         'map-modal-subtitle': 'Discover our global reach and specific challenges for each region',
         'region-africa-title': 'Africa - Absolute Priority',
         'region-africa-desc': 'The most critical need due to remote healthcare centers in rural areas. Our mobile clinics travel hundreds of kilometers to reach the most isolated populations.',
@@ -523,7 +525,7 @@ const translations = {
         
         // Footer details
         'footer-contact-title': 'Contact',
-        'footer-email': 'Email: sksevoevo@gmail.com',
+        'footer-email': 'Email: macassene@gmail.com',
         'footer-phone': 'Phone: +221 78 537 13 11',
         'footer-headquarters': 'World Headquarters',
         'footer-address': 'Amadou Mahtar Mbow University, Diamniadio',
@@ -540,20 +542,22 @@ const translations = {
         'member-director-impact': 'Ensures coherence between social mission, operational model, and long-term sustainability.',
         
         'member-medical-name': 'Cheikh Sadibou THIAM',
-        'member-medical-desc': 'Engineering student in Organizational Management (UAM, Diamniadio). He turns the vision into concrete operations by structuring care processes and field organization.',
-        'member-medical-skills': ['Operations & Care', 'Processes', 'Quality', 'Organization'],
-        'member-medical-impact': 'Improves service quality and reliability of patient pathways.',
+        'member-medical-email': 'Email: thiam.sadibou@uam.edu.sn',
+        'member-medical-desc': 'Engineering student in Organizational Management (UAM, Diamniadio). He supports operational organization and team coordination to ensure smooth field missions.',
+        'member-medical-skills': ['Operational coordination', 'Organization', 'Planning', 'Monitoring'],
+        'member-medical-impact': 'Supports operational continuity and solid field execution.',
         
         'member-cto-name': 'Mouhsine Abdallah Babacar DIAO',
-        'member-cto-desc': 'Geomatics engineering student (UAM, Diamniadio). He designs the tech and mapping dimension to prioritize critical areas and measure impact.',
-        'member-cto-skills': ['Geomatics', 'Data', 'Cartography', 'Innovation'],
-        'member-cto-impact': 'Leads geospatial intelligence to optimize routes and planning.',
+        'member-cto-email': 'Email: diao.mouhsine@uam.edu.sn',
+        'member-cto-desc': 'Geomatics engineering student (UAM, Diamniadio). He works on mapping and data to help prioritize intervention areas and track activities.',
+        'member-cto-skills': ['GIS', 'Cartography', 'Spatial analysis', 'Geospatial data processing'],
+        'member-cto-impact': 'Contributes to route planning and priority-area analysis.',
         
-        'member-operations-name': 'Operations Director',
-        'member-operations-desc': 'Profile to confirm. This role ensures field logistics, team coordination, and continuity of mobile clinic operations.',
-        'member-operations-skills': ['Logistics', 'Coordination', 'Field Ops', 'Monitoring'],
-        'member-operations-impact': 'Guarantees operational efficiency and sustained field presence.'
-        ,
+        'member-operations-name': 'Prosper Dib Ndour',
+        'member-operations-email': 'Email: ndour.prosper@uam.edu.sn',
+        'member-operations-desc': 'Engineering student in Agronomy, specializing in agroecology and plant resources (UAM, Diamniadio). He brings knowledge of rural dynamics that supports mission organization and on‑field resource management. His approach includes sustainability considerations.',
+        'member-operations-skills': ['Resource management', 'Rural field logistics', 'Rural dynamics', 'Sustainable approach'],
+        'member-operations-impact': 'Supports mission logistics with attention to local constraints.',
         // Map & Dashboard
         'region-africa-name': 'Africa',
         'region-asia-name': 'Asia & Pacific',
