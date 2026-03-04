@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://layeuh99.github.io/MACAS/sitemap.xml
